@@ -1,0 +1,186 @@
+
+.background{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #2196F3, #E91E63);
+    transform: skewY(-25deg);
+    -webkit-transform: skewY(-25deg);
+    transform-origin: top left;
+}
+.uk-navbar-container{
+    background: #fff !important;
+}
+.header-items{
+    background: transparent !important;
+    color: #000 !important;
+}
+.header-items,
+.header-items span,
+.header-items label{
+    cursor: pointer !important;
+}
+.header-items:hover{
+    color: #E91E63 !important;
+}
+.header-items:active{
+    color: #fff !important;
+    background: rgba(255,255,255,0.4) !important;
+}
+.header-items label{
+    font-family: Vazir !important;
+}
+.uk-navbar-item, .uk-navbar-nav>li>a, .uk-navbar-toggle {
+    height: 60px !important;
+    padding: 0 15px !important;
+}
+.st-name{
+    font-family: Vazir !important;
+    font-size: 16px !important;
+    color: #fff !important;
+}
+.st-icon{
+    color: #fff !important;
+}
+.uk-card-title{
+    font-family: Vazir !important;
+    direction: rtl !important;
+    margin: 16px !important;
+}
+.field{
+    color: rgba(0,0,0,0.7) !important;
+}
+.uk-offcanvas-bar h6, .uk-offcanvas-bar h4{
+    color: #767676 !important;
+}
+hr{
+    border-top: 1px solid rgba(0,0,0,0.2) !important;
+}
+.uk-offcanvas-bar{
+    background: #fff !important;
+}
+.padding{
+    padding: 100px 50px !important;
+}
+.padding-top{
+    padding-top: 8% !important;
+    right: 3% !important;
+}
+.container {
+    position: relative !important;
+    width: 100% !important;
+}
+.image {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+}
+
+.text {
+    width: 100% !important;
+    text-align: center !important;
+    font-family: Vazir !important;
+    color: #000 !important;
+    direction: rtl !important;
+    background: #fff !important;
+    font-size: 18px !important;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+span{
+    cursor: default !important;
+}
+.logo{
+    font-family: Vazir !important;
+    color: #000 !important;
+}
+.row{content:"" !important;display:table!important;clear:both!important;}
+.chocolat-image{
+    text-decoration: none !important;
+}
+.chocolat-overlay {
+    background-color: #000 !important;
+}
+.uk-modal-close-default{
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+    margin-left: 16px !important;
+}
+.confirm-message{
+    font-family: Vazir !important;
+    color: #fff !important;
+}
+.yes-no{
+    font-family: Vazir !important;
+    font-size: 18px !important;
+    border-radius: 2em !important;
+    padding: 0 65px !important;
+    line-height: 50px !important;
+    background: transparent !important;
+}
+.blue{
+    border: 2px solid #2196F3 !important;
+    color: #2196F3 !important;
+}
+.blue:hover{
+    background: #2196F3 !important;
+    color: #fff !important;
+}
+.red{
+    border: 2px solid #F44336 !important;
+    color: #F44336 !important;
+}
+.red:hover{
+    background: #F44336 !important;
+    color: #fff !important;
+}
+.exit-svg {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+@media screen and (max-width: 699px){
+    .background{
+        transform: skewY(0) !important;
+        height: 50% !important;
+    }
+    .width{
+        width: 100% !important;
+    }
+    .uk-padding-small {
+        padding: 15px 0 !important;
+    }
+    .hide, .logo{
+        display: none !important;
+    }
+    .header-items{
+        font-size: 14px !important;
+    }
+}
+@media screen and (min-width: 700px) and (max-width: 1200px){
+    .background{
+        transform: skewY(0) !important;
+        height: 50% !important;
+    }
+    .tablet-width{
+        width: 100% !important;
+    }
+    .hide{
+        display: none !important;
+    }
+}
+@media screen and (min-width: 1201px) and (max-width: 3000px){
+    .hide-btn{
+        display: none !important;
+    }
+}

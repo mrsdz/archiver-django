@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js" lang="fa">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>دانشکده شهید شمسی پور</title>
+    <meta name="description" content="اولین بایگانی آنلاین دانشکده فنی شهید شمسی پور">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="author" content="Ashkan Dehbashi | dhs.ashkan@gmail.com">
+    <meta name="theme-color" content="#0C76BF">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!--css-->
+    <link rel="stylesheet" href="css/template.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/uikit.min.css" />
+    <!--js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#header').load('ad-header.html');
+        });
+    </script>
+</head>
+<body>
+<div id="header"></div>
+<div class="uk-grid-match uk-grid-small padding" uk-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: > div ; delay: 0; repeat: false">
+    <div class="uk-width-1-3@m">
+        <div class="uk-width-1-1 uk-margin-top">
+            <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
+            <h3 class="uk-card-title">اضافه کردن کارمند</h3>
+            <hr/>
+            <form class="uk-form-stacked" style="margin-top: 32px;">
+                <!--name-->
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <input class="uk-input uk-form-width-large" placeholder="نام" type="number">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+                    </div>
+                </div>
+
+                <!--family name-->
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <input class="uk-input uk-form-width-large" placeholder="نام خانوادگی" type="number">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: users"></span>
+                    </div>
+                </div>
+
+                <!--email-->
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <input class="uk-input uk-form-width-large" placeholder="ایمیل" type="email">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: mail"></span>
+                    </div>
+                </div>
+
+                <!--username-->
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <input class="uk-input uk-form-width-large" placeholder="نام کاربری" type="text">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+                    </div>
+                </div>
+
+                <!--password-->
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <input class="uk-input uk-form-width-large" placeholder="رمزعبور" type="password">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                    </div>
+                </div>
+
+                <!--submit-->
+                <div class="uk-margin">
+                    <button class="uk-button uk-width-1-1 uk-box-shadow-hover-xlarge blue-btn">اضافه
+                        <span uk-icon="icon: plus"></span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

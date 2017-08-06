@@ -1,0 +1,118 @@
+body, html{
+    background: #ffffff;
+    width: 100%;
+}
+.background{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #19B5FE, #003780);
+    transform: skewY(-25deg);
+    -webkit-transform: skewY(-25deg);
+    transform-origin: top left;
+}
+.uk-navbar-container{
+    background: #fff !important;
+}
+.header-items{
+    background: transparent !important;
+    color: #000 !important;
+}
+.header-items,
+.header-items span,
+.header-items label{
+    cursor: pointer !important;
+}
+.header-items:hover{
+    color: #0C76BF !important;
+}
+.header-items label{
+    font-family: Vazir !important;
+    font-weight: 100 !important;
+}
+.uk-navbar-item, .uk-navbar-nav>li>a, .uk-navbar-toggle {
+    height: 60px !important;
+    padding: 0 15px !important;
+}
+.logo{
+    font-family: 'Vazir' !important;
+    color: #000 !important;
+    cursor: default !important;
+}
+.uk-offcanvas-bar h6, .uk-offcanvas-bar h4{
+    color: #767676 !important;
+}
+.uk-offcanvas-bar{
+    background: #fff !important;
+}
+.uk-modal-close-default{
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+    margin-left: 16px !important;
+}
+.confirm-message{
+    font-family: Vazir !important;
+    color: #fff !important;
+}
+.yes-no{
+    font-family: Vazir !important;
+    font-size: 18px !important;
+    border-radius: 2em !important;
+    padding: 0 65px !important;
+    line-height: 50px !important;
+    background: transparent !important;
+}
+.blue{
+    border: 2px solid #2196F3 !important;
+    color: #2196F3 !important;
+}
+.blue:hover{
+    background: #2196F3 !important;
+    color: #fff !important;
+}
+.red{
+    border: 2px solid #F44336 !important;
+    color: #F44336 !important;
+}
+.red:hover{
+    background: #F44336 !important;
+    color: #fff !important;
+}
+.exit-svg {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+@media screen and (max-width: 699px){
+    .background{
+        transform: skewY(0) !important;
+        height: 50% !important;
+    }
+    .hide{
+        display: none !important;
+    }
+    .logo{
+        font-size: 14px;
+        margin-right: 0 !important;
+    }
+}
+@media screen and (min-width: 700px) and (max-width: 1200px){
+    .background{
+        transform: skewY(0) !important;
+        height: 50% !important;
+    }
+    .logo{
+        display: none;
+    }
+}
+@media screen and (min-width: 700px) and (max-width: 5120px){
+    .hide-btn{
+        display: none !important;
+    }
+}

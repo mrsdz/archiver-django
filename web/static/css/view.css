@@ -1,0 +1,93 @@
+.padding{
+    padding: 100px 20px !important;
+}
+.uk-card{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+    position: relative !important;
+}
+.uk-card-title{
+    font-size: 17px !important;
+    font-family: Vazir !important;
+    text-align: center !important;
+    color: #000 !important;
+}
+.st-name{
+    font-family: Vazir !important;
+    font-size: 16px !important;
+    color: #fff !important;
+}
+.st-icon{
+    color: #fff !important;
+}
+.view-btn{
+    font-family: Vazir !important;
+    direction: rtl !important;
+    font-size: 16px !important;
+    text-align: center !important;
+    border: none !important;
+    color: #fff !important;
+    -webkit-transition: all 0.3s ease !important;
+    -moz-transition: all 0.3s ease !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    line-height: 45px !important;
+    padding: 0 22px !important;
+    border-radius: 3px !important;
+}
+.green{
+    color: #4CAF50 !important;
+}
+.green:hover {
+    background: rgba(76, 175, 80, 0.2) !important;
+}
+.green:active {
+    background: rgba(76, 175, 80, 0.4) !important;
+}
+.red-btn{
+    color: #F44336 !important;
+}
+.red-btn:hover{
+    background: rgba(244, 67, 54, 0.2) !important;
+}
+.red-btn:active {
+    background: rgba(244, 67, 54, 0.4) !important;
+}
+.gery{
+    color: #607D8B !important;
+}
+.gery:hover{
+    background: rgba(69, 90, 100, 0.2) !important
+}
+.gery:active{
+    background: rgba(69, 90, 100, 0.4) !important
+}
+@media screen and (max-width: 699px){
+    .view-btn{
+        width: 100% !important;
+        margin-top: 8px !important;
+    }
+    .chocolat-parent{
+        display: block !important;
+    }
+    .image-width{
+        width: 40px !important;
+    }
+    .uk-card-title{
+        font-size: 14px !important;
+    }
+}
+@media screen and (min-width: 960px) and (max-width: 1350px){
+    .view-btn{
+        margin-top: 8px !important;
+    }
+    .image-width{
+        width: 40px !important;
+    }
+    .uk-card-title{
+        font-size: 14px !important;
+    }
+}
+@media screen and (min-width: 700px) and (max-width: 3000px){
+
+}
+

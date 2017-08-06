@@ -1,0 +1,36 @@
+.uk-card-title{
+    font-family: Vazir !important;
+    font-size: 23px !important;
+    direction: rtl !important;
+    font-weight: bold !important;
+}
+.uk-search-input{
+    font-family: Vazir !important;
+    background: #EEEEEE !important;
+    color: #000 !important;
+    direction: rtl !important;
+    font-size: 16px !important;
+    text-indent: 40px !important;
+    text-align: right !important;
+    border: none !important;
+    border-radius: 2em !important;
+    -webkit-transition: 200ms cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+    -moz-transition: 200ms cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+    transition: 200ms cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+}
+.uk-search-input:focus,
+.uk-search-input:active{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+}
+.width{
+    width: 100% !important;
+}
+@media screen and (max-width: 699px){
+    .width,
+    .uk-form-width-large{
+        width: 100% !important;
+    }
+}
+@media screen and (min-width: 700px) and (max-width: 3000px){
+
+}

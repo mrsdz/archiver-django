@@ -1,0 +1,77 @@
+html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
+html, body{
+    direction: rtl;
+    text-align: right;
+    font-family: Vazir;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    margin: 0;
+    overflow-x:hidden;
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%
+}
+.header{
+    background: transparent;
+    top: 0;
+    position: absolute;
+    width: 100%;
+}
+.uk-navbar-center h2{
+    color: #fff;
+    font-family: 'Khandevane';
+}
+.uk-card-title{
+    font-family: 'Khandevane';
+}
+.uk-input{
+    font-family: 'Vazir' !important;
+    font-size: 16px !important;
+    text-indent: 30px;
+    direction: rtl !important;
+    background:rgba(255,255,255,0.1) !important;
+    border: none !important;
+    color: #fff !important;
+}
+.uk-input::placeholder{
+    color: #fff !important;
+}
+.uk-input:focus{
+    background:rgba(255,255,255,1) !important;
+    color: #000 !important;
+}
+.uk-input:focus + span{
+    color: #000 !important;
+}
+.uk-button{
+    font-family: 'Vazir';
+    background:  #fff;
+    color: #000 !important;
+    font-size: 18px !important;
+    height: 40px !important;
+    -webkit-transition: all 0.2s ease !important;
+    -moz-transition: all 0.2s ease !important;
+    transition: all 0.2s ease !important;
+}
+.uk-card-title,
+.uk-form-icon{
+    color: #fff !important;
+}
+.footer{
+    background: #fff;
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    width: 100%;
+    bottom: -10%;
+}
+/*media query*/
+@media screen and (max-width: 1200px){
+    .header h2{
+        font-size: 23px !important;
+        margin-left: 0 !important;
+    }
+    .uk-container{
+        padding: 0 !important;
+    }
+}
