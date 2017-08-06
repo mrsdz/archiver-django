@@ -48,7 +48,7 @@ class Lesson(models.Model):
 
 class Document(models.Model):
     id = models.AutoField(primary_key=True)
-    student = models.ForeignKey(Student)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
     type = models.CharField(max_length=200)
     # TODO: Must pass a function upload_to :)
     doc = models.ImageField()
