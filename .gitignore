@@ -101,6 +101,5 @@ ENV/
 .mypy_cache/
 
 .gitignore
-.idea/vcs.xml
-
 settings.py
+.idea
