@@ -1,28 +1,11 @@
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>دانشکده شهید شمسی پور</title>
-    <meta name="description" content="اولین بایگانی آنلاین دانشکده فنی شهید شمسی پور">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="author" content="Ashkan Dehbashi | dhs.ashkan@gmail.com">
-    <meta name="theme-color" content="#6C7AFE">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!--css-->
-    <link rel="stylesheet" href="css/st-panel.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/uikit.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chocolat/0.4.18/css/chocolat.css">
-    <!--js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chocolat/0.4.18/js/jquery.chocolat.js"></script>
-</head>
-<body>
+{% extends "header-template.html" %}
+{% load staticfiles %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
 <!--navbar-->
 <div class="uk-position-fixed uk-position-z-index uk-width-1-1 uk-animation-slide-top">
     <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
@@ -176,5 +159,4 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+{% endblock %}

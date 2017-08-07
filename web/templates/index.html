@@ -1,43 +1,34 @@
-<!doctype html>
+{% extends "header-template.html" %}
 {% load staticfiles %}
-<html class="no-js" lang="fa">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>دانشکده شهید شمسی پور</title>
-        <meta name="description" content="اولین بایگانی آنلاین دانشکده فنی شهید شمسی پور">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta name="author" content="Ashkan Dehbashi | dhs.ashkan@gmail.com">
-        <meta name="theme-color" content="#6C7AFE">
-        <link rel="apple-touch-icon" href={% static "apple-touch-icon.png" %}>
-        <link rel="icon" type="image/x-icon" href={% static "favicon.ico" %}>
-        <!--css-->
-        <link rel="stylesheet" href={% static "css/main.css" %}>
-        <link rel="stylesheet" href={% static "css/fonts.css" %}>
-        <link rel="stylesheet" href={% static "css/uikit.min.css" %}>
-        <!--js-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
+
+
+{% block header %}
         <!--style-->
-        <style>
-            html, body{
-                background: -webkit-linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
-                background: -moz-linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
-                background: -ms-linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
-                background: -o-linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
-                background: linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
-                background-color: #6C7AFE;
-            }
-            .uk-button:hover,
-            .uk-button:focus{
-                background: #6C7AFE;
-                color: #fff !important;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            }
-        </style>
-    </head>
-    <body>
+    <style>
+        html, body{
+            background: -webkit-linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
+            background: -moz-linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
+            background: -ms-linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
+            background: -o-linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
+            background: linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
+            background-color: #6C7AFE;
+        }
+        .uk-button:hover,
+        .uk-button:focus{
+            background: #6C7AFE;
+            color: #fff !important;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+    </style>
+    <script>
+        {% if error == "forbidden" %}
+            alert("نام کاربری یا رمز عبور غلط است");
+        {% endif %}
+    </script>
+{% endblock %}
+
+
+{% block content %}
     <div class="uk-navbar-container uk-navbar-container uk-margin-bottom">
         <div class="uk-container uk-container-expand header">
             <nav class="uk-navbar" uk-navbar>
@@ -50,12 +41,15 @@
     <div class="uk-card uk-card-body uk-width-1-2@m uk-width-1-3@l uk-width-1-1@s uk-position-center">
         <h3 class="uk-card-title uk-text-center">ورود دانشجویان</h3>
         <hr>
-        <form method="POST" action="/students/login/">
+        <form method="POST" action="{% url 'Student Login' %}">
+            {% csrf_token %}
             <div class="uk-inline uk-margin uk-width-1-1">
+                <label for="username" style="display: none">username</label>
                 <input class="uk-input uk-border-rounded" name="username" type="number" required placeholder="لطفا شماره دانشجویی خود را وارد کنید.">
                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
             </div>
             <div class="uk-inline uk-width-1-1">
+                <label for="password" style="display: none">password</label>
                 <input class="uk-input uk-border-rounded" name="password" type="number" required placeholder="لطفا کد ملی خود را وارد کنید.">
                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
             </div>
@@ -65,5 +59,4 @@
         </form>
     </div>
     <footer class="footer">تمامی حقوق این سایت متعلق به شرکت ورتا و دانشکده فنی شهید شمسی پور می باشد.</footer>
-    </body>
-</html>
+{% endblock %}
