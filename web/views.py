@@ -8,6 +8,11 @@ from .models import *
 
 # Create your views here.
 
+def logout(request):
+    request.session.flush()
+    return redirect('/')
+
+
 def index(request):
     context = dict()
     if "error" in request.session:
@@ -23,17 +28,16 @@ def student_login(request):
     if StudentLogin(request.POST).is_valid():
         this_username = request.POST['username']
         this_password = request.POST['password']
-        this_student = Student.objects.filter(college_number=this_username)
-        if this_student.exists():
+        if Student.objects.filter(college_number=this_username).exists():
+            this_student = Student.objects.get(college_number=this_username)
             if int(this_password) == int(this_student.social_number):
                 request.session['student_first_name'] = this_student.first_name
                 request.session['student_last_name'] = this_student.last_name
                 request.session['student_college_number'] = this_student.college_number
-                request.session['student_subject'] = this_student.reshteh.name
-                request.session['student_period'] = this_student.dore
-                request.session['student_section'] = this_student.maghta.name
+                request.session['student_subject'] = this_student.subject.name
+                request.session['student_period'] = this_student.period
+                request.session['student_section'] = this_student.section.name
                 return redirect('/', request)
 
     request.session['error'] = {'error': 'forbidden'}
-    return redirect('/', request)
-
+    return redirect('/')

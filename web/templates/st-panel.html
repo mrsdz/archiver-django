@@ -2,7 +2,10 @@
 {% load staticfiles %}
 
 {% block header %}
-
+    <link rel="stylesheet" href="{% static 'css/st-panel.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chocolat/0.4.18/css/chocolat.css">
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chocolat/0.4.18/js/jquery.chocolat.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -52,8 +55,8 @@
                 <!--card 1-->
                 <div class="uk-padding-small width" style="width: 21%; float: left">
                     <div class="container uk-box-shadow-large uk-box-shadow-hover-xlarge">
-                        <a class="chocolat-image" href="files/example.jpg" title="Winter is here">
-                            <img src="files/example.jpg" class="image" />
+                        <a class="chocolat-image" href="{% static 'files/example.jpg' %}" title="Winter is here">
+                            <img src="{% static 'files/example.jpg' %}" class="image" />
                             <div class="text">Winter is here</div>
                         </a>
                     </div>
@@ -153,7 +156,7 @@
         </div>
         <div class="uk-position-bottom-center" style="margin-bottom: 128px;">
             <div class="uk-padding-large uk-text-center">
-                <button class="uk-button yes-no blue">بله</button>
+                <a href="{% url 'Logout' %}"><button class="uk-button yes-no blue">بله</button></a>
                 <button class="uk-button yes-no red uk-modal-close-default">خیر</button>
             </div>
         </div>
