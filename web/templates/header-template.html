@@ -13,6 +13,7 @@
         <!--css-->
         <link rel="stylesheet" href={% static "css/fonts.css" %}>
         <link rel="stylesheet" href={% static "css/uikit.min.css" %}>
+        <link rel="stylesheet" href={% static "css/snackbar.css" %}>
         <!--js-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
@@ -26,17 +27,17 @@
     </head>
     <body>
         <script>
-            {% if error %}
+            {% if message.error %}
                 UIkit.notification(
-                    "<span uk-icon='icon: ban'></span> {{ error }}",
+                    "<span uk-icon='icon: ban'></span> {{ message.error }}",
                     {
                         pos: 'bottom-center',
                         status:'danger'
                     }
                 );
-            {% elif message %}
+            {% elif message.done %}
                 UIkit.notification(
-                    "<span uk-icon='icon: check'></span>{{ message }}",
+                    "<span uk-icon='icon: check'></span> {{ message.done }}",
                     {
                         pos: 'bottom-center',
                         status:'success'

@@ -6,12 +6,11 @@ from django.views.decorators.http import require_GET, require_POST
 from django.contrib.auth import authenticate, logout, login
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError
-from django.core import serializers
+from django.db import IntegrityError, Error, DatabaseError, DataError
 
 from .forms import *
 from .models import Subject, Section, Student, Document, Lesson
-from .utils import handle_error_message
+from .utils import handle_message
 
 # Create your views here.
 
@@ -25,7 +24,8 @@ def logout_all(request):
 
 @require_GET
 def index(request):
-    context = handle_error_message(request)
+    context = dict()
+    context['message'] = handle_message(request)
     if 'student_college_number' in request.session and request.session['student_college_number']:
         return render(request, "st-panel.html", context)
     return render(request, "index.html", context)
@@ -70,13 +70,16 @@ def admin_login(request):
 @require_GET
 @login_required(login_url="/")
 def admins_panel(request):
-    return render(request, "admin-panel.html")
+    context = dict()
+    context['message'] = handle_message(request)
+    return render(request, "admin-panel.html", context)
 
 
 @login_required(login_url="/")
 @require_GET
 def admins_student_management_section(request):
     context = dict()
+    context['message'] = handle_message(request)
     context['section'] = Section.objects.all()
     context['subject'] = Subject.objects.all()
     return render(request, "st-mg.html", context)
@@ -93,7 +96,7 @@ def admins_add_student(request):
         this_section = request.POST['section']
         this_last_name = request.POST['last_name']
         this_first_name = request.POST['first_name']
-        try:
+        if not Student.objects.filter(college_number__exact=this_college_number).exists():
             Student(
                 college_number=this_college_number,
                 social_number=this_social_number,
@@ -103,9 +106,9 @@ def admins_add_student(request):
                 section=get_object_or_404(Section, id=this_section),
                 subject=get_object_or_404(Subject, id=this_subject)
             ).save()
-            request.session['message'] = "دانشجو با موفقیت اضافه شد :)"
+            request.session['done'] = "دانشجو با موفقیت اضافه شد :)"
             return redirect("/admins/panel/student/")
-        except IntegrityError:
+        else:
             request.session['error'] = "دانشجویی با این مشخصات وجود دارد :/"
             return redirect("/admins/panel/student/")
     return redirect("/")
