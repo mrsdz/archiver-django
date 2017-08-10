@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, logout, login
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
+from django.core import serializers
 
 from .forms import *
 from .models import Subject, Section, Student, Document, Lesson
@@ -73,9 +74,18 @@ def admins_panel(request):
 
 
 @login_required(login_url="/")
+@require_GET
+def admins_student_management_section(request):
+    context = dict()
+    context['section'] = Section.objects.all()
+    context['subject'] = Subject.objects.all()
+    return render(request, "st-mg.html", context)
+
+
+@login_required(login_url="/")
 @require_POST
 def admins_add_student(request):
-    if AddStudent(require_POST).is_valid():
+    if AddStudent(request.POST).is_valid():
         this_college_number = request.POST['college_number']
         this_social_number = request.POST['social_number']
         this_period = request.POST['period']
@@ -93,11 +103,12 @@ def admins_add_student(request):
                 section=get_object_or_404(Section, id=this_section),
                 subject=get_object_or_404(Subject, id=this_subject)
             ).save()
+            request.session['message'] = "دانشجو با موفقیت اضافه شد :)"
+            return redirect("/admins/panel/student/")
         except IntegrityError:
             request.session['error'] = "دانشجویی با این مشخصات وجود دارد :/"
-            return redirect("admins/panel/student/")
+            return redirect("/admins/panel/student/")
+    return redirect("/")
 
-        request.session['done'] = "دانشجو با موفقیت اضافه شد :)"
-        return redirect("admins/panel/student/")
 
 

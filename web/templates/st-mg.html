@@ -12,12 +12,12 @@
             <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
                 <h3 class="uk-card-title">اضافه کردن دانشجو</h3>
                 <hr/>
-                <form class="uk-form-stacked" style="margin-top: 32px;">
+                <form class="uk-form-stacked" style="margin-top: 32px;" method="post" action="{% url 'Add Student' %}">
 
                     <!--name-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input uk-form-width-large" placeholder="نام" type="text">
+                            <input name="first_name" class="uk-input uk-form-width-large" placeholder="نام">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                     <!--Family-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input uk-form-width-large" placeholder="نام خانوادگی" type="text">
+                            <input name="last_name" class="uk-input uk-form-width-large" placeholder="نام خانوادگی">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: users"></span>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                     <!--student number-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input uk-form-width-large" placeholder="شماره دانشجویی" type="number">
+                            <input name="college_number" class="uk-input uk-form-width-large" placeholder="شماره دانشجویی" type="number">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: credit-card"></span>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                     <!--national code-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input uk-form-width-large" placeholder="کد ملی" type="number">
+                            <input name="social_number" class="uk-input uk-form-width-large" placeholder="کد ملی" type="number">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: world"></span>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                     <!--shabane/rozane-->
                     <div class="uk-margin">
                         <div style="position: relative">
-                            <select class="uk-select">
+                            <select class="uk-select" name="period">
                                 <option>شبانه</option>
                                 <option>روزانه</option>
                             </select>
@@ -61,14 +61,10 @@
                     <!--reshte-->
                     <div class="uk-margin">
                         <div style="position: relative">
-                            <select class="uk-select">
-                                <option>کامپیوتر</option>
-                                <option>IT</option>
-                                <option>الکترونیک</option>
-                                <option>حسابداری بازرگانی</option>
-                                <option>حسابداری صنعتی</option>
-                                <option>حسابداری کارشناسی</option>
-                                <option>عمومی</option>
+                            <select class="uk-select" name="subject">
+                                {% for sub in subject %}
+                                    <option value="{{ sub.pk }}">{{ sub.name }}</option>
+                                {% endfor %}
                             </select>
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: star"></span>
                             <span class="uk-form-icon" uk-icon="icon: chevron-down"></span>
@@ -78,9 +74,10 @@
                     <!--maghta-->
                     <div class="uk-margin">
                         <div style="position: relative">
-                            <select class="uk-select">
-                                <option>کارشناسی پیوسته</option>
-                                <option>کارشناسی ناپیوسته</option>
+                            <select class="uk-select" name="section">
+                                {% for sec in section %}
+                                    <option value="{{ sec.pk }}">{{ sec.name }}</option>
+                                {% endfor %}
                             </select>
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: info"></span>
                             <span class="uk-form-icon" uk-icon="icon: chevron-down"></span>
@@ -93,7 +90,7 @@
                             <span uk-icon="icon: plus"></span>
                         </button>
                     </div>
-
+                    {% csrf_token %}
                 </form>
             </div>
         </div>
