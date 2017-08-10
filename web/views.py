@@ -117,10 +117,41 @@ def admins_add_student(request):
 @require_POST
 def admins_delete_student(request):
     if DeleteStudent(request.POST).is_valid():
-        this_college_number = request.POST['college_number']
+        this_college_number = int(request.POST['college_number'])
         if Student.objects.filter(college_number__exact=this_college_number).exists():
             Student.objects.filter(college_number__exact=this_college_number).delete()
             request.session['done'] = "دانشجو با موفقیت حذف شد :)"
+            return redirect("/admins/panel/student/")
+        else:
+            request.session['error'] = "دانشجویی با این مشخصات وجود ندارد :/"
+            return redirect("/admins/panel/student/")
+    else:
+        return redirect("/")
+
+
+@login_required(login_url="/")
+@require_POST
+def admins_edit_student(request):
+    if EditStudent(request.POST).is_valid():
+        old_college_number = int(request.POST['old_college_number'])
+        this_college_number = int(request.POST['college_number'])
+        this_social_number = int(request.POST['social_number'])
+        this_last_name = request.POST['last_name']
+        this_first_name = request.POST['first_name']
+        this_period = request.POST['period']
+        this_subject = request.POST['subject']
+        this_section = request.POST['section']
+        if Student.objects.filter(college_number__exact=old_college_number).exists():
+            Student.objects.filter(college_number__exact=old_college_number).update(
+                college_number=this_college_number,
+                first_name=this_first_name,
+                last_name=this_last_name,
+                period=this_period,
+                social_number=this_social_number,
+                subject=get_object_or_404(Subject, id=this_subject),
+                section=get_object_or_404(Section, id=this_section)
+            )
+            request.session['done'] = "دانشجو با موفقیت به‌روز شد :)"
             return redirect("/admins/panel/student/")
         else:
             request.session['error'] = "دانشجویی با این مشخصات وجود ندارد :/"
