@@ -122,12 +122,11 @@
             <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
                 <h3 class="uk-card-title">حذف دانشجو</h3>
                 <hr/>
-                <form class="uk-form-stacked" style="margin-top: 32px;">
-
+                <form class="uk-form-stacked" style="margin-top: 32px;" action="{% url 'Delete Student' %}" method="post">
                     <!--st number-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input uk-form-width-large" placeholder="شماره دانشجویی" type="number">
+                            <input name="college_number" class="uk-input uk-form-width-large" placeholder="شماره دانشجویی" type="number">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: credit-card"></span>
                         </div>
                     </div>
@@ -136,7 +135,7 @@
                             <span uk-icon="icon: trash"></span>
                         </button>
                     </div>
-
+                    {% csrf_token %}
                 </form>
             </div>
         </div>

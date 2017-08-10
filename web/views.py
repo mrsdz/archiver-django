@@ -6,7 +6,6 @@ from django.views.decorators.http import require_GET, require_POST
 from django.contrib.auth import authenticate, logout, login
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError, Error, DatabaseError, DataError
 
 from .forms import *
 from .models import Subject, Section, Student, Document, Lesson
@@ -109,9 +108,24 @@ def admins_add_student(request):
             request.session['done'] = "دانشجو با موفقیت اضافه شد :)"
             return redirect("/admins/panel/student/")
         else:
-            request.session['error'] = "دانشجویی با این مشخصات وجود دارد :/"
+            request.session['error'] = "دانشجویی با این مشخصات وجود ندارد :/"
             return redirect("/admins/panel/student/")
     return redirect("/")
 
+
+@login_required(login_url="/")
+@require_POST
+def admins_delete_student(request):
+    if DeleteStudent(request.POST).is_valid():
+        this_college_number = request.POST['college_number']
+        if Student.objects.filter(college_number__exact=this_college_number).exists():
+            Student.objects.filter(college_number__exact=this_college_number).delete()
+            request.session['done'] = "دانشجو با موفقیت حذف شد :)"
+            return redirect("/admins/panel/student/")
+        else:
+            request.session['error'] = "دانشجویی با این مشخصات وجود ندارد :/"
+            return redirect("/admins/panel/student/")
+    else:
+        return redirect("/")
 
 
