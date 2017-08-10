@@ -16,6 +16,7 @@ class Section(models.Model):
 class Subject(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
+    section = models.ForeignKey(Section)
 
     def __unicode__(self):
         return "{}-{}".format(self.id, self.name)
@@ -32,18 +33,6 @@ class Student(models.Model):
 
     def __unicode__(self):
         return "{}".format(self.college_number)
-
-
-class Lesson(models.Model):
-    code = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=200)
-    subject = models.ForeignKey(Subject)
-    section = models.ForeignKey(Section)
-    lesson_type = models.CharField(max_length=120, default=0)
-    unit = models.IntegerField(default=1)
-
-    def __unicode__(self):
-        return "{}".format(self.code)
 
 
 class Document(models.Model):

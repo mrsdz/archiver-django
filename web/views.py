@@ -8,8 +8,10 @@ from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from .forms import *
-from .models import Subject, Section, Student, Document, Lesson
+from .models import Subject, Section, Student, Document
 from .utils import handle_message
+
+import csv
 
 # Create your views here.
 
@@ -27,7 +29,7 @@ def index(request):
     context['message'] = handle_message(request)
     if 'student_college_number' in request.session and request.session['student_college_number']:
         return render(request, "st-panel.html", context)
-    return render(request, "index.html", context)
+    return render(request, "iex.html", context)
 
 
 @require_POST
@@ -160,3 +162,67 @@ def admins_edit_student(request):
         return redirect("/")
 
 
+@login_required(login_url="/")
+@require_POST
+def admins_upload_student(request):
+    if 'students_info' in request.FILES:
+        this_student_info = request.FILES['students_info']
+        if this_student_info.content_type == 'text/csv':
+            reader = csv.reader(this_student_info, delimiter=str(u","))
+            this_period = this_section = this_last_name = this_first_name = this_college_number = \
+                this_social_number = this_subject = ''
+            row = list(reader)
+            for i in range(0, len(row[0])):
+                if row[0][i] == 'section':
+                    this_section = i
+                elif row[0][i] == 'last_name':
+                    this_last_name = i
+                elif row[0][i] == 'first_name':
+                    this_first_name = i
+                elif row[0][i] == 'college_number':
+                    this_college_number = i
+                elif row[0][i] == 'social_number':
+                    this_social_number = i
+                elif row[0][i] == 'period':
+                    this_period = i
+                elif row[0][i] == 'subject':
+                    this_subject = i
+                else:
+                    request.session['error'] = 'لطفا همانند الگو فایل را قالب بندی کنید :('
+                    return redirect("/admins/panel/student/")
+            for r in row:
+                if r[this_college_number] == "college_number":
+                    continue
+
+                print r[this_section]
+                if r[this_section].decode('utf8') == "کاردانی پیوسته":
+                    this_section_value = get_object_or_404(Section, name="کاردانی")
+                elif r[this_section].decode('utf8') == "کارشناسی ناپیوسته":
+                    this_section_value = get_object_or_404(Section, name="کارشناسی")
+
+                if not Subject.objects.filter(name=r[this_subject].decode('utf8')).exists():
+                    Subject(
+                        name=r[this_subject].decode('utf8'),
+                        section=this_section_value
+                    ).save()
+
+                if Student.objects.filter(college_number__exact=r[this_college_number]).exists():
+                    continue
+
+                this_row = Student(
+                    college_number=r[this_college_number],
+                    social_number=r[this_social_number],
+                    first_name=r[this_first_name].decode('utf8'),
+                    last_name=r[this_last_name].decode('utf8'),
+                    subject=get_object_or_404(Subject, name=r[this_subject].decode('utf8')),
+                    section=this_section_value,
+                    period=r[this_period].decode('utf8'),
+                )
+                this_row.save()
+            request.session['done'] = 'اطلاعات با موفقیت به ثبت رسید :)'
+            return redirect("/admins/panel/student/")
+        else:
+            request.session['error'] = 'فایل باید با فرمت csv آپلود شود :/'
+            return redirect("/admins/panel/student/")
+    request.session['error'] = 'فایل فرستاده شده ناقص می‌باشد :/'
+    return redirect("/admins/panel/student/")

@@ -100,12 +100,11 @@
             <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
             <h3 class="uk-card-title"> فایل حاوی تمام دانشجو ها</h3>
             <hr/>
-            <form class="uk-form-stacked" style="margin-top: 32px;">
-
+            <form class="uk-form-stacked" style="margin-top: 32px;" method="post" enctype="multipart/form-data" action="{% url 'Upload Student' %}">
                 <div class="uk-margin" uk-margin>
                     <div uk-form-custom="target: true" style="cursor: pointer">
-                        <input type="file">
-                        <input class="uk-input uk-form-width-large" type="text" placeholder="انتخاب فایل" disabled>
+                        <input type="file" name="students_info" accept="text/csv" title="Student File">
+                        <input class="uk-input uk-form-width-large" required placeholder="انتخاب فایل" disabled>
                         <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: folder"></span>
                     </div>
                 </div>
@@ -114,7 +113,7 @@
                         <span uk-icon="icon: upload"></span>
                     </button>
                 </div>
-
+                {% csrf_token %}
             </form>
         </div>
         </div>
