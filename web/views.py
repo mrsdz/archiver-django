@@ -226,3 +226,9 @@ def admins_upload_student(request):
             return redirect("/admins/panel/student/")
     request.session['error'] = 'فایل فرستاده شده ناقص می‌باشد :/'
     return redirect("/admins/panel/student/")
+
+
+@require_GET
+@login_required(login_url="/")
+def admins_view_new_docs(request):
+    return render(request, "view.html")
