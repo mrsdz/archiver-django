@@ -1,31 +1,16 @@
-<!doctype html>
-<html class="no-js" lang="fa">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>دانشکده شهید شمسی پور</title>
-    <meta name="description" content="اولین بایگانی آنلاین دانشکده فنی شهید شمسی پور">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="author" content="Ashkan Dehbashi | dhs.ashkan@gmail.com">
+{% extends 'header-template.html' %}
+{% load staticfiles %}
+
+{% block header %}
     <meta name="theme-color" content="#0C76BF">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!--css-->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/uikit.min.css" />
-    <!--js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
-    <!--style-->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <style>
         html, body{
-            background: -webkit-linear-gradient(90deg, rgba(25, 181, 254, 0.9), rgba(0, 55, 128,0.9)),url('files/index.jpg') !important;
-            background: -moz-linear-gradient(90deg, rgba(25, 181, 254, 0.9), rgba(0, 55, 128,0.9)),url('files/index.jpg') !important;
-            background: -ms-linear-gradient(90deg, rgba(25, 181, 254, 0.9), rgba(0, 55, 128,0.9)),url('files/index.jpg') !important;
-            background: -o-linear-gradient(90deg, rgba(25, 181, 254, 0.9), rgba(0, 55, 128,0.9)),url('files/index.jpg') !important;
-            background: linear-gradient(90deg, rgba(25, 181, 254, 0.9), rgba(0, 55, 128,0.9)),url('files/index.jpg') !important;
+            background: -webkit-linear-gradient(90deg, rgba(25, 181, 254, 0.9), rgba(0, 55, 128,0.9)),url({% static 'files/index.jpg' %}) !important;
+            background: -moz-linear-gradient(90deg, rgba(25, 181, 254, 0.9), rgba(0, 55, 128,0.9)),url({% static 'files/index.jpg' %}) !important;
+            background: -ms-linear-gradient(90deg, rgba(25, 181, 254, 0.9), rgba(0, 55, 128,0.9)),url({% static 'files/index.jpg' %}) !important;
+            background: -o-linear-gradient(90deg, rgba(25, 181, 254, 0.9), rgba(0, 55, 128,0.9)),url({% static 'files/index.jpg' %}) !important;
+            background: linear-gradient(90deg, rgba(25, 181, 254, 0.9), rgba(0, 55, 128,0.9)),url({% static 'files/index.jpg' %}) !important;
         }
         .uk-button:hover,
         .uk-button:focus{
@@ -34,8 +19,10 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
     </style>
-</head>
-<body>
+{% endblock %}
+
+
+{% block content %}
 <div class="uk-navbar-container uk-navbar-container uk-margin-bottom">
     <div class="uk-container uk-container-expand header">
         <nav class="uk-navbar" uk-navbar>
@@ -48,20 +35,20 @@
 <div class="uk-card uk-card-body uk-width-1-2@m uk-width-1-3@l uk-width-1-1@s uk-position-center">
     <h3 class="uk-card-title t uk-text-center">ورود مدیران</h3>
     <hr>
-    <form method="POST" action="/students/login/">
+    <form method="POST" action="{% url 'Admin Login' %}">
         <div class="uk-inline uk-margin uk-width-1-1">
-            <input class="uk-input uk-border-rounded" name="username" type="number" required placeholder="نام کاربری">
+            <input class="uk-input uk-border-rounded" name="username" required placeholder="نام کاربری">
             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
         </div>
         <div class="uk-inline uk-width-1-1">
-            <input class="uk-input uk-border-rounded" name="password" type="number" required placeholder="رمزعبور">
+            <input class="uk-input uk-border-rounded" name="password" type="password" required placeholder="رمزعبور">
             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
         </div>
         <div class="uk-margin">
             <button name="sbt" class="uk-button v uk-border-rounded uk-width-1-1" type="submit">ورود</button>
         </div>
+        {% csrf_token %}
     </form>
 </div>
 <footer class="footer">تمامی حقوق این سایت متعلق به شرکت ورتا و دانشکده فنی شهید شمسی پور می باشد.</footer>
-</body>
-</html>
+{% endblock %}

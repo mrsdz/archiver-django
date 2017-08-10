@@ -1,135 +1,126 @@
-<!doctype html>
-<html class="no-js" lang="fa">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>دانشکده شهید شمسی پور</title>
-    <meta name="description" content="اولین بایگانی آنلاین دانشکده فنی شهید شمسی پور">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="author" content="Ashkan Dehbashi | dhs.ashkan@gmail.com">
+{% extends "header-template.html" %}
+{% load staticfiles %}
+
+{% block header %}
     <meta name="theme-color" content="#0C76BF">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!--css-->
-    <link rel="stylesheet" type="text/css" href="css/admin-header.css">
-    <link rel="stylesheet" type="text/css" href="css/fonts.css">
-    <link rel="stylesheet" type="text/css" href="css/uikit.min.css" />
-    <!--js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
-</head>
-<body>
-<!--navbar-->
-<div class="uk-position-fixed uk-position-z-index uk-width-1-1">
-    <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
-        <div class="uk-navbar-left">
-            <ul class="uk-navbar-nav">
-                <li class="hide">
-                    <a href="#modal-full" uk-toggle class="header-items" style="margin-left: 32px;">
-                        <span uk-icon="icon: sign-out"></span>
-                        <label style="margin-left: 8px;">خروج</label>
-                    </a>
-                </li>
-                <li class="hide">
-                    <a href="admin-setting.html" class="header-items">
-                        <span uk-icon="icon: cog"></span>
-                        <label style="margin-left: 8px;">تنظیمات</label>
-                    </a>
-                </li>
-                <li class="hide">
-                    <a href="view-staff.html" class="header-items">
-                        <span uk-icon="icon: users"></span>
-                        <label style="margin-left: 8px;">کارکنان</label>
-                    </a>
-                </li>
-                <li class="hide">
-                    <a href="st-mg.html" class="header-items">
-                        <span uk-icon="icon: user"></span>
-                        <label style="margin-left: 8px;">دانشجویان</label>
-                    </a>
-                </li>
-                <li class="hide">
-                    <a href="admin-panel.html" class="header-items">
-                        <span uk-icon="icon: home"></span>
-                        <label style="margin-left: 8px;">صفحه اصلی</label>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="uk-navbar-right">
-            <ul class="uk-navbar-nav">
-                <li>
-                    <a class="logo" style="margin-right: 32px;">بایگانی آنلاین دانشکده شهید شمسی‌ پور</a>
-                </li>
-                <li class="hide-btn">
-                    <a class="header-items" uk-toggle="target: #offcanvas-overlay;">
-                        <span uk-icon="icon: menu"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
-<!--background-->
-<div class="background"></div>
-<!--slide bar-->
-<div class="uk-offcanvas-content">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin-header.css' %}">
+    {% block admin_header %}{% endblock %}
+{% endblock %}
 
-    <div id="offcanvas-overlay" uk-offcanvas="overlay: true; flip: true">
-        <div class="uk-offcanvas-bar">
-            <div class="uk-text-right uk-padding">
-                <h6>
-                    <a href="admin-setting.html"  class="header-items" style="margin-left: 32px;">
-                        <label style="margin-left: 8px;">صفحه اصلی</label>
-                        <span uk-icon="icon: home"></span>
-                    </a>
-                </h6>
-                <h6>
-                    <a href="st-mg.html" class="header-items">
-                        <label style="margin-left: 8px;">دانشجویان</label>
-                        <span uk-icon="icon: user"></span>
-                    </a>
-                </h6>
-                <h6>
-                    <a href="view-staff.html" class="header-items">
-                        <label style="margin-left: 8px;">کارکنان</label>
-                        <span uk-icon="icon: users"></span>
-                    </a>
-                </h6>
-                <h6>
-                    <a href="admin-setting.html" class="header-items">
-                        <label style="margin-left: 8px;">تنظیمات</label>
-                        <span uk-icon="icon: cog"></span>
-                    </a>
-                </h6>
-                <h6>
-                    <a href="" class="header-items">
-                        <label style="margin-left: 8px;">خروج</label>
-                        <span uk-icon="icon: sign-out"></span>
-                    </a>
-                </h6>
+{% block content %}
+    <!--navbar-->
+    <div class="uk-position-fixed uk-position-z-index uk-width-1-1">
+        <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li class="hide">
+                        <a href="#modal-full" uk-toggle class="header-items" style="margin-left: 32px;">
+                            <span uk-icon="icon: sign-out"></span>
+                            <label style="margin-left: 8px;">خروج</label>
+                        </a>
+                    </li>
+                    <li class="hide">
+                        <a href="admin-setting.html" class="header-items">
+                            <span uk-icon="icon: cog"></span>
+                            <label style="margin-left: 8px;">تنظیمات</label>
+                        </a>
+                    </li>
+                    <li class="hide">
+                        <a href="view-staff.html" class="header-items">
+                            <span uk-icon="icon: users"></span>
+                            <label style="margin-left: 8px;">کارکنان</label>
+                        </a>
+                    </li>
+                    <li class="hide">
+                        <a href="st-mg.html" class="header-items">
+                            <span uk-icon="icon: user"></span>
+                            <label style="margin-left: 8px;">دانشجویان</label>
+                        </a>
+                    </li>
+                    <li class="hide">
+                        <a href="admin-panel.html" class="header-items">
+                            <span uk-icon="icon: home"></span>
+                            <label style="margin-left: 8px;">صفحه اصلی</label>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a class="logo" style="margin-right: 32px;">بایگانی آنلاین دانشکده شهید شمسی‌ پور</a>
+                    </li>
+                    <li class="hide-btn">
+                        <a class="header-items" uk-toggle="target: #offcanvas-overlay;">
+                            <span uk-icon="icon: menu"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--background-->
+    <div class="background"></div>
+    <!--slide bar-->
+    <div class="uk-offcanvas-content">
+
+        <div id="offcanvas-overlay" uk-offcanvas="overlay: true; flip: true">
+            <div class="uk-offcanvas-bar">
+                <div class="uk-text-right uk-padding">
+                    <h6>
+                        <a href="admin-setting.html"  class="header-items" style="margin-left: 32px;">
+                            <label style="margin-left: 8px;">صفحه اصلی</label>
+                            <span uk-icon="icon: home"></span>
+                        </a>
+                    </h6>
+                    <h6>
+                        <a href="st-mg.html" class="header-items">
+                            <label style="margin-left: 8px;">دانشجویان</label>
+                            <span uk-icon="icon: user"></span>
+                        </a>
+                    </h6>
+                    <h6>
+                        <a href="view-staff.html" class="header-items">
+                            <label style="margin-left: 8px;">کارکنان</label>
+                            <span uk-icon="icon: users"></span>
+                        </a>
+                    </h6>
+                    <h6>
+                        <a href="admin-setting.html" class="header-items">
+                            <label style="margin-left: 8px;">تنظیمات</label>
+                            <span uk-icon="icon: cog"></span>
+                        </a>
+                    </h6>
+                    <h6>
+                        <a href="" class="header-items">
+                            <label style="margin-left: 8px;">خروج</label>
+                            <span uk-icon="icon: sign-out"></span>
+                        </a>
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--exit modal-->
+    <div id="modal-full" class="uk-modal-full" uk-modal>
+        <div class="uk-modal-dialog" style="height: 100%">
+            <svg class="exit-svg" viewBox="0 0 500 130" preserveAspectRatio="xMinYMin meet">
+                <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: #0E7CC5;"></path>
+            </svg>
+            <div class="uk-position-top-center" style="margin-top: 128px;">
+                <h1 class="confirm-message">آیا مطمئنید میخواهید خارج شوید؟</h1>
+            </div>
+            <div class="uk-position-bottom-center" style="margin-bottom: 128px;">
+                <div class="uk-padding-large uk-text-center">
+                    <a href="{% url 'Logout' %}"><button class="uk-button yes-no blue">بله</button></a>
+                    <button class="uk-button yes-no red uk-modal-close-default">خیر</button>
+                </div>
             </div>
         </div>
     </div>
+    {% block admin_content %}{% endblock %}
+{% endblock %}
 
-</div>
-<!--exit modal-->
-<div id="modal-full" class="uk-modal-full" uk-modal>
-    <div class="uk-modal-dialog" style="height: 100%">
-        <svg class="exit-svg" viewBox="0 0 500 130" preserveAspectRatio="xMinYMin meet">
-            <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: #0E7CC5;"></path>
-        </svg>
-        <div class="uk-position-top-center" style="margin-top: 128px;">
-            <h1 class="confirm-message">آیا مطمئنید میخواهید خارج شوید؟</h1>
-        </div>
-        <div class="uk-position-bottom-center" style="margin-bottom: 128px;">
-            <div class="uk-padding-large uk-text-center">
-                <button class="uk-button yes-no blue">بله</button>
-                <button class="uk-button yes-no red uk-modal-close-default">خیر</button>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+
+

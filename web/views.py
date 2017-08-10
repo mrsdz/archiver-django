@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect, render_to_response, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_GET, require_POST
 from django.contrib.auth import authenticate, logout, login
 from django.http.response import HttpResponse
@@ -46,7 +46,7 @@ def student_login(request):
                 request.session['student_section'] = this_student.section.name
                 return redirect('/', request)
 
-    request.session['error'] = {'error': 'forbidden'}
+    request.session['error'] = "نام کاربری یا رمز عبور اشتباه است"
     return redirect('/')
 
 
@@ -62,14 +62,14 @@ def admin_login(request):
                 return redirect('/admins/panel/')
             else:
                 HttpResponse("Your Account is disable.")
-    context = {'error': 'Forbidden'}
-    return render_to_response("admins.html", context)
+    context = {'error': 'نام کاربری یا رمز عبور اشتباه است'}
+    return render(request, "admins.html", context)
 
 
 @require_GET
 @login_required(login_url="/")
 def admins_panel(request):
-    return render_to_response("ad-panel.html")
+    return render(request, "admin-panel.html")
 
 
 @login_required(login_url="/")
