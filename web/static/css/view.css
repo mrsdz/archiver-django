@@ -1,5 +1,5 @@
 .padding{
-    padding: 100px 20px !important;
+    padding: 80px 20px !important;
 }
 .uk-card{
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
@@ -24,7 +24,6 @@
     direction: rtl !important;
     font-size: 16px !important;
     text-align: center !important;
-    border: none !important;
     color: #fff !important;
     -webkit-transition: all 0.3s ease !important;
     -moz-transition: all 0.3s ease !important;
@@ -32,7 +31,7 @@
     cursor: pointer !important;
     line-height: 45px !important;
     padding: 0 22px !important;
-    border-radius: 3px !important;
+    border-radius: 2em !important;
 }
 .green{
     color: #4CAF50 !important;
@@ -90,4 +89,3 @@
 @media screen and (min-width: 700px) and (max-width: 3000px){
 
 }
-

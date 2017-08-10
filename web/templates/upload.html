@@ -1,128 +1,35 @@
-<!doctype html>
-<html class="no-js" lang="fa">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>دانشکده شهید شمسی پور</title>
-    <meta name="description" content="اولین بایگانی آنلاین دانشکده فنی شهید شمسی پور">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="author" content="Ashkan Dehbashi | dhs.ashkan@gmail.com">
-    <meta name="theme-color" content="#6C7AFE">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!--css-->
-    <link rel="stylesheet" href="css/upload.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/uikit.css">
-    <!--js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
-    <script>
-
-
-        (function ($) {
-
-            var bar = $("#progressbar")[0];
-
-            UIkit.upload('.test-upload', {
-
-                url: '',
-                multiple: true,
-
-                beforeSend: function() { console.log('beforeSend', arguments); },
-                beforeAll: function() { console.log('beforeAll', arguments); },
-                load: function() { console.log('load', arguments); },
-                error: function() { console.log('error', arguments); },
-                complete: function() { console.log('complete', arguments); },
-
-                loadStart: function (e) {
-                    console.log('loadStart', arguments);
-
-                    bar.removeAttribute('hidden');
-                    bar.max =  e.total;
-                    bar.value =  e.loaded;
-                },
-
-                progress: function (e) {
-                    console.log('progress', arguments);
-
-                    bar.max =  e.total;
-                    bar.value =  e.loaded;
-
-                },
-
-                loadEnd: function (e) {
-                    console.log('loadEnd', arguments);
-
-                    bar.max =  e.total;
-                    bar.value =  e.loaded;
-                },
-
-                completeAll: function () {
-                    console.log('completeAll', arguments);
-
-                    setTimeout(function () {
-                        bar.setAttribute('hidden', 'hidden');
-                    }, 1000);
-
-                    alert('Upload Completed');
-                }
-            });
-
-        })(jQuery);
-    </script>
-</head>
-<body>
-<!--navbar-->
-<div class="uk-position-fixed uk-position-z-index uk-width-1-1">
-    <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
-        <div class="uk-navbar-left">
-            <ul class="uk-navbar-nav">
-                <li>
-                    <a href="st-panel.html" class="header-items" style="margin-left: 32px;">
-                        <span uk-icon="icon: arrow-left"></span>
-                        <label style="margin-left: 8px;">برگشت</label>
-                    </a>
-                </li>
-            </ul>
+<div id="modal-upload" uk-modal>
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title uk-text-center">آپلود مدرک</h2>
         </div>
-        <div class="uk-navbar-right">
-            <ul class="uk-navbar-nav">
-                <li>
-                    <label class="logo" style="margin-right: 32px;">بایگانی آنلاین دانشکده شهید شمسی‌ پور</label>
-                </li>
-            </ul>
+        <div class="uk-modal-body">
+            <form class="uk-form-stacked">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-select">لطفا موضوع فایل آپلود خود را انتخاب کنید!</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select uk-border-rounded" id="form-stacked-select">
+                            <option>دیپلم</option>
+                            <option>اشتغال به تحصیل</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-margin" uk-margin>
+                    <div class="uk-inline" uk-form-custom="target: true">
+                        <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: pull"></a>
+                        <input type="file">
+                        <input class="uk-input" type="text" placeholder="فایل مورد نظر را انتخاب کنید!" disabled>
+                    </div>
+                </div>
+            </form>
         </div>
-    </nav>
-</div>
-<!--background-->
-<div class="background"></div>
-<!--upload-->
-<div class="uk-position-center uk-width-1-2@m" uk-scrollspy="cls: uk-animation-slide-bottom; target: > div ; delay: 0; repeat: false">
-    <div class="uk-card uk-card-default uk-border-rounded uk-card-body">
-        <form class="uk-form-stacked">
-            <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-select">لطفا موضوع فایل آپلود خود را انتخاب کنید!</label>
-                <div class="uk-form-controls">
-                    <select class="uk-select uk-border-rounded" id="form-stacked-select">
-                        <option>دیپلم</option>
-                        <option>اشتغال به تحصیل</option>
-                    </select>
-                </div>
-            </div>
-            <div class="test-upload uk-placeholder uk-text-center">
-                <div uk-form-custom>
-                    <span  class="uk-link">!از اینجا انتخاب کنید</span>
-                    <input type="file" multiple>
-                </div>
-                <span class="uk-text-middle">فایل مورد نظر خود را اینجا رها کنید یا</span>
-                <span uk-icon="icon: cloud-upload"></span>
-            </div>
-            <progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
-        </form>
+        <div class="uk-modal-footer uk-text-left">
+            <button class="uk-button modal-btn blue-color" type="button">آپلود
+                <span uk-icon="icon: upload"></span>
+            </button>
+            <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
+                <span uk-icon="icon: close"></span>
+            </button>
+        </div>
     </div>
 </div>
-
-</body>
-</html>

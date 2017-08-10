@@ -1,0 +1,132 @@
+<!doctype html>
+<html class="no-js" lang="fa">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>دانشکده شهید شمسی پور</title>
+    <meta name="description" content="اولین بایگانی آنلاین دانشکده فنی شهید شمسی پور">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="author" content="Ashkan Dehbashi | dhs.ashkan@gmail.com">
+    <meta name="theme-color" content="#0C76BF">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!--css-->
+    <link rel="stylesheet" href="css/view-staff.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/uikit.min.css" />
+    <!--js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#header').load('admin-header.html');
+        });
+    </script>
+</head>
+<body>
+    <!--header-->
+    <div id="header"></div>
+    <!--search-->
+    <div class="uk-width-1-1@m card-padding" style="padding-top: 70px; padding-right: 70px; padding-left: 70px">
+        <div class="uk-card uk-card-default uk-border-rounded">
+            <form class="uk-search uk-align-center uk-border-rounded">
+                <span class="uk-search-icon-flip uk-margin-right" uk-search-icon></span>
+                <input class="uk-search-input uk-form-large" type="search" placeholder="جستجو کارمندان...">
+            </form>
+        </div>
+    </div>
+    <!--cards-->
+    <div class="uk-grid uk-grid-small padding " uk-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: > div ; delay: 0; repeat: false">
+        <div class="uk-width-1-4@m">
+            <div class="uk-card uk-card-default uk-border-rounded">
+                <div  class="uk-card-body uk-text-right" uk-grid>
+                    <!--name-->
+                    <h6 class="uk-width-1-1">
+                        <label>نام و نام خانوادگی:</label>
+                        <b>اشکان</b>
+                        <span uk-icon="icon: user"></span>
+                    </h6>
+                    <!--family name-->
+                    <h6 class="uk-width-1-1">
+                        <label>نام خانوادگی:</label>
+                        <b>دهباشی</b>
+                        <span uk-icon="icon: users"></span>
+                    </h6>
+                </div>
+                <div class="uk-card-footer">
+                    <a style="width: 100%" href="#" class="uk-button view-btn red-btn">حذف
+                        <span uk-icon="icon: trash"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--add staff button-->
+    <div class="uk-position-bottom-right uk-position-fixed uk-padding">
+        <a href="#modal-add" uk-toggle class="uk-button uk-border-circle add-btn" title="اضافه کردن کارمند" uk-tooltip>
+            <span uk-icon="icon: plus; ratio: 1.3"></span>
+        </a>
+    </div>
+    <!--add staff-->
+    <div id="modal-add" uk-modal>
+        <div class="uk-modal-dialog">
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title uk-text-center">اضافه کردن کارمند</h2>
+            </div>
+            <div class="uk-modal-body" uk-overflow-auto>
+                <form class="uk-form-stacked" style="margin-top: 32px;">
+                    <!--name-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input class="uk-input" placeholder="نام" type="number">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+                        </div>
+                    </div>
+
+                    <!--family name-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input class="uk-input" placeholder="نام خانوادگی" type="number">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: users"></span>
+                        </div>
+                    </div>
+
+                    <!--email-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input class="uk-input" placeholder="ایمیل" type="email">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: mail"></span>
+                        </div>
+                    </div>
+
+                    <!--username-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input class="uk-input" placeholder="نام کاربری" type="text">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+                        </div>
+                    </div>
+
+                    <!--password-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input class="uk-input" placeholder="رمزعبور" type="password">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="uk-modal-footer uk-text-left">
+                <button class="uk-button modal-btn blue-color" type="button">اضافه
+                    <span uk-icon="icon: plus"></span>
+                </button>
+                <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
+                    <span uk-icon="icon: close"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

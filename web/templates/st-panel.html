@@ -2,164 +2,458 @@
 {% load staticfiles %}
 
 {% block header %}
+    <meta name="theme-color" content="#6C7AFE">
+    <link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/upload.css' %}">
     <link rel="stylesheet" href="{% static 'css/st-panel.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chocolat/0.4.18/css/chocolat.css">
-    <script src="{% static 'js/main.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chocolat/0.4.18/js/jquery.chocolat.js"></script>
+    <link rel="stylesheet" href="{% static 'css/snackbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default-skin/default-skin.css' %}">
+    <script src="{% static 'js/photoswipe.min.js' %}"></script>
+    <script src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
+    <style>
+        h6{
+            font-family: Vazir !important;
+        }
+    </style>
 {% endblock %}
 
+
 {% block content %}
-<!--navbar-->
-<div class="uk-position-fixed uk-position-z-index uk-width-1-1 uk-animation-slide-top">
-    <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
-        <div class="uk-navbar-left">
-            <ul class="uk-navbar-nav">
-                <li class="hide">
-                    <a href="#modal-full" uk-toggle class="header-items" style="margin-left: 32px;">
-                        <span uk-icon="icon: sign-out"></span>
-                        <label style="margin-left: 8px;">خروج</label>
-                    </a>
-                </li>
-                <li>
-                    <a href="upload.html" class="header-items">
-                        <span uk-icon="icon: plus"></span>
-                        <label style="margin-left: 8px;">آپلود</label>
-                    </a>
-                </li>
-                <li class="">
-                    <a class="header-items hide-btn" style="margin-right: 32px;"  uk-toggle="target: #offcanvas-overlay;">
-                        <label style="margin-right: 8px;">مشخصات</label>
-                        <span  uk-icon="icon: menu"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="uk-navbar-right">
-            <ul class="uk-navbar-nav">
-                <li>
-                    <label class="logo" style="margin-right: 32px;">بایگانی آنلاین دانشکده شهید شمسی‌ پور</label>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
-<!--background-->
-<div class="background"></div>
-<!--photos and st-info-->
-<div class="uk-text-center row">
-    <!--photos-->
-    <div class="width tablet-width" style="width: 80%; float: left">
-        <div class="uk-text-center padding" uk-scrollspy="cls: uk-animation-scale-up; target: > div > .uk-padding-small; delay: 120; repeat: false">
-            <!--cards-->
-            <div class="chocolat-parent" data-chocolat-title="">
-                <!--card 1-->
-                <div class="uk-padding-small width" style="width: 21%; float: left">
-                    <div class="container uk-box-shadow-large uk-box-shadow-hover-xlarge">
-                        <a class="chocolat-image" href="{% static 'files/example.jpg' %}" title="Winter is here">
-                            <img src="{% static 'files/example.jpg' %}" class="image" />
-                            <div class="text">Winter is here</div>
+    {% include "upload.html" %}
+    <!--navbar-->
+    <div class="uk-position-fixed uk-position-z-index uk-width-1-1 uk-animation-slide-top">
+        <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="#modal-full" uk-toggle class="header-items" style="margin-left: 32px;">
+                            <span uk-icon="icon: sign-out"></span>
+                            <label style="margin-left: 8px;">خروج</label>
                         </a>
-                    </div>
+                    </li>
+                    <li>
+                        <a class="header-items" uk-toggle href="#modal-upload">
+                            <span uk-icon="icon: plus"></span>
+                            <label style="margin-left: 8px;">آپلود</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="header-items hide-btn" style="margin-right: 32px;"  uk-toggle="target: #offcanvas-overlay;">
+                            <label style="margin-right: 8px;">مشخصات</label>
+                            <span  uk-icon="icon: menu"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <label class="logo" style="margin-right: 32px;">بایگانی آنلاین دانشکده شهید شمسی‌ پور</label>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--background-->
+    <div class="background"></div>
+    <!--photos and st-info-->
+    <div class="uk-text-center row">
+        <!--photos-->
+        <div class="width tablet-width" style="width: 80%; float: left">
+            <div class="uk-text-center padding" uk-scrollspy="cls: uk-animation-scale-up; target: > div > figure; delay: 120; repeat: false">
+                <!--cards-->
+                <div class="my-gallery" itemscope>
+                    <!--card 1-->
+                    <figure class="uk-position-relative width uk-box-shadow-large uk-box-shadow-hover-xlarge" style="width: 21%; float: left" itemprop="associatedMedia" itemscope>
+                        <a href="{% static 'files/example.jpg' %}" itemprop="contentUrl" data-size="1500x1024" style="cursor: zoom-in">
+                            <img src="{% static 'files/example.jpg' %}" class="image" itemprop="thumbnail" alt="Image description" />
+                        </a>
+                        <div class="text" itemprop="caption description">Winter is here</div>
+                    </figure>
                 </div>
             </div>
         </div>
-    </div>
-    <!--st info-->
-    <div class="width hide" style="width: 20%; float: left; margin-top: 32px;">
-        <div class="uk-text-right padding-top uk-position-fixed">
-            <h4 class="uk-text-center">مشخصات دانشجو</h4>
-            <hr/>
-            <!--name-->
-            <h6>
-                <label>نام و نام خانوادگی:</label>
-                <b>اشکان</b>
-                <span uk-icon="icon: user"></span>
-            </h6>
-            <!--filed-->
-            <h6 class="field">
-                <label>رشته:</label>
-                <b>نرم افزار</b>
-                <span uk-icon="icon: info"></span>
-            </h6>
-            <!--st number-->
-            <h6>
-                <label>شماره دانشجویی:</label>
-                <b>123456789</b>
-                <span uk-icon="icon: credit-card"></span>
-            </h6>
-            <!--section-->
-            <h6>
-                <label>مقطع:</label>
-                <b>کاردانی پیوسته</b>
-                <span uk-icon="icon: tag"></span>
-            </h6>
-            <!--entry period-->
-            <h6>
-                <label>دوره ورود:</label>
-                <b>95-96</b>
-                <span uk-icon="icon: thumbnails"></span>
-            </h6>
-        </div>
-    </div>
-</div>
-<!--slide bar-->
-<div class="uk-offcanvas-content">
-
-    <div id="offcanvas-overlay" uk-offcanvas="overlay: true; flip: true">
-        <div class="uk-offcanvas-bar">
-            <div class="uk-text-right">
+        <!--st info-->
+        <div class="width hide" style="width: 20%; float: right;">
+            <div class="uk-text-right padding-top uk-position-fixed">
                 <h4 class="uk-text-center">مشخصات دانشجو</h4>
                 <hr/>
+                <!--st number-->
+                <h6>
+                    <label>شماره دانشجویی:</label>
+                    <b>{{ request.session.student_college_number }}</b>
+                    <span uk-icon="icon: credit-card"></span>
+                </h6>
                 <!--name-->
                 <h6>
-                    <label>نام و نام خانوادگی:</label>
-                    <b>اشکان</b>
+                    <label>نام:</label>
+                    <b>{{ request.session.student_first_name }}</b>
                     <span uk-icon="icon: user"></span>
+                </h6>
+                <!--family name-->
+                <h6>
+                    <label>نام خانوادگی:</label>
+                    <b>{{ request.session.student_last_name }}</b>
+                    <span uk-icon="icon: users"></span>
                 </h6>
                 <!--filed-->
                 <h6 class="field">
                     <label>رشته:</label>
-                    <b>نرم افزار</b>
+                    <b>{{ request.session.student_subject }}</b>
                     <span uk-icon="icon: info"></span>
-                </h6>
-                <!--st number-->
-                <h6>
-                    <label>شماره دانشجویی:</label>
-                    <b>123456789</b>
-                    <span uk-icon="icon: credit-card"></span>
                 </h6>
                 <!--section-->
                 <h6>
                     <label>مقطع:</label>
-                    <b>کاردانی پیوسته</b>
+                    <b>{{ request.session.student_section }}</b>
                     <span uk-icon="icon: tag"></span>
                 </h6>
                 <!--entry period-->
                 <h6>
-                    <label>دوره ورود:</label>
-                    <b>95-96</b>
+                    <label>دوره:</label>
+                    <b>{{ request.session.student_period }}</b>
                     <span uk-icon="icon: thumbnails"></span>
                 </h6>
             </div>
         </div>
     </div>
+    <!--slide bar-->
+    <div class="uk-offcanvas-content" style="display: block">
 
-</div>
-<!--exit modal-->
-<div id="modal-full" class="uk-modal-full" uk-modal>
-    <div class="uk-modal-dialog" style="height: 100%">
-        <svg class="exit-svg" viewBox="0 0 500 130" preserveAspectRatio="xMinYMin meet">
-            <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: #855AAB;"></path>
-        </svg>
-        <div class="uk-position-top-center" style="margin-top: 128px;">
-            <h1 class="confirm-message">آیا مطمئنید میخواهید خارج شوید؟</h1>
+        <div id="offcanvas-overlay" uk-offcanvas="overlay: true; flip: true">
+            <div class="uk-offcanvas-bar">
+                <div class="uk-text-right">
+                    <h4 class="uk-text-center">مشخصات دانشجو</h4>
+                    <hr/>
+                    <!--st number-->
+                    <h6>
+                        <label>شماره دانشجویی:</label>
+                        <b>{{ request.session.student_college_number }}</b>
+                        <span uk-icon="icon: credit-card"></span>
+                    </h6>
+                    <!--name-->
+                    <h6>
+                        <label>نام:</label>
+                        <b>{{ request.session.student_first_name }}</b>
+                        <span uk-icon="icon: user"></span>
+                    </h6>
+                    <!--family name-->
+                    <h6>
+                        <label>نام خانوادگی:</label>
+                        <b>{{ request.session.student_last_name }}</b>
+                        <span uk-icon="icon: users"></span>
+                    </h6>
+                    <!--filed-->
+                    <h6 class="field">
+                        <label>رشته:</label>
+                        <b>{{ request.session.student_subject }}</b>
+                        <span uk-icon="icon: info"></span>
+                    </h6>
+                    <!--section-->
+                    <h6>
+                        <label>مقطع:</label>
+                        <b>{{ request.session.student_section }}</b>
+                        <span uk-icon="icon: tag"></span>
+                    </h6>
+                    <!--entry period-->
+                    <h6>
+                        <label>دوره:</label>
+                        <b>{{ request.session.student_period }}</b>
+                        <span uk-icon="icon: thumbnails"></span>
+                    </h6>
+                </div>
+            </div>
         </div>
-        <div class="uk-position-bottom-center" style="margin-bottom: 128px;">
-            <div class="uk-padding-large uk-text-center">
-                <a href="{% url 'Logout' %}"><button class="uk-button yes-no blue">بله</button></a>
-                <button class="uk-button yes-no red uk-modal-close-default">خیر</button>
+
+    </div>
+    <!--exit modal-->
+    <div id="modal-full" class="uk-modal-full" uk-modal>
+        <div class="uk-modal-dialog" style="height: 100%">
+            <svg class="exit-svg" viewBox="0 0 500 130" preserveAspectRatio="xMinYMin meet">
+                <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: #855AAB;"></path>
+            </svg>
+            <div class="uk-position-top-center" style="margin-top: 128px;">
+                <h1 class="confirm-message">آیا مطمئنید میخواهید خارج شوید؟</h1>
+            </div>
+            <div class="uk-position-bottom-center" style="margin-bottom: 128px;">
+                <div class="uk-padding-large uk-text-center">
+                    <a href="{% url 'Logout' %}"><button class="uk-button yes-no blue">بله</button></a>
+                    <button class="uk-button yes-no red uk-modal-close-default">خیر</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+        <!-- Background of PhotoSwipe.
+             It's a separate element, as animating opacity is faster than rgba(). -->
+        <div class="pswp__bg"></div>
+
+        <!-- Slides wrapper with overflow:hidden. -->
+        <div class="pswp__scroll-wrap">
+
+            <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+            <div class="pswp__container">
+                <!-- don't modify these 3 pswp__item elements, data is added later on -->
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+
+            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+            <div class="pswp__ui pswp__ui--hidden">
+
+                <div class="pswp__top-bar">
+
+                    <!--  Controls are self-explanatory. Order can be changed. -->
+
+                    <div class="pswp__counter"></div>
+
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                    <!-- element will get class pswp__preloader--active when preloader is running -->
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!--swipe box-->
+    <script>
+        var initPhotoSwipeFromDOM = function(gallerySelector) {
+
+            // parse slide data (url, title, size ...) from DOM elements
+            // (children of gallerySelector)
+            var parseThumbnailElements = function(el) {
+                var thumbElements = el.childNodes,
+                    numNodes = thumbElements.length,
+                    items = [],
+                    figureEl,
+                    linkEl,
+                    size,
+                    item;
+
+                for(var i = 0; i < numNodes; i++) {
+
+                    figureEl = thumbElements[i]; // <figure> element
+
+                    // include only element nodes
+                    if(figureEl.nodeType !== 1) {
+                        continue;
+                    }
+
+                    linkEl = figureEl.children[0]; // <a> element
+
+                    size = linkEl.getAttribute('data-size').split('x');
+
+                    // create slide object
+                    item = {
+                        src: linkEl.getAttribute('href'),
+                        w: parseInt(size[0], 10),
+                        h: parseInt(size[1], 10)
+                    };
+
+
+
+                    if(figureEl.children.length > 1) {
+                        // <figcaption> content
+                        item.title = figureEl.children[1].innerHTML;
+                    }
+
+                    if(linkEl.children.length > 0) {
+                        // <img> thumbnail element, retrieving thumbnail url
+                        item.msrc = linkEl.children[0].getAttribute('src');
+                    }
+
+                    item.el = figureEl; // save link to element for getThumbBoundsFn
+                    items.push(item);
+                }
+
+                return items;
+            };
+
+            // find nearest parent element
+            var closest = function closest(el, fn) {
+                return el && ( fn(el) ? el : closest(el.parentNode, fn) );
+            };
+
+            // triggers when user clicks on thumbnail
+            var onThumbnailsClick = function(e) {
+                e = e || window.event;
+                e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+                var eTarget = e.target || e.srcElement;
+
+                // find root element of slide
+                var clickedListItem = closest(eTarget, function(el) {
+                    return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+                });
+
+                if(!clickedListItem) {
+                    return;
+                }
+
+                // find index of clicked item by looping through all child nodes
+                // alternatively, you may define index via data- attribute
+                var clickedGallery = clickedListItem.parentNode,
+                    childNodes = clickedListItem.parentNode.childNodes,
+                    numChildNodes = childNodes.length,
+                    nodeIndex = 0,
+                    index;
+
+                for (var i = 0; i < numChildNodes; i++) {
+                    if(childNodes[i].nodeType !== 1) {
+                        continue;
+                    }
+
+                    if(childNodes[i] === clickedListItem) {
+                        index = nodeIndex;
+                        break;
+                    }
+                    nodeIndex++;
+                }
+
+
+
+                if(index >= 0) {
+                    // open PhotoSwipe if valid index found
+                    openPhotoSwipe( index, clickedGallery );
+                }
+                return false;
+            };
+
+            // parse picture index and gallery index from URL (#&pid=1&gid=2)
+            var photoswipeParseHash = function() {
+                var hash = window.location.hash.substring(1),
+                    params = {};
+
+                if(hash.length < 5) {
+                    return params;
+                }
+
+                var vars = hash.split('&');
+                for (var i = 0; i < vars.length; i++) {
+                    if(!vars[i]) {
+                        continue;
+                    }
+                    var pair = vars[i].split('=');
+                    if(pair.length < 2) {
+                        continue;
+                    }
+                    params[pair[0]] = pair[1];
+                }
+
+                if(params.gid) {
+                    params.gid = parseInt(params.gid, 10);
+                }
+
+                return params;
+            };
+
+            var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+                var pswpElement = document.querySelectorAll('.pswp')[0],
+                    gallery,
+                    options,
+                    items;
+
+                items = parseThumbnailElements(galleryElement);
+
+                // define options (if needed)
+                options = {
+
+                    // define gallery index (for URL)
+                    galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+                    getThumbBoundsFn: function(index) {
+                        // See Options -> getThumbBoundsFn section of documentation for more info
+                        var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+                            pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                            rect = thumbnail.getBoundingClientRect();
+
+                        return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+                    }
+
+                };
+
+                // PhotoSwipe opened from URL
+                if(fromURL) {
+                    if(options.galleryPIDs) {
+                        // parse real index when custom PIDs are used
+                        // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+                        for(var j = 0; j < items.length; j++) {
+                            if(items[j].pid == index) {
+                                options.index = j;
+                                break;
+                            }
+                        }
+                    } else {
+                        // in URL indexes start from 1
+                        options.index = parseInt(index, 10) - 1;
+                    }
+                } else {
+                    options.index = parseInt(index, 10);
+                }
+
+                // exit if index not found
+                if( isNaN(options.index) ) {
+                    return;
+                }
+
+                if(disableAnimation) {
+                    options.showAnimationDuration = 0;
+                }
+
+                // Pass data to PhotoSwipe and initialize it
+                gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+                gallery.init();
+            };
+
+            // loop through all gallery elements and bind events
+            var galleryElements = document.querySelectorAll( gallerySelector );
+
+            for(var i = 0, l = galleryElements.length; i < l; i++) {
+                galleryElements[i].setAttribute('data-pswp-uid', i+1);
+                galleryElements[i].onclick = onThumbnailsClick;
+            }
+
+            // Parse URL and open gallery if it contains #&pid=3&gid=1
+            var hashData = photoswipeParseHash();
+            if(hashData.pid && hashData.gid) {
+                openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
+            }
+        };
+
+        // execute above function
+        initPhotoSwipeFromDOM('.my-gallery');
+
+    </script>
 {% endblock %}

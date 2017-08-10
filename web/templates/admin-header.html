@@ -1,5 +1,4 @@
 <!doctype html>
-{% load staticfiles %}
 <html class="no-js" lang="fa">
 <head>
     <meta charset="utf-8">
@@ -9,21 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="author" content="Ashkan Dehbashi | dhs.ashkan@gmail.com">
     <meta name="theme-color" content="#0C76BF">
-    <link rel="apple-touch-icon" href={% static 'apple-touch-icon.png' %}>
-    <link rel="icon" type="image/x-icon" href={% static 'favicon.ico' %}>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!--css-->
-    <link rel="stylesheet" type="text/css" href={% static 'css/admin-header.css' %}>
-    <link rel="stylesheet" type="text/css" href={% static 'css/fonts.css' %}>
-    <link rel="stylesheet" type="text/css" href={% static 'css/uikit.min.css' %}>
+    <link rel="stylesheet" type="text/css" href="css/admin-header.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="css/uikit.min.css" />
     <!--js-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
-    {% block header %}
-    {% endblock %}
 </head>
-
 <body>
+<!--navbar-->
 <div class="uk-position-fixed uk-position-z-index uk-width-1-1">
     <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
         <div class="uk-navbar-left">
@@ -35,25 +32,25 @@
                     </a>
                 </li>
                 <li class="hide">
-                    <a href="ad-setting.html" class="header-items">
+                    <a href="admin-setting.html" class="header-items">
                         <span uk-icon="icon: cog"></span>
                         <label style="margin-left: 8px;">تنظیمات</label>
                     </a>
                 </li>
                 <li class="hide">
-                    <a href="staff-mg.html" class="header-items">
+                    <a href="view-staff.html" class="header-items">
                         <span uk-icon="icon: users"></span>
                         <label style="margin-left: 8px;">کارکنان</label>
                     </a>
                 </li>
                 <li class="hide">
-                    <a href="{% url 'Student Management' %}" class="header-items">
+                    <a href="st-mg.html" class="header-items">
                         <span uk-icon="icon: user"></span>
                         <label style="margin-left: 8px;">دانشجویان</label>
                     </a>
                 </li>
                 <li class="hide">
-                    <a href={% url 'Admin Panel' %} class="header-items">
+                    <a href="admin-panel.html" class="header-items">
                         <span uk-icon="icon: home"></span>
                         <label style="margin-left: 8px;">صفحه اصلی</label>
                     </a>
@@ -83,25 +80,25 @@
         <div class="uk-offcanvas-bar">
             <div class="uk-text-right uk-padding">
                 <h6>
-                    <a href="ad-panel.html" class="header-items" style="margin-left: 32px;">
+                    <a href="admin-setting.html"  class="header-items" style="margin-left: 32px;">
                         <label style="margin-left: 8px;">صفحه اصلی</label>
                         <span uk-icon="icon: home"></span>
                     </a>
                 </h6>
                 <h6>
-                    <a href="{% url 'Student Management' %}" class="header-items">
+                    <a href="st-mg.html" class="header-items">
                         <label style="margin-left: 8px;">دانشجویان</label>
                         <span uk-icon="icon: user"></span>
                     </a>
                 </h6>
                 <h6>
-                    <a href="staff-mg.html" class="header-items">
+                    <a href="view-staff.html" class="header-items">
                         <label style="margin-left: 8px;">کارکنان</label>
                         <span uk-icon="icon: users"></span>
                     </a>
                 </h6>
                 <h6>
-                    <a href="ad-setting.html" class="header-items">
+                    <a href="admin-setting.html" class="header-items">
                         <label style="margin-left: 8px;">تنظیمات</label>
                         <span uk-icon="icon: cog"></span>
                     </a>
@@ -115,6 +112,7 @@
             </div>
         </div>
     </div>
+
 </div>
 <!--exit modal-->
 <div id="modal-full" class="uk-modal-full" uk-modal>
@@ -127,15 +125,11 @@
         </div>
         <div class="uk-position-bottom-center" style="margin-bottom: 128px;">
             <div class="uk-padding-large uk-text-center">
-                <a href="{% url 'Logout' %}"><button class="uk-button yes-no blue">بله</button></a>
+                <button class="uk-button yes-no blue">بله</button>
                 <button class="uk-button yes-no red uk-modal-close-default">خیر</button>
             </div>
         </div>
     </div>
 </div>
-
-{% block content %}
-{% endblock %}
-
 </body>
 </html>

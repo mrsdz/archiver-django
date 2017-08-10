@@ -1,33 +1,13 @@
-<!doctype html>
-<html class="no-js" lang="fa">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>دانشکده شهید شمسی پور</title>
-    <meta name="description" content="اولین بایگانی آنلاین دانشکده فنی شهید شمسی پور">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="author" content="Ashkan Dehbashi | dhs.ashkan@gmail.com">
-    <meta name="theme-color" content="#0C76BF">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!--css-->
-    <link rel="stylesheet" href="css/ad-panel.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/uikit.min.css" />
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chocolat/0.4.18/css/chocolat.css">-->
-    <!--js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/chocolat/0.4.18/js/jquery.chocolat.js"></script>-->
-    <script>
-        $(document).ready(function() {
-            $('#header').load('ad-header.html');
-        });
-    </script>
-</head>
-<body>
-    <div id="header"></div>
+{% extends 'ad-header.html' %}
+{% load staticfiles %}
+
+
+{% block header %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin-panel.css' %}">
+{% endblock %}
+
+
+{% block content %}
     <!--search card-->
     <div class="uk-position-center uk-text-center" uk-scrollspy="cls: uk-animation-slide-bottom; target: > div ; delay: 0; repeat: false">
         <div class="uk-card uk-card-default uk-card-body width uk-border-rounded">
@@ -41,5 +21,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}
