@@ -103,3 +103,4 @@ ENV/
 .gitignore
 settings.py
 .idea
+db.sqlite3
