@@ -46,4 +46,9 @@ class Document(models.Model):
         return "{}-{}-{}".format(self.id, self.student.college_number, self.type)
 
 
+class PrimaryDocument(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return "{}-{}".format(self.id, self.name)

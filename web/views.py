@@ -8,7 +8,7 @@ from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from .forms import *
-from .models import Subject, Section, Student, Document
+from .models import Subject, Section, Student
 from .utils import handle_message
 
 import csv
@@ -29,7 +29,7 @@ def index(request):
     context['message'] = handle_message(request)
     if 'student_college_number' in request.session and request.session['student_college_number']:
         return render(request, "st-panel.html", context)
-    return render(request, "iex.html", context)
+    return render(request, "index.html", context)
 
 
 @require_POST
