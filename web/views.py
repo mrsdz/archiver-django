@@ -8,7 +8,7 @@ from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from .forms import *
-from .models import Subject, Section, Student
+from .models import Subject, Section, Student, PrimaryDocument, Document
 from .utils import handle_message
 
 import csv
@@ -238,3 +238,33 @@ def admins_view_new_docs(request):
 @login_required(login_url="/")
 def admins_staff_management(request):
     return render(request, "view-staff.html")
+
+
+@require_POST
+def upload_document(request):
+    if (not request.user.is_anonymous()) or \
+            ('student_college_number' in request.session and request.session['student_college_number']):
+        form = DocumentUpload(request.POST, request.FILES)
+        if form.is_valid():
+            if form.cleaned_data['image'].size > 262144:
+                request.session['error'] = 'سایز فایل از ۲۵۰ کیلو بایت بیشتر است :/'
+                return redirect("/admins/panel/student/")
+            is_primary = False
+            image_type = form.cleaned_data['type']
+            this_student = request.POST['student']
+            if PrimaryDocument.objects.filter(name__exact=image_type).exists():
+                is_primary = True
+
+            Document(
+                student=get_object_or_404(Student, college_number=this_student),
+                type=image_type,
+                primary=is_primary,
+                doc=form.cleaned_data['image']
+            ).save()
+            request.session['done'] = 'مدرک با موفقیت آپلود شد :)'
+            return redirect("/admins/panel/student/")
+        else:
+            request.session['error'] = 'فایل فرستاده شده اشتباه می‌باشد :/'
+            return redirect("/admins/panel/student/")
+    else:
+        return redirect("/")

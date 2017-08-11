@@ -36,11 +36,20 @@ class Student(models.Model):
 
 
 class Document(models.Model):
+    def rename(self):
+        def rename_file(instance, filename):
+            name = str(instance.student_id) + "-" + instance.type + "." + filename.split('.')[-1]
+            path = "docs/" + str(instance.student_id) + "/"
+            full = path + name
+            return full
+        return rename_file
     id = models.AutoField(primary_key=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     type = models.CharField(max_length=200)
+    primary = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now=True)
     # TODO: Must pass a function upload_to :)
-    doc = models.ImageField()
+    doc = models.ImageField(upload_to=rename(True))
 
     def __unicode__(self):
         return "{}-{}-{}".format(self.id, self.student.college_number, self.type)

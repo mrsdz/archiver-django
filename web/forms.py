@@ -47,3 +47,7 @@ class AddStaffer(forms.Form):
 class DeleteStaffer(forms.Form):
     username = forms.CharField(label='username', max_length=200)
 
+
+class DocumentUpload(forms.Form):
+    image = forms.ImageField(allow_empty_file=False)
+    type = forms.CharField(max_length=200)

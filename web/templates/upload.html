@@ -4,33 +4,39 @@
             <h2 class="uk-modal-title uk-text-center">آپلود مدرک</h2>
         </div>
         <div class="uk-modal-body">
-            <form class="uk-form-stacked" id="main">
+            <form class="uk-form-stacked" id="main" method="post" enctype="multipart/form-data" action="{% url 'Upload' %}">
                 <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-select">لطفا موضوع فایل آپلود خود را انتخاب کنید!</label>
                     <div class="uk-form-controls">
-                        <select class="uk-select uk-border-rounded" id="form-stacked-select" v-model="visibility">
-                            <option value="false">دیپلم</option>
+                        <select class="uk-select uk-border-rounded" id="form-stacked-select" v-model="visibility" name="type">
+                            <option>دیپلم</option>
                             <option value="true">غیره</option>
                         </select>
                     </div>
-                    <input v-if="visibility == 'true'" class="uk-input" style="margin-top: 5px" name="others" placeholder="لطفا نام مدرک خود را وارد کنید.">
+                    <input v-if="visibility == 'true'" class="uk-input" style="margin-top: 5px" name="type" placeholder="لطفا نام مدرک خود را وارد کنید.">
                 </div>
                 <div class="uk-margin" uk-margin>
                     <div class="uk-inline" uk-form-custom="target: true">
                         <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: pull"></a>
-                        <input type="file">
+                        <input type="file" name="image" accept="image/*" maxlength="250">
                         <input class="uk-input" placeholder="فایل مورد نظر را انتخاب کنید!" disabled>
                     </div>
                 </div>
+                {% csrf_token %}
+                {% if request.session.student_college_number %}
+                    <input type="hidden" name="student" value="{{ request.session.student_college_number }}">
+                {% elif college_number %}
+                    <input type="hidden" name="student" value="{{ college_number }}">
+                {% endif %}
+                <div class="uk-modal-footer uk-text-left">
+                    <button class="uk-button modal-btn blue-color" type="submit">آپلود
+                        <span uk-icon="icon: upload"></span>
+                    </button>
+                    <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
+                        <span uk-icon="icon: close"></span>
+                    </button>
+                </div>
             </form>
-        </div>
-        <div class="uk-modal-footer uk-text-left">
-            <button class="uk-button modal-btn blue-color" type="button">آپلود
-                <span uk-icon="icon: upload"></span>
-            </button>
-            <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
-                <span uk-icon="icon: close"></span>
-            </button>
         </div>
     </div>
 </div>

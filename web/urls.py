@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^admins/panel/docs/new/$', views.admins_view_new_docs, name="New Docs"),
     url(r'^admins/panel/staff/$', views.admins_staff_management, name="Staff Management"),
     url(r'^student/login/$', views.student_login, name="Student Login"),
+    url(r'^upload/$', views.upload_document, name="Upload"),
     url(r'^logout/$', views.logout_all, name="Logout"),
     url(r'^$', views.index, name="Index"),
 ]

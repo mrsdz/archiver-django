@@ -21,7 +21,6 @@
 
 
 {% block content %}
-    {% include "upload.html" %}
     <!--navbar-->
     <div class="uk-position-fixed uk-position-z-index uk-width-1-1 uk-animation-slide-top">
         <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
@@ -456,4 +455,5 @@
         initPhotoSwipeFromDOM('.my-gallery');
 
     </script>
+    {% include "upload.html" %}
 {% endblock %}
