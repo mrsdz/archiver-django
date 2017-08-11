@@ -232,3 +232,9 @@ def admins_upload_student(request):
 @login_required(login_url="/")
 def admins_view_new_docs(request):
     return render(request, "view.html")
+
+
+@require_GET
+@login_required(login_url="/")
+def admins_staff_management(request):
+    return render(request, "view-staff.html")
