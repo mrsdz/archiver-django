@@ -1,548 +1,537 @@
-<!doctype html>
-<html class="no-js" lang="fa">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>دانشکده شهید شمسی پور</title>
-    <meta name="description" content="اولین بایگانی آنلاین دانشکده فنی شهید شمسی پور">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="author" content="Ashkan Dehbashi | dhs.ashkan@gmail.com">
-    <meta name="theme-color" content="#0C76BF">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!--css-->
-    <link rel="stylesheet" type="text/css" href="css/search-result.css">
-    <link rel="stylesheet" type="text/css" href="css/fonts.css">
-    <link rel="stylesheet" type="text/css" href="css/uikit.min.css" />
-    <!--js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
-    <!-- Core CSS file -->
-    <link rel="stylesheet" href="css/photoswipe.css">
-    <!-- theme CSS file -->
-    <link rel="stylesheet" href="css/default-skin/default-skin.css">
-    <!-- Core JS file -->
-    <script src="js/photoswipe.min.js"></script>
-    <!-- UI JS file -->
-    <script src="js/photoswipe-ui-default.min.js"></script>
-</head>
-<body>
-<!--navbar-->
-<div class="uk-position-fixed uk-position-z-index uk-width-1-1 uk-animation-slide-top">
-    <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
-        <div class="uk-navbar-left">
-            <ul class="uk-navbar-nav">
-                <li>
-                    <a href="admin-panel.html" class="header-items" style="margin-left: 32px;">
-                        <span uk-icon="icon:  arrow-left"></span>
-                        <label style="margin-left: 8px;">برگشت</label>
-                    </a>
-                </li>
-                <li>
-                    <a href="#modal-upload" uk-toggle class="header-items">
-                        <span class="hide" uk-icon="icon: upload"></span>
-                        <label style="margin-left: 8px;">آپلود</label>
-                    </a>
-                </li>
-                <li>
-                    <a href="#modal-edit" uk-toggle class="header-items">
-                        <span class="hide" uk-icon="icon: file-edit"></span>
-                        <label style="margin-left: 8px;">تغییر مشخصات</label>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="uk-navbar-right">
-            <ul class="uk-navbar-nav">
-                <li>
-                    <a class="logo" style="margin-right: 32px;">بایگانی آنلاین دانشکده شهید شمسی‌ پور</a>
-                </li>
-                <li>
-                    <a class="header-items hide-btn" style="margin-right: 32px;"  uk-toggle="target: #offcanvas-overlay;">
-                        <span  uk-icon="icon: menu"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
-<!--background-->
-<div class="background"></div>
-<!--photos and st-info-->
-<div class="uk-text-center row">
-    <!--photos-->
-    <div class="width tablet-width" style="width: 80%; float: left">
-        <!--cards-->
-        <div class="uk-text-center padding" uk-scrollspy="cls: uk-animation-scale-up; target: > div > figure; delay: 120; repeat: false">
-                    <!--card 1-->
-                    <div class="uk-inline-clip uk-transition-toggle uk-position-relative width uk-box-shadow-large uk-box-shadow-hover-xlarge" style="width: 21%; float: left">
-                        <img src="files/example.jpg" class="image" />
-                        <div class="text" itemprop="caption description">Winter is here</div>
-                        <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary">
-                            <div class="uk-transition-slide-top-small">
-                                <button class="uk-button paper-btn green">تایید مدرک</button>
-                            </div>
-                            <div class="my-gallery" itemscope>
-                                <figure class="uk-transition-slide-bottom-small" itemprop="associatedMedia" itemscope>
-                                    <a href="files/example.jpg" itemprop="contentUrl" data-size="1500x1024" class="paper-btn uk-button blue">مشاهده مدرک
-                                        <img src="files/example.jpg" class="image" itemprop="thumbnail" alt="Image description" style="display: none !important;" />
-                                    </a>
-                                </figure>
+{% extends "admin-header.html" %}
+{% load staticfiles %}
+
+{% block admin_header %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/search-result.css' %}">
+    <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default-skin/default-skin.css' %}">
+    <script src="{% static 'js/photoswipe.min.js' %}"></script>
+    <script src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
+    <style>
+        h6{
+            font-family: Vazir !important;
+        }
+    </style>
+{% endblock %}
+
+
+{% block admin_content %}
+    <!--navbar-->
+    <div class="uk-position-fixed uk-position-z-index uk-width-1-1">
+        <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="{% url 'Admin Panel' %}" class="header-items" style="margin-left: 32px;">
+                            <span uk-icon="icon:  arrow-left"></span>
+                            <label style="margin-left: 8px;">برگشت</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#modal-upload" uk-toggle class="header-items">
+                            <span class="hide" uk-icon="icon: upload"></span>
+                            <label style="margin-left: 8px;">آپلود</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#modal-edit" uk-toggle class="header-items">
+                            <span class="hide" uk-icon="icon: file-edit"></span>
+                            <label style="margin-left: 8px;">تغییر مشخصات</label>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a class="logo" style="margin-right: 32px;">بایگانی آنلاین دانشکده شهید شمسی‌ پور</a>
+                    </li>
+                    <li>
+                        <a class="header-items hide-btn" style="margin-right: 32px;"  uk-toggle="target: #offcanvas-overlay;">
+                            <span  uk-icon="icon: menu"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--background-->
+    <div class="background"></div>
+    <!--photos and st-info-->
+    <div class="uk-text-center row">
+        <!--photos-->
+        <div class="width tablet-width" style="width: 80%; float: left">
+            <!--cards-->
+            <div class="uk-text-center padding" uk-scrollspy="cls: uk-animation-scale-up; target: > div > figure; delay: 120; repeat: false">
+                {% for i in docs %}
+                        <!--card 1-->
+                        <div class="uk-inline-clip uk-transition-toggle uk-position-relative width uk-box-shadow-large uk-box-shadow-hover-xlarge" style="width: 21%; float: left">
+                            <img src="/media?image={{ i.doc.url }}&student={{ student_info.college_number }}" class="image" />
+                            <div class="text" itemprop="caption description">Winter is here</div>
+                            <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary">
+                                <div class="uk-transition-slide-top-small">
+                                    <button class="uk-button paper-btn green">تایید مدرک</button>
+                                </div>
+                                <div class="my-gallery" itemscope>
+                                    <figure class="uk-transition-slide-bottom-small" itemprop="associatedMedia" itemscope>
+                                        <a href="/media?image={{ i.doc.url }}&student={{ student_info.college_number }}" itemprop="contentUrl" data-size="1500x1024" class="paper-btn uk-button blue">مشاهده مدرک
+                                            <img src="/media?image={{ i.doc.url }}&student={{ student_info.college_number }}" class="image" itemprop="thumbnail" alt="Image description" style="display: none !important;" />
+                                        </a>
+                                    </figure>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-    </div>
-    <!--st info-->
-    <div class="width hide" style="width: 20%; float: right">
-        <div class="uk-text-right padding-top uk-position-fixed">
-            <h4 class="uk-text-center">مشخصات دانشجو</h4>
-            <hr/>
-            <!--name-->
-            <h6>
-                <label>نام:</label>
-                <b>محمد رضا</b>
-                <span uk-icon="icon: user"></span>
-            </h6>
-            <!--family name-->
-            <h6>
-                <label>نام خانوادگی:</label>
-                <b>صادق زاده</b>
-                <span uk-icon="icon: users"></span>
-            </h6>
-            <!--st number-->
-            <h6>
-                <label>شماره دانشجویی:</label>
-                <b>123456789</b>
-                <span uk-icon="icon: credit-card"></span>
-            </h6>
-            <!--section-->
-            <h6>
-                <label>مقطع:</label>
-                <b>کاردانی پیوسته</b>
-                <span uk-icon="icon: tag"></span>
-            </h6>
-            <!--entry period-->
-            <h6>
-                <label>دوره ورود:</label>
-                <b>95-96</b>
-                <span uk-icon="icon: thumbnails"></span>
-            </h6>
+            {% endfor %}
         </div>
-    </div>
-</div>
-<!--upload-->
-<div id="modal-upload" uk-modal>
-    <div class="uk-modal-dialog">
-        <div class="uk-modal-header">
-            <h2 class="uk-modal-title uk-text-center">آپلود مدرک</h2>
-        </div>
-        <div class="uk-modal-body">
-            <form class="uk-form-stacked">
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-select">لطفا موضوع فایل آپلود خود را انتخاب کنید!</label>
-                    <div class="uk-form-controls">
-                        <select class="uk-select uk-border-rounded" id="form-stacked-select">
-                            <option>دیپلم</option>
-                            <option>اشتغال به تحصیل</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="test-upload uk-placeholder uk-text-center">
-                    <div uk-form-custom>
-                        <span  class="uk-link">!از اینجا انتخاب کنید</span>
-                        <input type="file" multiple>
-                    </div>
-                    <span class="uk-text-middle">فایل مورد نظر خود را اینجا رها کنید یا</span>
-                    <span uk-icon="icon: cloud-upload"></span>
-                </div>
-                <progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
-            </form>
-        </div>
-        <div class="uk-modal-footer uk-text-left">
-            <button class="uk-button modal-btn blue-color" type="button">آپلود
-                <span uk-icon="icon: upload"></span>
-            </button>
-            <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
-                <span uk-icon="icon: close"></span>
-            </button>
-        </div>
-    </div>
-</div>
-<!--edit-->
-<div id="modal-edit" uk-modal>
-    <div class="uk-modal-dialog">
-        <div class="uk-modal-header">
-            <h2 class="uk-modal-title uk-text-center">تغییر مشخصات اشکان دهباشی</h2>
-        </div>
-        <div class="uk-modal-body" uk-overflow-auto>
-            <form class="uk-form-stacked uk-text-center">
-
-                <!--name nad family name-->
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <input class="uk-input uk-form-width-large" placeholder="نام و خانوادگی" value="اشکان" type="text">
-                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: users"></span>
-                    </div>
-                </div>
-
-                <!--reshte-->
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <input class="uk-input uk-form-width-large" placeholder="رشته" value="نرم افزار" type="text">
-                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: info"></span>
-                    </div>
-                </div>
-
-                <!--st number-->
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <input class="uk-input uk-form-width-large" placeholder="شماره دانشجویی" value="123456789" type="number">
-                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: credit-card"></span>
-                    </div>
-                </div>
-
-                <!--maghta-->
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <input class="uk-input uk-form-width-large" placeholder="مقطع" value="کاردانی پیوسته" type="text">
-                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: tag"></span>
-                    </div>
-                </div>
-
-                <!--dore vorodi-->
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <input class="uk-input uk-form-width-large" placeholder="دوره ورودی" value="95-96" type="text">
-                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: thumbnails"></span>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="uk-modal-footer uk-text-left">
-            <button class="uk-button modal-btn blue-color" type="button">تغییر
-                <span uk-icon="icon: file-edit"></span>
-            </button>
-            <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
-                <span uk-icon="icon: close"></span>
-            </button>
-        </div>
-    </div>
-</div>
-<!--slide bar-->
-<div class="uk-offcanvas-content">
-
-    <div id="offcanvas-overlay" uk-offcanvas="overlay: true; flip: true">
-        <div class="uk-offcanvas-bar">
-            <div class="uk-text-right">
+        <!--st info-->
+        <div class="width hide" style="width: 20%; float: right">
+            <div class="uk-text-right padding-top uk-position-fixed">
                 <h4 class="uk-text-center">مشخصات دانشجو</h4>
                 <hr/>
-                <!--name-->
-                <h6>
-                    <label>نام و نام خانوادگی:</label>
-                    <b>اشکان</b>
-                    <span uk-icon="icon: user"></span>
-                </h6>
-                <!--filed-->
-                <h6 class="field">
-                    <label>رشته:</label>
-                    <b>نرم افزار</b>
-                    <span uk-icon="icon: info"></span>
-                </h6>
                 <!--st number-->
                 <h6>
                     <label>شماره دانشجویی:</label>
-                    <b>123456789</b>
+                    <b>{{ student_info.college_number }}</b>
                     <span uk-icon="icon: credit-card"></span>
+                </h6>
+                <!--name-->
+                <h6>
+                    <label>نام:</label>
+                    <b>{{ student_info.first_name }}</b>
+                    <span uk-icon="icon: user"></span>
+                </h6>
+                <!--family name-->
+                <h6>
+                    <label>نام خانوادگی:</label>
+                    <b>{{ student_info.last_name }}</b>
+                    <span uk-icon="icon: users"></span>
                 </h6>
                 <!--section-->
                 <h6>
                     <label>مقطع:</label>
-                    <b>کاردانی پیوسته</b>
+                    <b>{{ student_info.section.name }}</b>
                     <span uk-icon="icon: tag"></span>
                 </h6>
                 <!--entry period-->
                 <h6>
-                    <label>دوره ورود:</label>
-                    <b>95-96</b>
+                    <label>دوره:</label>
+                    <b>{{ student_info.subject.name }}</b>
                     <span uk-icon="icon: thumbnails"></span>
                 </h6>
             </div>
         </div>
     </div>
+    <!--upload-->
+    <div id="modal-upload" uk-modal>
+        <div class="uk-modal-dialog">
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title uk-text-center">آپلود مدرک</h2>
+            </div>
+            <div class="uk-modal-body">
+                <form class="uk-form-stacked">
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-select">لطفا موضوع فایل آپلود خود را انتخاب کنید!</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select uk-border-rounded" id="form-stacked-select">
+                                <option>دیپلم</option>
+                                <option>اشتغال به تحصیل</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="test-upload uk-placeholder uk-text-center">
+                        <div uk-form-custom>
+                            <span  class="uk-link">!از اینجا انتخاب کنید</span>
+                            <input type="file" multiple>
+                        </div>
+                        <span class="uk-text-middle">فایل مورد نظر خود را اینجا رها کنید یا</span>
+                        <span uk-icon="icon: cloud-upload"></span>
+                    </div>
+                    <progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
+                </form>
+            </div>
+            <div class="uk-modal-footer uk-text-left">
+                <button class="uk-button modal-btn blue-color" type="button">آپلود
+                    <span uk-icon="icon: upload"></span>
+                </button>
+                <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
+                    <span uk-icon="icon: close"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--edit-->
+    <div id="modal-edit" uk-modal>
+        <div class="uk-modal-dialog">
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title uk-text-center">تغییر مشخصات اشکان دهباشی</h2>
+            </div>
+            <div class="uk-modal-body" uk-overflow-auto>
+                <form class="uk-form-stacked uk-text-center">
 
-</div>
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                    <!--name nad family name-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input class="uk-input uk-form-width-large" placeholder="نام و خانوادگی" value="{{ student_info.first_name }}">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: users"></span>
+                        </div>
+                    </div>
 
-    <!-- Background of PhotoSwipe.
-         It's a separate element, as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
+                    <!--reshte-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input class="uk-input uk-form-width-large" placeholder="رشته" value="">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: info"></span>
+                        </div>
+                    </div>
 
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
+                    <!--st number-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input class="uk-input uk-form-width-large" placeholder="شماره دانشجویی" value="{{ student_info.college_number }}" type="number">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: credit-card"></span>
+                        </div>
+                    </div>
 
-        <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
-        <div class="pswp__container">
-            <!-- don't modify these 3 pswp__item elements, data is added later on -->
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
+                    <!--maghta-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input class="uk-input uk-form-width-large" placeholder="مقطع" value="کاردانی پیوسته" type="text">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: tag"></span>
+                        </div>
+                    </div>
+
+                    <!--dore vorodi-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input class="uk-input uk-form-width-large" placeholder="دوره" value="95-96" type="text">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: thumbnails"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="uk-modal-footer uk-text-left">
+                <button class="uk-button modal-btn blue-color" type="button">تغییر
+                    <span uk-icon="icon: file-edit"></span>
+                </button>
+                <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
+                    <span uk-icon="icon: close"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--slide bar-->
+    <div class="uk-offcanvas-content">
+
+        <div id="offcanvas-overlay" uk-offcanvas="overlay: true; flip: true">
+            <div class="uk-offcanvas-bar">
+                <div class="uk-text-right">
+                    <h4 class="uk-text-center">مشخصات دانشجو</h4>
+                    <hr/>
+                    <!--st number-->
+                    <h6>
+                        <label>شماره دانشجویی:</label>
+                        <b>{{ student_info.college_number }}</b>
+                        <span uk-icon="icon: credit-card"></span>
+                    </h6>
+                    <!--name-->
+                    <h6>
+                        <label>نام:</label>
+                        <b>{{ student_info.first_name }}</b>
+                        <span uk-icon="icon: user"></span>
+                    </h6>
+                    <!--family name-->
+                    <h6>
+                        <label>نام خانوادگی:</label>
+                        <b>{{ student_info.last_name }}</b>
+                        <span uk-icon="icon: users"></span>
+                    </h6>
+                    <!--section-->
+                    <h6>
+                        <label>مقطع:</label>
+                        <b>{{ student_info.section.name }}</b>
+                        <span uk-icon="icon: tag"></span>
+                    </h6>
+                    <!--entry period-->
+                    <h6>
+                        <label>دوره:</label>
+                        <b>{{ student_info.subject.name }}</b>
+                        <span uk-icon="icon: thumbnails"></span>
+                    </h6>
+                </div>
+            </div>
         </div>
 
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
+    </div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
-            <div class="pswp__top-bar">
+        <!-- Background of PhotoSwipe.
+             It's a separate element, as animating opacity is faster than rgba(). -->
+        <div class="pswp__bg"></div>
 
-                <!--  Controls are self-explanatory. Order can be changed. -->
+        <!-- Slides wrapper with overflow:hidden. -->
+        <div class="pswp__scroll-wrap">
 
-                <div class="pswp__counter"></div>
+            <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+            <div class="pswp__container">
+                <!-- don't modify these 3 pswp__item elements, data is added later on -->
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
 
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+            <div class="pswp__ui pswp__ui--hidden">
 
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <div class="pswp__top-bar">
 
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                    <!--  Controls are self-explanatory. Order can be changed. -->
 
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
+                    <div class="pswp__counter"></div>
+
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                    <!-- element will get class pswp__preloader--active when preloader is running -->
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
 
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
 
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
 
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+
             </div>
 
         </div>
 
     </div>
+    <!--swipe box-->
+    <script>
+        var initPhotoSwipeFromDOM = function(gallerySelector) {
 
-</div>
-<!--swipe box-->
-<script>
-    var initPhotoSwipeFromDOM = function(gallerySelector) {
+            // parse slide data (url, title, size ...) from DOM elements
+            // (children of gallerySelector)
+            var parseThumbnailElements = function(el) {
+                var thumbElements = el.childNodes,
+                    numNodes = thumbElements.length,
+                    items = [],
+                    figureEl,
+                    linkEl,
+                    size,
+                    item;
 
-        // parse slide data (url, title, size ...) from DOM elements
-        // (children of gallerySelector)
-        var parseThumbnailElements = function(el) {
-            var thumbElements = el.childNodes,
-                numNodes = thumbElements.length,
-                items = [],
-                figureEl,
-                linkEl,
-                size,
-                item;
+                for(var i = 0; i < numNodes; i++) {
 
-            for(var i = 0; i < numNodes; i++) {
+                    figureEl = thumbElements[i]; // <figure> element
 
-                figureEl = thumbElements[i]; // <figure> element
+                    // include only element nodes
+                    if(figureEl.nodeType !== 1) {
+                        continue;
+                    }
 
-                // include only element nodes
-                if(figureEl.nodeType !== 1) {
-                    continue;
+                    linkEl = figureEl.children[0]; // <a> element
+
+                    size = linkEl.getAttribute('data-size').split('x');
+
+                    // create slide object
+                    item = {
+                        src: linkEl.getAttribute('href'),
+                        w: parseInt(size[0], 10),
+                        h: parseInt(size[1], 10)
+                    };
+
+
+
+                    if(figureEl.children.length > 1) {
+                        // <figcaption> content
+                        item.title = figureEl.children[1].innerHTML;
+                    }
+
+                    if(linkEl.children.length > 0) {
+                        // <img> thumbnail element, retrieving thumbnail url
+                        item.msrc = linkEl.children[0].getAttribute('src');
+                    }
+
+                    item.el = figureEl; // save link to element for getThumbBoundsFn
+                    items.push(item);
                 }
 
-                linkEl = figureEl.children[0]; // <a> element
-
-                size = linkEl.getAttribute('data-size').split('x');
-
-                // create slide object
-                item = {
-                    src: linkEl.getAttribute('href'),
-                    w: parseInt(size[0], 10),
-                    h: parseInt(size[1], 10)
-                };
-
-
-
-                if(figureEl.children.length > 1) {
-                    // <figcaption> content
-                    item.title = figureEl.children[1].innerHTML;
-                }
-
-                if(linkEl.children.length > 0) {
-                    // <img> thumbnail element, retrieving thumbnail url
-                    item.msrc = linkEl.children[0].getAttribute('src');
-                }
-
-                item.el = figureEl; // save link to element for getThumbBoundsFn
-                items.push(item);
-            }
-
-            return items;
-        };
-
-        // find nearest parent element
-        var closest = function closest(el, fn) {
-            return el && ( fn(el) ? el : closest(el.parentNode, fn) );
-        };
-
-        // triggers when user clicks on thumbnail
-        var onThumbnailsClick = function(e) {
-            e = e || window.event;
-            e.preventDefault ? e.preventDefault() : e.returnValue = false;
-
-            var eTarget = e.target || e.srcElement;
-
-            // find root element of slide
-            var clickedListItem = closest(eTarget, function(el) {
-                return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
-            });
-
-            if(!clickedListItem) {
-                return;
-            }
-
-            // find index of clicked item by looping through all child nodes
-            // alternatively, you may define index via data- attribute
-            var clickedGallery = clickedListItem.parentNode,
-                childNodes = clickedListItem.parentNode.childNodes,
-                numChildNodes = childNodes.length,
-                nodeIndex = 0,
-                index;
-
-            for (var i = 0; i < numChildNodes; i++) {
-                if(childNodes[i].nodeType !== 1) {
-                    continue;
-                }
-
-                if(childNodes[i] === clickedListItem) {
-                    index = nodeIndex;
-                    break;
-                }
-                nodeIndex++;
-            }
-
-
-
-            if(index >= 0) {
-                // open PhotoSwipe if valid index found
-                openPhotoSwipe( index, clickedGallery );
-            }
-            return false;
-        };
-
-        // parse picture index and gallery index from URL (#&pid=1&gid=2)
-        var photoswipeParseHash = function() {
-            var hash = window.location.hash.substring(1),
-                params = {};
-
-            if(hash.length < 5) {
-                return params;
-            }
-
-            var vars = hash.split('&');
-            for (var i = 0; i < vars.length; i++) {
-                if(!vars[i]) {
-                    continue;
-                }
-                var pair = vars[i].split('=');
-                if(pair.length < 2) {
-                    continue;
-                }
-                params[pair[0]] = pair[1];
-            }
-
-            if(params.gid) {
-                params.gid = parseInt(params.gid, 10);
-            }
-
-            return params;
-        };
-
-        var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
-            var pswpElement = document.querySelectorAll('.pswp')[0],
-                gallery,
-                options,
-                items;
-
-            items = parseThumbnailElements(galleryElement);
-
-            // define options (if needed)
-            options = {
-
-                // define gallery index (for URL)
-                galleryUID: galleryElement.getAttribute('data-pswp-uid'),
-
-                getThumbBoundsFn: function(index) {
-                    // See Options -> getThumbBoundsFn section of documentation for more info
-                    var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
-                        pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-                        rect = thumbnail.getBoundingClientRect();
-
-                    return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
-                }
-
+                return items;
             };
 
-            // PhotoSwipe opened from URL
-            if(fromURL) {
-                if(options.galleryPIDs) {
-                    // parse real index when custom PIDs are used
-                    // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
-                    for(var j = 0; j < items.length; j++) {
-                        if(items[j].pid == index) {
-                            options.index = j;
-                            break;
+            // find nearest parent element
+            var closest = function closest(el, fn) {
+                return el && ( fn(el) ? el : closest(el.parentNode, fn) );
+            };
+
+            // triggers when user clicks on thumbnail
+            var onThumbnailsClick = function(e) {
+                e = e || window.event;
+                e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+                var eTarget = e.target || e.srcElement;
+
+                // find root element of slide
+                var clickedListItem = closest(eTarget, function(el) {
+                    return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+                });
+
+                if(!clickedListItem) {
+                    return;
+                }
+
+                // find index of clicked item by looping through all child nodes
+                // alternatively, you may define index via data- attribute
+                var clickedGallery = clickedListItem.parentNode,
+                    childNodes = clickedListItem.parentNode.childNodes,
+                    numChildNodes = childNodes.length,
+                    nodeIndex = 0,
+                    index;
+
+                for (var i = 0; i < numChildNodes; i++) {
+                    if(childNodes[i].nodeType !== 1) {
+                        continue;
+                    }
+
+                    if(childNodes[i] === clickedListItem) {
+                        index = nodeIndex;
+                        break;
+                    }
+                    nodeIndex++;
+                }
+
+
+
+                if(index >= 0) {
+                    // open PhotoSwipe if valid index found
+                    openPhotoSwipe( index, clickedGallery );
+                }
+                return false;
+            };
+
+            // parse picture index and gallery index from URL (#&pid=1&gid=2)
+            var photoswipeParseHash = function() {
+                var hash = window.location.hash.substring(1),
+                    params = {};
+
+                if(hash.length < 5) {
+                    return params;
+                }
+
+                var vars = hash.split('&');
+                for (var i = 0; i < vars.length; i++) {
+                    if(!vars[i]) {
+                        continue;
+                    }
+                    var pair = vars[i].split('=');
+                    if(pair.length < 2) {
+                        continue;
+                    }
+                    params[pair[0]] = pair[1];
+                }
+
+                if(params.gid) {
+                    params.gid = parseInt(params.gid, 10);
+                }
+
+                return params;
+            };
+
+            var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+                var pswpElement = document.querySelectorAll('.pswp')[0],
+                    gallery,
+                    options,
+                    items;
+
+                items = parseThumbnailElements(galleryElement);
+
+                // define options (if needed)
+                options = {
+
+                    // define gallery index (for URL)
+                    galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+                    getThumbBoundsFn: function(index) {
+                        // See Options -> getThumbBoundsFn section of documentation for more info
+                        var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+                            pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                            rect = thumbnail.getBoundingClientRect();
+
+                        return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+                    }
+
+                };
+
+                // PhotoSwipe opened from URL
+                if(fromURL) {
+                    if(options.galleryPIDs) {
+                        // parse real index when custom PIDs are used
+                        // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+                        for(var j = 0; j < items.length; j++) {
+                            if(items[j].pid == index) {
+                                options.index = j;
+                                break;
+                            }
                         }
+                    } else {
+                        // in URL indexes start from 1
+                        options.index = parseInt(index, 10) - 1;
                     }
                 } else {
-                    // in URL indexes start from 1
-                    options.index = parseInt(index, 10) - 1;
+                    options.index = parseInt(index, 10);
                 }
-            } else {
-                options.index = parseInt(index, 10);
+
+                // exit if index not found
+                if( isNaN(options.index) ) {
+                    return;
+                }
+
+                if(disableAnimation) {
+                    options.showAnimationDuration = 0;
+                }
+
+                // Pass data to PhotoSwipe and initialize it
+                gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+                gallery.init();
+            };
+
+            // loop through all gallery elements and bind events
+            var galleryElements = document.querySelectorAll( gallerySelector );
+
+            for(var i = 0, l = galleryElements.length; i < l; i++) {
+                galleryElements[i].setAttribute('data-pswp-uid', i+1);
+                galleryElements[i].onclick = onThumbnailsClick;
             }
 
-            // exit if index not found
-            if( isNaN(options.index) ) {
-                return;
+            // Parse URL and open gallery if it contains #&pid=3&gid=1
+            var hashData = photoswipeParseHash();
+            if(hashData.pid && hashData.gid) {
+                openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
             }
-
-            if(disableAnimation) {
-                options.showAnimationDuration = 0;
-            }
-
-            // Pass data to PhotoSwipe and initialize it
-            gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
-            gallery.init();
         };
 
-        // loop through all gallery elements and bind events
-        var galleryElements = document.querySelectorAll( gallerySelector );
+        // execute above function
+        initPhotoSwipeFromDOM('.my-gallery');
 
-        for(var i = 0, l = galleryElements.length; i < l; i++) {
-            galleryElements[i].setAttribute('data-pswp-uid', i+1);
-            galleryElements[i].onclick = onThumbnailsClick;
-        }
-
-        // Parse URL and open gallery if it contains #&pid=3&gid=1
-        var hashData = photoswipeParseHash();
-        if(hashData.pid && hashData.gid) {
-            openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
-        }
-    };
-
-    // execute above function
-    initPhotoSwipeFromDOM('.my-gallery');
-
-</script>
-</body>
-</html>
+    </script>
+{% endblock %}

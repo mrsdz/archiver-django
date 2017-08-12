@@ -278,6 +278,19 @@ def upload_document(request):
 
 
 @require_GET
+@login_required(login_url="/")
+def admins_view_students(request):
+    if 'search' in request.GET:
+        this_search_key = int(request.GET['search'])
+        context = dict()
+        context['docs'] = Document.objects.filter(student__college_number__exact=this_search_key)
+        context['student_info'] = Student.objects.get(college_number__exact=this_search_key)
+        return render(request, "search-result.html", context)
+    request.session['error'] = 'داداچ اشتباه داری می‌زنی :/'
+    return redirect("/admins/panel/")
+
+
+@require_GET
 def media(request):
     if (not request.user.is_anonymous()) or \
             ('student_college_number' in request.session and request.session['student_college_number']) and \
@@ -288,7 +301,7 @@ def media(request):
         if 'student_college_number' in request.session and request.session['student_college_number']:
             path = settings.BASE_DIR + "/docs/" + str(request.session['student_college_number']) + "/"
         elif not request.user.is_anonymous():
-            path = settings.BASE_DIR + "/docs/" + str(request.get['student']) + "/" + image_file
+            path = settings.BASE_DIR + "/docs/" + str(request.GET['student']) + "/"
         else:
             return redirect("/")
 
