@@ -3,6 +3,7 @@
 
 {% block admin_header %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/search-result.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}">
     <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
     <link rel="stylesheet" href="{% static 'css/default-skin/default-skin.css' %}">
     <script src="{% static 'js/photoswipe.min.js' %}"></script>
@@ -119,44 +120,6 @@
                     <b>{{ student_info.subject.name }}</b>
                     <span uk-icon="icon: thumbnails"></span>
                 </h6>
-            </div>
-        </div>
-    </div>
-    <!--upload-->
-    <div id="modal-upload" uk-modal>
-        <div class="uk-modal-dialog">
-            <div class="uk-modal-header">
-                <h2 class="uk-modal-title uk-text-center">آپلود مدرک</h2>
-            </div>
-            <div class="uk-modal-body">
-                <form class="uk-form-stacked">
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-stacked-select">لطفا موضوع فایل آپلود خود را انتخاب کنید!</label>
-                        <div class="uk-form-controls">
-                            <select class="uk-select uk-border-rounded" id="form-stacked-select">
-                                <option>دیپلم</option>
-                                <option>اشتغال به تحصیل</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="test-upload uk-placeholder uk-text-center">
-                        <div uk-form-custom>
-                            <span  class="uk-link">!از اینجا انتخاب کنید</span>
-                            <input type="file" multiple>
-                        </div>
-                        <span class="uk-text-middle">فایل مورد نظر خود را اینجا رها کنید یا</span>
-                        <span uk-icon="icon: cloud-upload"></span>
-                    </div>
-                    <progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
-                </form>
-            </div>
-            <div class="uk-modal-footer uk-text-left">
-                <button class="uk-button modal-btn blue-color" type="button">آپلود
-                    <span uk-icon="icon: upload"></span>
-                </button>
-                <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
-                    <span uk-icon="icon: close"></span>
-                </button>
             </div>
         </div>
     </div>
@@ -534,4 +497,5 @@
         initPhotoSwipeFromDOM('.my-gallery');
 
     </script>
+    {% include "upload.html" %}
 {% endblock %}

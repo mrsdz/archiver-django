@@ -267,9 +267,12 @@ def upload_document(request):
                 doc=form.cleaned_data['image']
             ).save()
 
+            request.session['done'] = 'مدرک با موفقیت آپلود شد :)'
+
             if 'student_college_number' in request.session and request.session['student_college_number']:
-                request.session['done'] = 'مدرک با موفقیت آپلود شد :)'
                 return redirect("/")
+            elif not request.user.is_anonymous():
+                return redirect("/admins/panel/student/view?search="+request.POST['student'])
         else:
             request.session['error'] = 'فایل فرستاده شده اشتباه می‌باشد :/'
             return redirect("/")
@@ -281,12 +284,14 @@ def upload_document(request):
 @login_required(login_url="/")
 def admins_view_students(request):
     if 'search' in request.GET:
-        this_search_key = int(request.GET['search'])
         context = dict()
+        this_search_key = int(request.GET['search'])
+        context['message'] = handle_message(request)
         context['docs'] = Document.objects.filter(student__college_number__exact=this_search_key)
         context['student_info'] = Student.objects.get(college_number__exact=this_search_key)
+        context['primary_docs'] = PrimaryDocument.objects.all()
         return render(request, "search-result.html", context)
-    request.session['error'] = 'داداچ اشتباه داری می‌زنی :/'
+    request.session['error'] = 'خطا :('
     return redirect("/admins/panel/")
 
 

@@ -27,8 +27,8 @@
                 {% csrf_token %}
                 {% if request.session.student_college_number %}
                     <input type="hidden" name="student" value="{{ request.session.student_college_number }}">
-                {% elif college_number %}
-                    <input type="hidden" name="student" value="{{ college_number }}">
+                {% elif student_info.college_number %}
+                    <input type="hidden" name="student" value="{{ student_info.college_number }}">
                 {% endif %}
                 <div class="uk-modal-footer uk-text-left">
                     <button class="uk-button modal-btn blue-color" type="submit">آپلود
