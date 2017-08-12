@@ -10,9 +10,13 @@ body, html{
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, #19B5FE, #003780);
-    transform: skewY(-25deg);
-    -webkit-transform: skewY(-25deg);
+    background: -webkit-linear-gradient(45deg, rgba(156, 39, 176, 1), rgba(255, 152, 0, 1));
+    background: -moz-linear-gradient(45deg, rgba(156, 39, 176, 1), rgba(255, 152, 0, 1));
+    background: -ms-linear-gradient(45deg, rgba(156, 39, 176, 1), rgba(255, 152, 0, 1));
+    background: -o-linear-gradient(45deg, rgba(156, 39, 176, 1), rgba(255, 152, 0, 1));
+    background: linear-gradient(45deg, rgba(156, 39, 176, 1), rgba(255, 152, 0, 1));
+    transform: skewY(-29deg);
+    -webkit-transform: skewY(-29deg);
     transform-origin: top left;
 }
 .uk-navbar-container{
@@ -28,7 +32,7 @@ body, html{
     cursor: pointer !important;
 }
 .header-items:hover{
-    color: #0C76BF !important;
+    color: #C4546A !important;
 }
 .header-items label{
     font-family: Vazir !important;
@@ -67,19 +71,19 @@ body, html{
     line-height: 50px !important;
     background: transparent !important;
 }
-.blue{
+.blue-modal-btn{
     border: 2px solid #2196F3 !important;
     color: #2196F3 !important;
 }
-.blue:hover{
+.blue-modal-btn:hover{
     background: #2196F3 !important;
     color: #fff !important;
 }
-.red{
+.red-modal-btn{
     border: 2px solid #F44336 !important;
     color: #F44336 !important;
 }
-.red:hover{
+.red-modal-btn:hover{
     background: #F44336 !important;
     color: #fff !important;
 }

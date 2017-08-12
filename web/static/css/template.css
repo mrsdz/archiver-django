@@ -30,6 +30,9 @@
     -moz-transition: 200ms cubic-bezier(0.4, 0.0, 0.2, 1) !important;
     transition: 200ms cubic-bezier(0.4, 0.0, 0.2, 1) !important;
 }
+.uk-input, .uk-select:not([multiple]):not([size]) {
+    height: 45px !important;
+}
 .uk-input:focus,
 .uk-input:active,
 .uk-select:focus,
@@ -49,26 +52,16 @@
     direction: rtl !important;
     font-size: 16px !important;
     text-align: center !important;
-    border: none !important;
     background: transparent;
     border-radius: 2em !important;
     -webkit-transition: all 0.3s ease !important;
     -moz-transition: all 0.3s ease !important;
     transition: all 0.3s ease!important;
     cursor: pointer !important;
-    line-height: 40px !important;
+    line-height: 45px !important;
 }
 .uk-button:hover{
     transform: scale(1.05) !important;
-}
-.blue-btn{
-    color: #0C76BF !important;
-    border: 2px solid #0C76BF !important;
-}
-.blue-btn:hover,
-.blue-btn:focus{
-    color: #fff !important;
-    background: #0C76BF !important;
 }
 .red-btn{
     color: #f44336 !important;
@@ -78,6 +71,15 @@
 .red-btn:focus{
     color: #fff !important;
     background: #f44336 !important;
+}
+.ubuntu-btn{
+    color: #C4546A !important;
+    border: 2px solid #C4546A !important;
+}
+.ubuntu-btn:hover,
+.ubuntu-btn:focus{
+    color: #fff !important;
+    background: #C4546A !important;
 }
 .uk-form-icon{color: #000}
 .uk-select {
