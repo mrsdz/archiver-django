@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 from django.db import models
+from django.utils.crypto import get_random_string
 
 # Create your models here.
 
@@ -38,7 +40,7 @@ class Student(models.Model):
 class Document(models.Model):
     def rename(self):
         def rename_file(instance, filename):
-            name = str(instance.student_id) + "-" + instance.type + "." + filename.split('.')[-1]
+            name = get_random_string(length=24) + "." + filename.split('.')[-1]
             path = "docs/" + str(instance.student_id) + "/"
             full = path + name
             return full
