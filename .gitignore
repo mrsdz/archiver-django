@@ -101,6 +101,7 @@ ENV/
 .mypy_cache/
 
 .gitignore
+onlineArchiver/settings.py
 settings.py
 .idea
 db.sqlite3
