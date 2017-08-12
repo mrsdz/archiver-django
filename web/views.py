@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, logout, login
 from django.http.response import HttpResponse, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from .forms import *
 from .models import Subject, Section, Student, PrimaryDocument, Document
@@ -301,6 +302,37 @@ def admins_setting(request):
     context = dict()
     context['message'] = handle_message(request)
     return render(request, "admin-setting.html", context)
+
+
+@require_POST
+@login_required(login_url="/")
+def admins_password_change(request):
+    if PasswordChange(request.POST).is_valid():
+        new_pass = request.POST['new_password']
+        repeat_pass = request.POST['repeat_password']
+        old_pass = request.POST['old_password']
+
+        if not new_pass == repeat_pass:
+            request.session['error'] = 'دو رمز عبور وارد شده با هم برابر نمی‌باشد :('
+            return redirect("/admins/panel/setting/")
+        elif old_pass == new_pass:
+            request.session['error'] = 'رمز عبور فعلی با رمز عبور جدید برابر است :/'
+            return redirect("/admins/panel/setting/")
+
+        this_user = User.objects.get(username__exact=request.user.username)
+
+        if not this_user.check_password(old_pass):
+            request.session['error'] = 'رمز عبور فعلی معتبر نمی‌باشد :('
+            return redirect("/admins/panel/setting/")
+
+        this_user.set_password(new_pass)
+        this_user.save()
+
+        request.session['done'] = 'رمز عبور شما با موفقیت تغییر کرد :)'
+        return redirect("/admins/panel/setting/")
+
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/setting/")
 
 
 @require_GET

@@ -13,11 +13,11 @@
                 <div class="uk-card uk-card-body uk-border-rounded">
                 <h3 class="uk-card-title">تغیر رمزعبور</h3>
                 <hr>
-                <form class="uk-form-stacked">
+                <form class="uk-form-stacked" method="post" action="{% url 'Admin Change Password' %}">
                     <!--password-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input uk-form-width-large" placeholder="رمزعبور جدید" type="password">
+                            <input name="old_password" class="uk-input uk-form-width-large" placeholder="رمزعبور فعلی" type="password">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
                         </div>
                     </div>
@@ -25,17 +25,26 @@
                     <!--password-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input uk-form-width-large" placeholder="تکرار رمزعبور" type="password">
+                            <input name="new_password" class="uk-input uk-form-width-large" placeholder="رمزعبور جدید" type="password">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                        </div>
+                    </div>
+
+                    <!--password-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input name="repeat_password" class="uk-input uk-form-width-large" placeholder="تکرار رمزعبور" type="password">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
                         </div>
                     </div>
                     <!--submit-->
                     <div class="uk-margin">
-                        <a type="submit" class="uk-button uk-width-1-1 uk-box-shadow-hover-xlarge blue-btn">تغییر
+                        <button class="uk-button uk-width-1-1 uk-box-shadow-hover-xlarge blue-btn">تغییر
                             <span uk-icon="icon: pencil"></span>
-                        </a>
+                        </button>
                     </div>
 
+                    {% csrf_token %}
                 </form>
             </div>
             </div>
