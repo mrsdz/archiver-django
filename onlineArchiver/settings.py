@@ -124,3 +124,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR + '/web/static/'
+
+MEDIA_URL = '/'
+MEDIA_ROOT = BASE_DIR

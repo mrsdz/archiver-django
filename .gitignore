@@ -104,3 +104,5 @@ ENV/
 settings.py
 .idea
 db.sqlite3
+
+docs/

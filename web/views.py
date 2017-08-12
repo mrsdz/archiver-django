@@ -4,14 +4,16 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_GET, require_POST
 from django.contrib.auth import authenticate, logout, login
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 from .forms import *
 from .models import Subject, Section, Student, PrimaryDocument, Document
 from .utils import handle_message
 
 import csv
+import os
 
 # Create your views here.
 
@@ -28,6 +30,8 @@ def index(request):
     context = dict()
     context['message'] = handle_message(request)
     if 'student_college_number' in request.session and request.session['student_college_number']:
+        this_student = get_object_or_404(Student, college_number=request.session['student_college_number'])
+        context['docs'] = Document.objects.filter(student=this_student)
         return render(request, "st-panel.html", context)
     return render(request, "index.html", context)
 
@@ -248,7 +252,7 @@ def upload_document(request):
         if form.is_valid():
             if form.cleaned_data['image'].size > 262144:
                 request.session['error'] = 'سایز فایل از ۲۵۰ کیلو بایت بیشتر است :/'
-                return redirect("/admins/panel/student/")
+                return redirect("/")
             is_primary = False
             image_type = form.cleaned_data['type']
             this_student = request.POST['student']
@@ -261,10 +265,38 @@ def upload_document(request):
                 primary=is_primary,
                 doc=form.cleaned_data['image']
             ).save()
-            request.session['done'] = 'مدرک با موفقیت آپلود شد :)'
-            return redirect("/admins/panel/student/")
+
+            if 'student_college_number' in request.session and request.session['student_college_number']:
+                request.session['done'] = 'مدرک با موفقیت آپلود شد :)'
+                return redirect("/")
         else:
             request.session['error'] = 'فایل فرستاده شده اشتباه می‌باشد :/'
-            return redirect("/admins/panel/student/")
+            return redirect("/")
+    else:
+        return redirect("/")
+
+
+@require_GET
+def media(request):
+    if (not request.user.is_anonymous()) or \
+            ('student_college_number' in request.session and request.session['student_college_number']) and \
+            'image' in request.GET:
+
+        image_file = request.GET['image'].split('/')[3].encode('utf-8')
+
+        if 'student_college_number' in request.session and request.session['student_college_number']:
+            path = settings.BASE_DIR + "/docs/" + str(request.session['student_college_number']) + "/"
+        elif not request.user.is_anonymous():
+            path = settings.BASE_DIR + "/docs/" + str(request.get['student']) + "/" + image_file
+        else:
+            return redirect("/")
+
+        try:
+            with open(os.path.join(path, image_file.decode('utf-8')), "rb") as f:
+
+                return HttpResponse(f.read(), content_type="image/jpeg")
+        except IOError:
+            return HttpResponseNotFound()
+
     else:
         return redirect("/")

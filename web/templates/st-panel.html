@@ -65,12 +65,14 @@
                 <!--cards-->
                 <div class="my-gallery" itemscope>
                     <!--card 1-->
-                    <figure class="uk-position-relative width uk-box-shadow-large uk-box-shadow-hover-xlarge" style="width: 21%; float: left" itemprop="associatedMedia" itemscope>
-                        <a href="{% static 'files/example.jpg' %}" itemprop="contentUrl" data-size="1500x1024" style="cursor: zoom-in">
-                            <img src="{% static 'files/example.jpg' %}" class="image" itemprop="thumbnail" alt="Image description" />
-                        </a>
-                        <div class="text" itemprop="caption description">Winter is here</div>
-                    </figure>
+                    {% for i in docs %}
+                        <figure class="uk-position-relative width uk-box-shadow-large uk-box-shadow-hover-xlarge" style="width: 21%; float: left" itemprop="associatedMedia" itemscope>
+                            <a href="/media?image={{ i.doc.url}}" itemprop="contentUrl" data-size="1500x1024" style="cursor: zoom-in">
+                                <img src="/media?image={{ i.doc.url }}" class="image" itemprop="thumbnail" alt="Image description" />
+                            </a>
+                            <div class="text" itemprop="caption description">{{ i.type }}</div>
+                        </figure>
+                    {% endfor %}
                 </div>
             </div>
         </div>
