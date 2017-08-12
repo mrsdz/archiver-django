@@ -296,6 +296,14 @@ def admins_view_students(request):
 
 
 @require_GET
+@login_required(login_url="/")
+def admins_setting(request):
+    context = dict()
+    context['message'] = handle_message(request)
+    return render(request, "admin-setting.html", context)
+
+
+@require_GET
 def media(request):
     if (not request.user.is_anonymous()) or \
             ('student_college_number' in request.session and request.session['student_college_number']) and \
