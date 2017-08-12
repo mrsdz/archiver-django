@@ -54,12 +54,12 @@
                 <div class="uk-card margin-top uk-card-body uk-border-rounded">
                 <h3 class="uk-card-title">اضافه کردن مدرک اصلی</h3>
                 <hr>
-                <form class="uk-form-stacked">
+                <form class="uk-form-stacked" method="post" action="{% url 'Add Main Doc' %}">
 
                     <!--paper-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input uk-form-width-large" placeholder="نام مدرک" type="text">
+                            <input name="name" class="uk-input uk-form-width-large" placeholder="نام مدرک">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: tag"></span>
                         </div>
                     </div>
@@ -71,6 +71,7 @@
                         </button>
                     </div>
 
+                    {% csrf_token %}
                 </form>
             </div>
             </div>

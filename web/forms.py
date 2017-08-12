@@ -57,3 +57,7 @@ class PasswordChange(forms.Form):
     new_password = forms.CharField(max_length=200)
     repeat_password = forms.CharField(max_length=200)
     old_password = forms.CharField(max_length=200)
+
+
+class PrimaryDocumentName(forms.Form):
+    name = forms.CharField(max_length=200)

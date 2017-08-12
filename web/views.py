@@ -335,6 +335,23 @@ def admins_password_change(request):
     return redirect("/admins/panel/setting/")
 
 
+@require_POST
+@login_required(login_url="/")
+def add_main_doc(request):
+    if PrimaryDocumentName(request.POST).is_valid():
+        this_main_doc = request.POST['name']
+        if PrimaryDocument.objects.filter(name__exact=this_main_doc).exists():
+            request.session['error'] = 'این مورد موجود می‌باشد :('
+            return redirect("/admins/panel/setting/")
+        PrimaryDocument(
+            name=this_main_doc
+        ).save()
+        request.session['done'] = 'نام مدرک اصلی با موفقیت اضافه شد :)'
+        return redirect("/admins/panel/setting/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/setting/")
+
+
 @require_GET
 def media(request):
     if (not request.user.is_anonymous()) or \
