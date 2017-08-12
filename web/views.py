@@ -32,6 +32,7 @@ def index(request):
     if 'student_college_number' in request.session and request.session['student_college_number']:
         this_student = get_object_or_404(Student, college_number=request.session['student_college_number'])
         context['docs'] = Document.objects.filter(student=this_student)
+        context['primary_docs'] = PrimaryDocument.objects.all()
         return render(request, "st-panel.html", context)
     return render(request, "index.html", context)
 

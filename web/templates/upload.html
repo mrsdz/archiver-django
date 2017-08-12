@@ -9,7 +9,9 @@
                     <label class="uk-form-label" for="form-stacked-select">لطفا موضوع فایل آپلود خود را انتخاب کنید!</label>
                     <div class="uk-form-controls">
                         <select class="uk-select uk-border-rounded" id="form-stacked-select" v-model="visibility" name="type">
-                            <option>دیپلم</option>
+                            {% for i in primary_docs %}
+                                <option value="{{ i.name }}">{{ i.name }}</option>
+                            {% endfor %}
                             <option value="true">غیره</option>
                         </select>
                     </div>
