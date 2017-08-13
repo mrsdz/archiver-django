@@ -6,7 +6,7 @@ Online Archiver is a web app for Shamsipour Technical and Vocational College.
 ## How to run
 To run archiver; Just use steps below:
 
-1. Install `python2`, `pip`, `virtualenv` in your system.
+1. Install `python2`, `pip`, `virtualenv` and `pillow` in your system.
 2. Clone the project `https://github.com/mrsdz/archiver-django`.
 3. Make development environment ready using commands below;
 
