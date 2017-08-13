@@ -237,13 +237,17 @@ def admins_upload_student(request):
 @require_GET
 @login_required(login_url="/")
 def admins_view_new_docs(request):
-    return render(request, "view.html")
+    context = dict()
+    context['message'] = handle_message(request)
+    return render(request, "view.html", context)
 
 
 @require_GET
 @login_required(login_url="/")
 def admins_staff_management(request):
-    return render(request, "view-staff.html")
+    context = dict()
+    context['message'] = handle_message(request)
+    return render(request, "view-staff.html", context)
 
 
 @require_POST
