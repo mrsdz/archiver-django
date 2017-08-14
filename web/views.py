@@ -35,8 +35,7 @@ def media(request):
             return redirect("/")
 
         try:
-            with open(os.path.join(path, image_file.decode('utf-8')), "rb") as f:
-
+            with open(os.path.join(path, image_file.decode('utf-8')), str("rb")) as f:
                 return HttpResponse(f.read(), content_type="image/jpeg")
         except IOError:
             return HttpResponseNotFound()
