@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, logout, login
 from django.http.response import HttpResponse, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from .forms import *
 from .models import Subject, Section, Student, PrimaryDocument, Document
@@ -236,13 +237,17 @@ def admins_upload_student(request):
 @require_GET
 @login_required(login_url="/")
 def admins_view_new_docs(request):
-    return render(request, "view.html")
+    context = dict()
+    context['message'] = handle_message(request)
+    return render(request, "view.html", context)
 
 
 @require_GET
 @login_required(login_url="/")
 def admins_staff_management(request):
-    return render(request, "view-staff.html")
+    context = dict()
+    context['message'] = handle_message(request)
+    return render(request, "view-staff.html", context)
 
 
 @require_POST
@@ -267,14 +272,88 @@ def upload_document(request):
                 doc=form.cleaned_data['image']
             ).save()
 
+            request.session['done'] = 'مدرک با موفقیت آپلود شد :)'
+
             if 'student_college_number' in request.session and request.session['student_college_number']:
-                request.session['done'] = 'مدرک با موفقیت آپلود شد :)'
                 return redirect("/")
+            elif not request.user.is_anonymous():
+                return redirect("/admins/panel/student/view?search="+request.POST['student'])
         else:
             request.session['error'] = 'فایل فرستاده شده اشتباه می‌باشد :/'
             return redirect("/")
     else:
         return redirect("/")
+
+
+@require_GET
+@login_required(login_url="/")
+def admins_view_students(request):
+    if 'search' in request.GET:
+        context = dict()
+        this_search_key = int(request.GET['search'])
+        context['message'] = handle_message(request)
+        context['docs'] = Document.objects.filter(student__college_number__exact=this_search_key)
+        context['student_info'] = Student.objects.get(college_number__exact=this_search_key)
+        context['primary_docs'] = PrimaryDocument.objects.all()
+        return render(request, "search-result.html", context)
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/")
+
+
+@require_GET
+@login_required(login_url="/")
+def admins_setting(request):
+    context = dict()
+    context['message'] = handle_message(request)
+    return render(request, "admin-setting.html", context)
+
+
+@require_POST
+@login_required(login_url="/")
+def admins_password_change(request):
+    if PasswordChange(request.POST).is_valid():
+        new_pass = request.POST['new_password']
+        repeat_pass = request.POST['repeat_password']
+        old_pass = request.POST['old_password']
+
+        if not new_pass == repeat_pass:
+            request.session['error'] = 'دو رمز عبور وارد شده با هم برابر نمی‌باشد :('
+            return redirect("/admins/panel/setting/")
+        elif old_pass == new_pass:
+            request.session['error'] = 'رمز عبور فعلی با رمز عبور جدید برابر است :/'
+            return redirect("/admins/panel/setting/")
+
+        this_user = User.objects.get(username__exact=request.user.username)
+
+        if not this_user.check_password(old_pass):
+            request.session['error'] = 'رمز عبور فعلی معتبر نمی‌باشد :('
+            return redirect("/admins/panel/setting/")
+
+        this_user.set_password(new_pass)
+        this_user.save()
+
+        request.session['done'] = 'رمز عبور شما با موفقیت تغییر کرد :)'
+        return redirect("/admins/panel/setting/")
+
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/setting/")
+
+
+@require_POST
+@login_required(login_url="/")
+def add_main_doc(request):
+    if PrimaryDocumentName(request.POST).is_valid():
+        this_main_doc = request.POST['name']
+        if PrimaryDocument.objects.filter(name__exact=this_main_doc).exists():
+            request.session['error'] = 'این مورد موجود می‌باشد :('
+            return redirect("/admins/panel/setting/")
+        PrimaryDocument(
+            name=this_main_doc
+        ).save()
+        request.session['done'] = 'نام مدرک اصلی با موفقیت اضافه شد :)'
+        return redirect("/admins/panel/setting/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/setting/")
 
 
 @require_GET
@@ -288,7 +367,7 @@ def media(request):
         if 'student_college_number' in request.session and request.session['student_college_number']:
             path = settings.BASE_DIR + "/docs/" + str(request.session['student_college_number']) + "/"
         elif not request.user.is_anonymous():
-            path = settings.BASE_DIR + "/docs/" + str(request.get['student']) + "/" + image_file
+            path = settings.BASE_DIR + "/docs/" + str(request.GET['student']) + "/"
         else:
             return redirect("/")
 

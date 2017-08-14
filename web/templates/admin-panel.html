@@ -13,9 +13,10 @@
             <h3 class="uk-card-title">جستجو دانشجو</h3>
             <hr/>
             <div class="uk-margin">
-                <form class="uk-search uk-form-width-large">
+                <form class="uk-search uk-form-width-large" method="get" action="{% url 'View Student' %}">
                     <span class="uk-search-icon-flip uk-margin-right" uk-search-icon></span>
-                    <input class="uk-search-input uk-form-large" type="search" placeholder="شماره دانشجویی...">
+                    <input class="uk-search-input uk-form-large" required name="search" type="search" placeholder="شماره دانشجویی...">
+                    {% csrf_token %}
                 </form>
             </div>
         </div>
