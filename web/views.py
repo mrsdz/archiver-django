@@ -16,7 +16,33 @@ from .utils import handle_message
 import csv
 import os
 
-# Create your views here.
+
+# Public Views
+
+@require_GET
+def media(request):
+    if (not request.user.is_anonymous()) or \
+            ('student_college_number' in request.session and request.session['student_college_number']) and \
+            'image' in request.GET:
+
+        image_file = request.GET['image'].split('/')[3].encode('utf-8')
+
+        if 'student_college_number' in request.session and request.session['student_college_number']:
+            path = settings.BASE_DIR + "/docs/" + str(request.session['student_college_number']) + "/"
+        elif not request.user.is_anonymous():
+            path = settings.BASE_DIR + "/docs/" + str(request.GET['student']) + "/"
+        else:
+            return redirect("/")
+
+        try:
+            with open(os.path.join(path, image_file.decode('utf-8')), "rb") as f:
+
+                return HttpResponse(f.read(), content_type="image/jpeg")
+        except IOError:
+            return HttpResponseNotFound()
+
+    else:
+        return redirect("/")
 
 
 @require_GET
@@ -24,6 +50,41 @@ def logout_all(request):
     logout(request)
     request.session.flush()
     return redirect('/')
+
+
+@require_POST
+def upload_document(request):
+    if (not request.user.is_anonymous()) or \
+            ('student_college_number' in request.session and request.session['student_college_number']):
+        form = DocumentUpload(request.POST, request.FILES)
+        if form.is_valid():
+            if form.cleaned_data['image'].size > 262144:
+                request.session['error'] = 'سایز فایل از ۲۵۰ کیلو بایت بیشتر است :/'
+                return redirect("/")
+            is_primary = False
+            image_type = form.cleaned_data['type']
+            this_student = request.POST['student']
+            if PrimaryDocument.objects.filter(name__exact=image_type).exists():
+                is_primary = True
+
+            Document(
+                student=get_object_or_404(Student, college_number=this_student),
+                type=image_type,
+                primary=is_primary,
+                doc=form.cleaned_data['image']
+            ).save()
+
+            request.session['done'] = 'مدرک با موفقیت آپلود شد :)'
+
+            if 'student_college_number' in request.session and request.session['student_college_number']:
+                return redirect("/")
+            elif not request.user.is_anonymous():
+                return redirect("/admins/panel/student/view?search="+request.POST['student'])
+        else:
+            request.session['error'] = 'فایل فرستاده شده اشتباه می‌باشد :/'
+            return redirect("/")
+    else:
+        return redirect("/")
 
 
 @require_GET
@@ -37,6 +98,8 @@ def index(request):
         return render(request, "st-panel.html", context)
     return render(request, "index.html", context)
 
+
+# Student Actions
 
 @require_POST
 def student_login(request):
@@ -57,6 +120,8 @@ def student_login(request):
     request.session['error'] = "نام کاربری یا رمز عبور اشتباه است"
     return redirect('/')
 
+
+# Admins Actions
 
 @require_POST
 def admin_login(request):
@@ -250,41 +315,6 @@ def admins_staff_management(request):
     return render(request, "view-staff.html", context)
 
 
-@require_POST
-def upload_document(request):
-    if (not request.user.is_anonymous()) or \
-            ('student_college_number' in request.session and request.session['student_college_number']):
-        form = DocumentUpload(request.POST, request.FILES)
-        if form.is_valid():
-            if form.cleaned_data['image'].size > 262144:
-                request.session['error'] = 'سایز فایل از ۲۵۰ کیلو بایت بیشتر است :/'
-                return redirect("/")
-            is_primary = False
-            image_type = form.cleaned_data['type']
-            this_student = request.POST['student']
-            if PrimaryDocument.objects.filter(name__exact=image_type).exists():
-                is_primary = True
-
-            Document(
-                student=get_object_or_404(Student, college_number=this_student),
-                type=image_type,
-                primary=is_primary,
-                doc=form.cleaned_data['image']
-            ).save()
-
-            request.session['done'] = 'مدرک با موفقیت آپلود شد :)'
-
-            if 'student_college_number' in request.session and request.session['student_college_number']:
-                return redirect("/")
-            elif not request.user.is_anonymous():
-                return redirect("/admins/panel/student/view?search="+request.POST['student'])
-        else:
-            request.session['error'] = 'فایل فرستاده شده اشتباه می‌باشد :/'
-            return redirect("/")
-    else:
-        return redirect("/")
-
-
 @require_GET
 @login_required(login_url="/")
 def admins_view_students(request):
@@ -354,29 +384,3 @@ def add_main_doc(request):
         return redirect("/admins/panel/setting/")
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/setting/")
-
-
-@require_GET
-def media(request):
-    if (not request.user.is_anonymous()) or \
-            ('student_college_number' in request.session and request.session['student_college_number']) and \
-            'image' in request.GET:
-
-        image_file = request.GET['image'].split('/')[3].encode('utf-8')
-
-        if 'student_college_number' in request.session and request.session['student_college_number']:
-            path = settings.BASE_DIR + "/docs/" + str(request.session['student_college_number']) + "/"
-        elif not request.user.is_anonymous():
-            path = settings.BASE_DIR + "/docs/" + str(request.GET['student']) + "/"
-        else:
-            return redirect("/")
-
-        try:
-            with open(os.path.join(path, image_file.decode('utf-8')), "rb") as f:
-
-                return HttpResponse(f.read(), content_type="image/jpeg")
-        except IOError:
-            return HttpResponseNotFound()
-
-    else:
-        return redirect("/")
