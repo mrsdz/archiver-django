@@ -49,10 +49,17 @@
     color: #F44336 !important;
 }
 .red-color:hover{
-    background: #F44336 !important;
-    color: #fff !important;
+    background: rgba(244, 67, 54, 0.2) !important;
+}
+.red-color:active{
+    background: rgba(244, 67, 54, 0.4) !important;
 }
 .blue-color{
-    background: #2196F3 !important;
-    color: #fff !important;
+    color: #2196F3 !important;
+}
+.blue-color:hover{
+    background: rgba(33, 150, 243, 0.2) !important;
+}
+.blue-color:active{
+    background: rgba(33, 150, 243, 0.4) !important;
 }

@@ -60,13 +60,13 @@
     <!--photos and st-info-->
     <div class="uk-text-center row">
         <!--photos-->
-        <div class="width tablet-width" style="width: 80%; float: left">
+        <div class="width tablet-width" style="width: 30%; float: left">
             <div class="uk-text-center padding" uk-scrollspy="cls: uk-animation-scale-up; target: > div > figure; delay: 120; repeat: false">
                 <!--cards-->
                 <div class="my-gallery" itemscope>
                     <!--card 1-->
                     {% for i in docs %}
-                        <figure class="uk-position-relative width uk-box-shadow-large uk-box-shadow-hover-xlarge" style="width: 21%; float: left" itemprop="associatedMedia" itemscope>
+                        <figure class="uk-position-relative width uk-box-shadow-large uk-box-shadow-hover-xlarge" style="width: 100%; float: left" itemprop="associatedMedia" itemscope>
                             <a href="/media?image={{ i.doc.url}}" itemprop="contentUrl" data-size="1500x1024" style="cursor: zoom-in">
                                 <img src="/media?image={{ i.doc.url }}" class="image" itemprop="thumbnail" alt="Image description" />
                             </a>
@@ -78,7 +78,7 @@
         </div>
         <!--st info-->
         <div class="width hide" style="width: 20%; float: right;">
-            <div class="uk-text-right padding-top uk-position-fixed">
+            <div class="uk-text-right padding-top uk-position-fixed uk-margin-right" style="right: 0">
                 <h4 class="uk-text-center">مشخصات دانشجو</h4>
                 <hr/>
                 <!--st number-->
