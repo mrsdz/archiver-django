@@ -63,3 +63,13 @@
 .blue-color:active{
     background: rgba(33, 150, 243, 0.4) !important;
 }
+.uk-form-icon-flip+.uk-input {
+     padding-right: 0 !important;
+    text-indent: 35px !important;
+}
+.uk-modal-body {
+    padding: 15px 30px !important;
+}
+.uk-modal-footer {
+    padding: 15px 15px !important;
+}

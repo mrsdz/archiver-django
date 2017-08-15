@@ -15,7 +15,12 @@
                             <option value="true">غیره</option>
                         </select>
                     </div>
-                    <input v-if="visibility == 'true'" class="uk-input" style="margin-top: 5px" name="type" placeholder="لطفا نام مدرک خود را وارد کنید.">
+                    <div class="uk-margin">
+                        <div v-if="visibility == 'true'" class="uk-inline" uk-form-custom="target: true">
+                            <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: plus"></a>
+                            <input class="uk-input" name="type" placeholder="لطفا نام مدرک خود را وارد کنید.">
+                        </div>
+                    </div>
                 </div>
                 <div class="uk-margin" uk-margin>
                     <div class="uk-inline" uk-form-custom="target: true">
@@ -23,13 +28,13 @@
                         <input type="file" name="image" accept="image/*" maxlength="250">
                         <input class="uk-input" placeholder="فایل مورد نظر را انتخاب کنید!" disabled>
                     </div>
-                </div>
-                {% csrf_token %}
-                {% if request.session.student_college_number %}
+                    {% csrf_token %}
+                    {% if request.session.student_college_number %}
                     <input type="hidden" name="student" value="{{ request.session.student_college_number }}">
-                {% elif student_info.college_number %}
+                    {% elif student_info.college_number %}
                     <input type="hidden" name="student" value="{{ student_info.college_number }}">
-                {% endif %}
+                    {% endif %}
+                </div>
                 <div class="uk-modal-footer uk-text-left">
                     <button class="uk-button modal-btn blue-color" type="submit">آپلود
                         <span uk-icon="icon: upload"></span>
