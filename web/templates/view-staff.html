@@ -66,11 +66,11 @@
                 <h2 class="uk-modal-title uk-text-center">اضافه کردن کارمند</h2>
             </div>
             <div class="uk-modal-body" uk-overflow-auto>
-                <form class="uk-form-stacked" style="margin-top: 32px;">
+                <form class="uk-form-stacked" style="margin-top: 32px;" method="post" action="{% url 'Add Staff' %}">
                     <!--name-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input" placeholder="نام" type="number">
+                            <input name="first_name" class="uk-input" placeholder="نام">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                     <!--family name-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input" placeholder="نام خانوادگی" type="number">
+                            <input name="last_name" class="uk-input" required placeholder="نام خانوادگی">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: users"></span>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                     <!--email-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input" placeholder="ایمیل" type="email">
+                            <input name="email" required class="uk-input" placeholder="ایمیل" type="email">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: mail"></span>
                         </div>
                     </div>
@@ -94,10 +94,10 @@
                     <!--maghta-->
                     <div class="uk-margin">
                         <div style="position: relative">
-                            <select class="uk-select" name="section">
-                                <option value="مسئول بایگانی">مسئول بایگانی</option>
-                                <option value="همکار معمولی">همکار معمولی</option>
-                                <option value="ادمین">ادمین</option>
+                            <select class="uk-select" required name="job">
+                                <option value="B">مسئول بایگانی</option>
+                                <option value="N">همکار معمولی</option>
+                                <option value="A">ادمین</option>
                             </select>
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: info"></span>
                             <span class="uk-form-icon" uk-icon="icon: chevron-down"></span>
@@ -107,7 +107,7 @@
                     <!--username-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input" placeholder="نام کاربری" type="text">
+                            <input name="username" required class="uk-input" placeholder="نام کاربری">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
                         </div>
                     </div>
@@ -115,21 +115,22 @@
                     <!--password-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input" placeholder="رمزعبور" type="password">
+                            <input name="password" required class="uk-input" placeholder="رمزعبور" type="password">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
                         </div>
                     </div>
-
+                    {% csrf_token %}
+                    <div class="uk-modal-footer uk-text-left">
+                        <button class="uk-button modal-btn blue-color" type="submit">اضافه
+                            <span uk-icon="icon: plus"></span>
+                        </button>
+                        <button class="uk-button modal-btn red-btn uk-modal-close" type="button">انصراف
+                            <span uk-icon="icon: close"></span>
+                        </button>
+                    </div>
                 </form>
             </div>
-            <div class="uk-modal-footer uk-text-left">
-                <button class="uk-button modal-btn blue-color" type="button">اضافه
-                    <span uk-icon="icon: plus"></span>
-                </button>
-                <button class="uk-button modal-btn red-btn uk-modal-close" type="button">انصراف
-                    <span uk-icon="icon: close"></span>
-                </button>
-            </div>
+
         </div>
     </div>
 {% endblock %}

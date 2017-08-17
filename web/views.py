@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 from .forms import *
-from .models import Subject, Section, Student, PrimaryDocument, Document
+from .models import Subject, Section, Student, PrimaryDocument, Document, UsersJob
 from .utils import handle_message
 
 import csv
@@ -408,3 +408,33 @@ def education_page(request):
     context = dict()
     context['message'] = handle_message(request)
     return render(request, "education-mg.html", context)
+
+
+@require_POST
+@login_required(login_url="/")
+def add_staffer(request):
+    if AddStaffer(request.POST).is_valid():
+        this_username = request.POST['username']
+        this_first_name = request.POST['first_name']
+        this_last_name = request.POST['last_name']
+        this_email = request.POST['email']
+        this_job = request.POST['job']
+        this_password = request.POST['password']
+        if User.objects.filter(username=this_username).exists():
+            request.session['error'] = 'کاربری با این مشخصات وجود دارد :('
+            return redirect("/admins/panel/staff/")
+        User.objects.create_user(
+            username=this_username,
+            password=this_password,
+            email=this_email,
+            first_name=this_first_name,
+            last_name=this_last_name,
+        ).save()
+        UsersJob(
+            user=get_object_or_404(User, username=this_username),
+            job=this_job
+        ).save()
+        request.session['done'] = 'کاربر با موفقیت اضافه گردید :)'
+        return redirect("/admins/panel/staff/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/staff/")

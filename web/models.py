@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.crypto import get_random_string
-from django.utils.deconstruct import deconstructible
+from django.contrib.auth.models import User
 
 
 def path_rename(instance, filename):
@@ -67,3 +67,13 @@ class PrimaryDocument(models.Model):
 
     def __unicode__(self):
         return "{}-{}".format(self.id, self.name)
+
+
+class UsersJob(models.Model):
+    JOBS = (
+        ('N', 'کاربر معمولی'),
+        ('A', 'ادمین'),
+        ('B', 'مسئول بایگانی'),
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job = models.CharField(max_length=1, choices=JOBS, default='N')

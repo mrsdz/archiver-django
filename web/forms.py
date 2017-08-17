@@ -42,6 +42,7 @@ class AddStaffer(forms.Form):
     password = forms.CharField(label='password')
     email = forms.EmailField(label='email')
     username = forms.CharField(label='username', max_length=200)
+    job = forms.CharField(max_length=1)
 
 
 class DeleteStaffer(forms.Form):
