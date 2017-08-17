@@ -208,9 +208,9 @@ def admins_edit_student(request):
         old_college_number = int(request.POST['old_college_number'])
         this_college_number = int(request.POST['college_number'])
         this_social_number = int(request.POST['social_number'])
-        this_last_name = str(request.POST['last_name'])
-        this_first_name = str(request.POST['first_name'])
-        this_period = str(request.POST['period'])
+        this_last_name = request.POST['last_name']
+        this_first_name = request.POST['first_name']
+        this_period = request.POST['period']
         this_subject = request.POST['subject']
         this_section = request.POST['section']
         if Student.objects.filter(college_number__exact=old_college_number).exists():
@@ -224,10 +224,10 @@ def admins_edit_student(request):
                 section=get_object_or_404(Section, id=this_section)
             )
             request.session['done'] = "دانشجو با موفقیت به‌روز شد :)"
-            return redirect("/admins/panel/")
+            return redirect("/admins/panel/student/view/?search="+str(this_college_number))
         else:
             request.session['error'] = "دانشجویی با این مشخصات وجود ندارد :/"
-            return redirect("/admins/panel/")
+            return redirect("/admins/panel/student/view/?search="+str(this_college_number))
     else:
         return redirect("/")
 

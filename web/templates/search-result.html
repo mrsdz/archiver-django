@@ -149,7 +149,8 @@
                 <h2 class="uk-modal-title uk-text-center">تغییر مشخصات</h2>
             </div>
             <div class="uk-modal-body" uk-overflow-auto>
-                <form class="uk-form-stacked uk-text-center" method="post" >
+                <form class="uk-form-stacked uk-text-center" method="post" action="{% url 'Edit Student' %}">
+                    <input type="hidden" name="old_college_number" value="{{ student_info.college_number }}">
 
                     <!--st number-->
                     <div class="uk-margin">
@@ -231,15 +232,15 @@
                         </div>
                     </div>
                     {% csrf_token %}
+                    <div class="uk-modal-footer uk-text-left">
+                        <button class="uk-button modal-btn blue-color">تغییر
+                            <span uk-icon="icon: file-edit"></span>
+                        </button>
+                        <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
+                            <span uk-icon="icon: close"></span>
+                        </button>
+                    </div>
                 </form>
-            </div>
-            <div class="uk-modal-footer uk-text-left">
-                <button class="uk-button modal-btn blue-color" type="button">تغییر
-                    <span uk-icon="icon: file-edit"></span>
-                </button>
-                <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
-                    <span uk-icon="icon: close"></span>
-                </button>
             </div>
         </div>
     </div>
