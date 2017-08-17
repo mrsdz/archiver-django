@@ -44,13 +44,18 @@ class Student(models.Model):
 
 
 class Document(models.Model):
+    STATUS = (
+        ('W', 'Waiting'),
+        ('A', 'Accepted'),
+        ('R', 'Rejected'),
+    )
     id = models.AutoField(primary_key=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     type = models.CharField(max_length=200)
     primary = models.BooleanField(default=False)
     date = models.DateTimeField(auto_now=True)
     doc = models.ImageField(upload_to=path_rename)
-    is_accepted = models.BooleanField(default=False)
+    status = models.CharField(default='W', choices=STATUS, max_length=1)
 
     def __unicode__(self):
         return "{}-{}-{}".format(self.id, self.student.college_number, self.type)

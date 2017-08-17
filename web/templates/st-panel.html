@@ -13,6 +13,8 @@
 
 {% block content %}
 
+    {% include "upload.html" %}
+
     <!--navbar-->
     <div class="uk-position-fixed uk-position-z-index uk-width-1-1">
         <nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
@@ -62,7 +64,13 @@
                             <img src="/media?image={{ i.doc.url }}" class="image"/>
                         </a>
                         <div class="text" itemprop="caption description">{{ i.type }}</div>
-                        <div class="state"><label class="tb-green">تایید شده<span uk-icon="icon: check"></span></label></div>
+                        {% if i.status == 'A' %}
+                            <div class="state"><label class="tb-green">تأیید شده <span uk-icon="icon: check"></span></label></div>
+                        {% elif i.status == 'R' %}
+                            <div class="state"><label class="tb-red">تأیید نشده <span uk-icon="icon: close"></span></label></div>
+                        {% else %}
+                            <div class="state"><label class="tb-yellow">در انتظار تأیید <span uk-icon="icon: clock"></span></label></div>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
@@ -177,6 +185,5 @@
             </div>
         </div>
     </div>
-    {% include "upload.html" %}
 
 {% endblock %}
