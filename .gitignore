@@ -107,3 +107,5 @@ settings.py
 db.sqlite3
 
 docs/
+
+web/migrations
