@@ -18,39 +18,51 @@
     <!--cards-->
     <div class="uk-grid uk-grid-small padding " uk-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: > div ; delay: 0; repeat: false">
         <div class="uk-width-1-4@m">
-            <div class="uk-card uk-card-default uk-border-rounded">
-                <div  class="uk-card-body uk-text-right" uk-grid>
-                    <!--name-->
-                    <h6 class="uk-width-1-1 staff-info">
-                        <span uk-icon="icon: user"></span>
-                        <label>نام:</label>
-                        <b>اشکان</b>
-                    </h6>
-                    <!--family name-->
-                    <h6 class="uk-width-1-1 staff-info">
-                        <span uk-icon="icon: users"></span>
-                        <label>نام خانوادگی:</label>
-                        <b>دهباشی</b>
-                    </h6>
-                    <!--username-->
-                    <h6 class="uk-width-1-1 staff-info">
-                        <span uk-icon="icon: credit-card"></span>
-                        <label>نام کاربری:</label>
-                        <b>msdz</b>
-                    </h6>
-                    <!--email-->
-                    <h6 class="uk-width-1-1 staff-info">
-                        <span uk-icon="icon: mail"></span>
-                        <label>ایمیل: </label>
-                        <b>partyrock802@gmail.com</b>
-                    </h6>
+            {% for i in staffers %}
+                <div class="uk-card uk-card-default uk-border-rounded">
+                    <div  class="uk-card-body uk-text-right" uk-grid>
+                        <!--name-->
+                        <h6 class="uk-width-1-1 staff-info">
+                            <span uk-icon="icon: user"></span>
+                            <label>نام:</label>
+                            <b>{{ i.user.first_name }}</b>
+                        </h6>
+                        <!--family name-->
+                        <h6 class="uk-width-1-1 staff-info">
+                            <span uk-icon="icon: users"></span>
+                            <label>نام خانوادگی:</label>
+                            <b>{{ i.user.last_name }}</b>
+                        </h6>
+                        <!--username-->
+                        <h6 class="uk-width-1-1 staff-info">
+                            <span uk-icon="icon: credit-card"></span>
+                            <label>نام کاربری:</label>
+                            <b>{{ i.user.username }}</b>
+                        </h6>
+                        <!--email-->
+                        <h6 class="uk-width-1-1 staff-info">
+                            <span uk-icon="icon: mail"></span>
+                            <label>ایمیل: </label>
+                            <b>{{ i.user.email }}</b>
+                        </h6>
+                        <!--job-->
+                        <h6 class="uk-width-1-1 staff-info">
+                            <span uk-icon="icon: bookmark"></span>
+                            <label>نوع کاربر: </label>
+                            <b>{{ i.get_job_display }}</b>
+                        </h6>
+                    </div>
+                    <div class="uk-card-footer">
+                        <form onsubmit="return confirm('آیا مطمئن هستید؟!')" action="{% url 'Delete Staff' %}" method="post">
+                            <button style="width: 100%" class="uk-button view-btn red-btn">حذف
+                                <span uk-icon="icon: trash"></span>
+                            </button>
+                            {% csrf_token %}
+                            <input type="hidden" name="username" value="{{ i.user.username }}">
+                        </form>
+                    </div>
                 </div>
-                <div class="uk-card-footer">
-                    <a style="width: 100%" href="#" class="uk-button view-btn red-btn">حذف
-                        <span uk-icon="icon: trash"></span>
-                    </a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <!--add staff button-->
@@ -70,7 +82,7 @@
                     <!--name-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input name="first_name" class="uk-input" placeholder="نام">
+                            <input required name="first_name" class="uk-input" placeholder="نام">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
                         </div>
                     </div>
@@ -121,7 +133,7 @@
                     </div>
                     {% csrf_token %}
                     <div class="uk-modal-footer uk-text-left">
-                        <button class="uk-button modal-btn blue-color" type="submit">اضافه
+                        <button class="uk-button modal-btn blue-color">اضافه
                             <span uk-icon="icon: plus"></span>
                         </button>
                         <button class="uk-button modal-btn red-btn uk-modal-close" type="button">انصراف

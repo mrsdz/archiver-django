@@ -8,6 +8,7 @@ from django.http.response import HttpResponse, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 from .forms import *
 from .models import Subject, Section, Student, PrimaryDocument, Document, UsersJob
@@ -311,6 +312,7 @@ def admins_view_new_docs(request):
 def admins_staff_management(request):
     context = dict()
     context['message'] = handle_message(request)
+    context['staffers'] = UsersJob.objects.all()
     return render(request, "view-staff.html", context)
 
 
@@ -435,6 +437,21 @@ def add_staffer(request):
             job=this_job
         ).save()
         request.session['done'] = 'کاربر با موفقیت اضافه گردید :)'
+        return redirect("/admins/panel/staff/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/staff/")
+
+
+@require_POST
+@login_required(login_url="/")
+def delete_staffer(request):
+    if DeleteStaffer(request.POST).is_valid():
+        this_username = str(request.POST['username'])
+        if not User.objects.filter(username=this_username).exists():
+            request.session['error'] = 'کاربری با این مشخصات وجود ندارد :('
+            return redirect("/admins/panel/staff/")
+        User.objects.get(username__exact=this_username).delete()
+        request.session['done'] = 'کاربر با موفقیت حذف گردید :)'
         return redirect("/admins/panel/staff/")
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/staff/")
