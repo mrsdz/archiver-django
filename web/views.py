@@ -8,7 +8,6 @@ from django.http.response import HttpResponse, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models import Q
 
 from .forms import *
 from .models import Subject, Section, Student, PrimaryDocument, Document, UsersJob
@@ -209,9 +208,9 @@ def admins_edit_student(request):
         old_college_number = int(request.POST['old_college_number'])
         this_college_number = int(request.POST['college_number'])
         this_social_number = int(request.POST['social_number'])
-        this_last_name = request.POST['last_name']
-        this_first_name = request.POST['first_name']
-        this_period = request.POST['period']
+        this_last_name = str(request.POST['last_name'])
+        this_first_name = str(request.POST['first_name'])
+        this_period = str(request.POST['period'])
         this_subject = request.POST['subject']
         this_section = request.POST['section']
         if Student.objects.filter(college_number__exact=old_college_number).exists():
@@ -326,6 +325,8 @@ def admins_view_students(request):
         context['docs'] = Document.objects.filter(student__college_number__exact=this_search_key)
         context['student_info'] = Student.objects.get(college_number__exact=this_search_key)
         context['primary_docs'] = PrimaryDocument.objects.all()
+        context['subject'] = Subject.objects.all()
+        context['section'] = Section.objects.all()
         return render(request, "search-result.html", context)
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/")

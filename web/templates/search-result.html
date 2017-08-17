@@ -120,7 +120,7 @@
                 <!--entry period-->
                 <h6>
                     <label>دوره:</label>
-                    <b>{{ student_info.subject.name }}</b>
+                    <b>{{ student_info.period }}</b>
                     <span uk-icon="icon: thumbnails"></span>
                 </h6>
             </div>
@@ -133,12 +133,20 @@
                 <h2 class="uk-modal-title uk-text-center">تغییر مشخصات</h2>
             </div>
             <div class="uk-modal-body" uk-overflow-auto>
-                <form class="uk-form-stacked uk-text-center">
+                <form class="uk-form-stacked uk-text-center" method="post" >
 
                     <!--st number-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input temp-input uk-form-width-large" placeholder="شماره دانشجویی" value="{{ student_info.college_number }}" type="number">
+                            <input name="college_number" class="uk-input temp-input uk-form-width-large" placeholder="شماره دانشجویی" value="{{ student_info.college_number }}" type="number">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: credit-card"></span>
+                        </div>
+                    </div>
+
+                    <!--st number-->
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <input name="social_number" class="uk-input temp-input uk-form-width-large" placeholder="کد ملی" value="{{ student_info.social_number }}" type="number">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: credit-card"></span>
                         </div>
                     </div>
@@ -146,7 +154,7 @@
                     <!--name-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input temp-input uk-form-width-large" placeholder="نام" value="{{ student_info.first_name }}">
+                            <input name="first_name" class="uk-input temp-input uk-form-width-large" placeholder="نام" value="{{ student_info.first_name }}">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
                         </div>
                     </div>
@@ -154,7 +162,7 @@
                     <!--family-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input class="uk-input temp-input uk-form-width-large" placeholder="نام خانوادگی" value="{{ student_info.last_name }}">
+                            <input name="last_name" class="uk-input temp-input uk-form-width-large" placeholder="نام خانوادگی" value="{{ student_info.last_name }}">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: users"></span>
                         </div>
                     </div>
@@ -163,8 +171,11 @@
                     <div class="uk-margin">
                         <div style="position: relative">
                             <select class="uk-select temp-select" name="subject">
+                                <option value="{{ student_info.subject.id }}">{{ student_info.subject.name }}</option>
                                 {% for sub in subject %}
-                                <option value="{{ sub.pk }}">{{ sub.name }}</option>
+                                    {% if sub.pk != student_info.subject.id %}
+                                        <option value="{{ sub.pk }}">{{ sub.name }}</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: info"></span>
@@ -175,9 +186,12 @@
                     <!--maghta-->
                     <div class="uk-margin">
                         <div style="position: relative">
-                            <select class="uk-select temp-select" name="subject">
-                                {% for sub in subject %}
-                                <option value="{{ sub.pk }}">{{ sub.name }}</option>
+                            <select class="uk-select temp-select" name="section">
+                                <option value="{{ student_info.section.id }}">{{ student_info.section.name }}</option>
+                                {% for sec in section %}
+                                    {% if sec.pk != student_info.section.id %}
+                                        <option value="{{ sec.pk }}">{{ sec.name }}</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: tag"></span>
@@ -185,18 +199,22 @@
                         </div>
                     </div>
 
-                    <!--dore vorodi-->
+                    <!--dore-->
                     <div class="uk-margin">
                         <div style="position: relative">
-                            <select class="uk-select temp-select" name="subject">
-                                {% for sub in subject %}
-                                <option value="{{ sub.pk }}">{{ sub.name }}</option>
-                                {% endfor %}
+                            <select class="uk-select temp-select" name="period">
+                                <option value="{{ student_info.period }}">{{ student_info.period }}</option>
+                                {% if student_info.subject.id == "شبانه" %}
+                                    <option>روزانه</option>
+                                {% else %}
+                                    <option>شبانه</option>
+                                {% endif %}
                             </select>
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: thumbnails"></span>
                             <span class="uk-form-icon" uk-icon="icon: chevron-down"></span>
                         </div>
                     </div>
+                    {% csrf_token %}
                 </form>
             </div>
             <div class="uk-modal-footer uk-text-left">
@@ -250,7 +268,7 @@
                     <!--entry period-->
                     <h6>
                         <label>دوره:</label>
-                        <b>{{ student_info.subject.name }}</b>
+                        <b>{{ student_info.period }}</b>
                         <span uk-icon="icon: thumbnails"></span>
                     </h6>
                 </div>
