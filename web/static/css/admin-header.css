@@ -106,13 +106,13 @@ body, html{
         margin-right: 0 !important;
     }
 }
-@media screen and (min-width: 700px) and (max-width: 1200px){
+@media screen and (min-width: 699px) and (max-width: 1200px){
     .background{
         transform: skewY(0) !important;
         height: 50% !important;
     }
     .logo{
-        display: none;
+        display: none !important;
     }
 }
 @media screen and (min-width: 700px) and (max-width: 5120px){
