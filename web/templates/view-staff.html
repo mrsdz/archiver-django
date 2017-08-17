@@ -21,16 +21,28 @@
             <div class="uk-card uk-card-default uk-border-rounded">
                 <div  class="uk-card-body uk-text-right" uk-grid>
                     <!--name-->
-                    <h6 class="uk-width-1-1">
-                        <label>نام و نام خانوادگی:</label>
-                        <b>اشکان</b>
+                    <h6 class="uk-width-1-1 staff-info">
                         <span uk-icon="icon: user"></span>
+                        <label>نام:</label>
+                        <b>اشکان</b>
                     </h6>
                     <!--family name-->
-                    <h6 class="uk-width-1-1">
+                    <h6 class="uk-width-1-1 staff-info">
+                        <span uk-icon="icon: users"></span>
                         <label>نام خانوادگی:</label>
                         <b>دهباشی</b>
-                        <span uk-icon="icon: users"></span>
+                    </h6>
+                    <!--username-->
+                    <h6 class="uk-width-1-1 staff-info">
+                        <span uk-icon="icon: credit-card"></span>
+                        <label>نام کاربری:</label>
+                        <b>msdz</b>
+                    </h6>
+                    <!--email-->
+                    <h6 class="uk-width-1-1 staff-info">
+                        <span uk-icon="icon: mail"></span>
+                        <label>ایمیل: </label>
+                        <b>partyrock802@gmail.com</b>
                     </h6>
                 </div>
                 <div class="uk-card-footer">
@@ -79,6 +91,19 @@
                         </div>
                     </div>
 
+                    <!--maghta-->
+                    <div class="uk-margin">
+                        <div style="position: relative">
+                            <select class="uk-select" name="section">
+                                <option value="مسئول بایگانی">مسئول بایگانی</option>
+                                <option value="همکار معمولی">همکار معمولی</option>
+                                <option value="ادمین">ادمین</option>
+                            </select>
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: info"></span>
+                            <span class="uk-form-icon" uk-icon="icon: chevron-down"></span>
+                        </div>
+                    </div>
+
                     <!--username-->
                     <div class="uk-margin">
                         <div class="uk-inline">
@@ -101,7 +126,7 @@
                 <button class="uk-button modal-btn blue-color" type="button">اضافه
                     <span uk-icon="icon: plus"></span>
                 </button>
-                <button class="uk-button modal-btn red-color uk-modal-close" type="button">انصراف
+                <button class="uk-button modal-btn red-btn uk-modal-close" type="button">انصراف
                     <span uk-icon="icon: close"></span>
                 </button>
             </div>

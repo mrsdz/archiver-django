@@ -3,6 +3,22 @@
 
 {% block admin_header %}
     <link rel="stylesheet" href="{% static 'css/template.css' %}">
+    <script>
+        $(document).ready(function() {
+            $('a.edit').click(function () {
+                var dad = $(this).parent().parent();
+                dad.find('.rec-name').hide();
+                dad.find('.edit-input').fadeIn().focus();
+            });
+
+            $('.edit-input').focusout(function() {
+                var dad = $(this).parent();
+                var dad2 = $(this).parent().parent();
+                $(this).hide();
+                dad2.find('.rec-name').fadeIn();
+            });
+        });
+    </script>
 {% endblock %}
 
 
@@ -39,7 +55,7 @@
                     </div>
                     <!--submit-->
                     <div class="uk-margin">
-                        <button class="uk-button uk-width-1-1 uk-box-shadow-hover-xlarge blue-btn">تغییر
+                        <button class="uk-button uk-width-1-1 uk-box-shadow-hover-xlarge ubuntu-btn">تغییر
                             <span uk-icon="icon: pencil"></span>
                         </button>
                     </div>
@@ -47,6 +63,46 @@
                     {% csrf_token %}
                 </form>
             </div>
+            </div>
+        </div>
+        <div class="uk-width-1-3@m">
+            <div class="uk-width-1-1 uk-margin-top">
+                <div class="uk-card margin-top uk-card-body uk-border-rounded">
+                    <h3 class="uk-card-title">مشاهده و تغییر مدرک اصلی</h3>
+                    <hr>
+                    <table class="uk-table uk-table-divider rec-table uk-overlay">
+                        <thead>
+                        <tr>
+                            <th>نام مدرک</th>
+                            <th>تغییر مدرک</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="rec-name">دیپلم</td>
+                            <td class="edit-input">
+                                <input value="دیپلم" class="edit-input edit-input-style" dir="rtl">
+                                <a class="save" href="#">تغییر</a>
+                            </td>
+                            <td>
+                                <a class="edit edit-style" uk-icon="icon: file-edit"></a>
+                                <a class="edit-style" uk-icon="icon: trash"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="rec-name">اشتغال به تحصیل</td>
+                            <td class="edit-input">
+                                <input value="اشتغال به تحصیل" class="edit-input edit-input-style" dir="rtl">
+                                <a class="save" href="#">تغییر</a>
+                            </td>
+                            <td>
+                                <a class="edit edit-style" uk-icon="icon: file-edit"></a>
+                                <a class="edit-style" uk-icon="icon: trash"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="uk-width-1-3@m">
@@ -66,7 +122,7 @@
 
                     <!--submit-->
                     <div class="uk-margin">
-                        <button class="uk-button uk-width-1-1 uk-box-shadow-hover-xlarge blue-btn">اضافه
+                        <button class="uk-button uk-width-1-1 uk-box-shadow-hover-xlarge ubuntu-btn">اضافه
                             <span uk-icon="icon: plus"></span>
                         </button>
                     </div>

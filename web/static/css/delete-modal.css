@@ -1,0 +1,40 @@
+.uk-modal-close-default{
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+    margin-left: 16px !important;
+}
+.confirm-message{
+    font-family: Vazir !important;
+    color: #fff !important;
+}
+.yes-no{
+    font-family: Vazir !important;
+    font-size: 18px !important;
+    border-radius: 2em !important;
+    padding: 0 65px !important;
+    line-height: 50px !important;
+    background: transparent !important;
+}
+.blue{
+    border: 2px solid #2196F3 !important;
+    color: #2196F3 !important;
+}
+.blue:hover{
+    background: #2196F3 !important;
+    color: #fff !important;
+}
+.red{
+    border: 2px solid #F44336 !important;
+    color: #F44336 !important;
+}
+.red:hover{
+    background: #F44336 !important;
+    color: #fff !important;
+}
+.exit-svg {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
