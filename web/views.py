@@ -401,3 +401,10 @@ def accept_reject_docs(request):
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/setting/")
 
+
+@require_GET
+@login_required(login_url="/")
+def education_page(request):
+    context = dict()
+    context['message'] = handle_message(request)
+    return render(request, "education-mg.html", context)
