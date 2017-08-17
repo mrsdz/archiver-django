@@ -18,7 +18,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js"></script>
         {% block header %}{% endblock %}
         <style>
             .uk-notification-message{
@@ -27,6 +26,10 @@
         </style>
     </head>
     <body>
+        {% block uploader %}{% endblock %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js"></script>
+
         <script>
             {% if message.error %}
                 UIkit.notification(
