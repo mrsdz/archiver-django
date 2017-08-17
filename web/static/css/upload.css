@@ -9,8 +9,8 @@
     direction: rtl !important;
     color: #333 !important;
 }
-.uk-select,
-.uk-input{
+.upload-select,
+.upload-input{
     color: #333 !important;
     direction: rtl !important;
     text-align: right !important;
@@ -18,16 +18,16 @@
     text-indent: 15px !important;
     border: 1px solid #e5e5e5 !important;
 }
-.uk-input{
+.upload-input{
     width: 600px !important;
     border-radius: 5px !important;
     background: transparent !important;
     text-indent: 30px !important;
 }
-.uk-input::placeholder{
+.upload-input::placeholder{
     color: #333 !important;
 }
-.uk-select option{
+.upload-select option{
     background: #fff !important;
     border: none!important;
 }
