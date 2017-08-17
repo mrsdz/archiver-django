@@ -65,12 +65,28 @@
                         <img src="/media?image={{ i.doc.url }}&student={{ student_info.college_number }}" class="image" alt="">
                         <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary">
                             <div class="uk-position-center">
-                                <div class="uk-transition-slide-top-small">
-                                    <button class="uk-button paper-btn red">تکذیب مدرک</button>
-                                </div>
-                                <div class="uk-transition-slide-bottom-small">
-                                    <button class="uk-button paper-btn green">تایید مدرک</button>
-                                </div>
+                                {% if i.status != 'R' %}
+                                    <div class="uk-transition-slide-top-small">
+                                        <form action="{% url 'Docs Change Status' %}" method="post">
+                                            <input type="hidden" value="R" name="status">
+                                            <input type="hidden" value="{{ i.id }}" name="doc">
+                                            <input type="hidden" value="{{ i.student.college_number }}" name="student">
+                                            <button class="uk-button paper-btn red">تکذیب مدرک</button>
+                                            {% csrf_token %}
+                                        </form>
+                                    </div>
+                                {% endif %}
+                                {% if i.status != 'A' %}
+                                    <div class="uk-transition-slide-bottom-small">
+                                        <form action="{% url 'Docs Change Status' %}" method="post">
+                                            <input type="hidden" value="A" name="status">
+                                            <input type="hidden" value="{{ i.id }}" name="doc">
+                                            <input type="hidden" value="{{ i.student.college_number }}" name="student">
+                                            <button class="uk-button paper-btn green">تایید مدرک</button>
+                                            {% csrf_token %}
+                                        </form>
+                                    </div>
+                                {% endif %}
                                 <div class="uk-transition-slide-bottom-small">
                                     <a href="/media?image={{ i.doc.url }}&student={{ student_info.college_number }}" data-caption="{{ i.type }}" class="uk-button paper-btn blue">مشاهده مدرک</a>
                                 </div>

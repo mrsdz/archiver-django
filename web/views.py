@@ -224,10 +224,10 @@ def admins_edit_student(request):
                 section=get_object_or_404(Section, id=this_section)
             )
             request.session['done'] = "دانشجو با موفقیت به‌روز شد :)"
-            return redirect("/admins/panel/student/")
+            return redirect("/admins/panel/")
         else:
             request.session['error'] = "دانشجویی با این مشخصات وجود ندارد :/"
-            return redirect("/admins/panel/student/")
+            return redirect("/admins/panel/")
     else:
         return redirect("/")
 
@@ -391,18 +391,19 @@ def add_main_doc(request):
 @require_POST
 @login_required(login_url="/")
 def accept_reject_docs(request):
-    if 'doc' in request.POST:
+    if 'doc' in request.POST and 'status' in request.POST and 'student' in request.POST:
         this_doc_id = request.POST['doc']
-        this_document = Document.objects.get(id=this_doc_id)
-        if this_document:
-            is_accepted = False if this_document.is_accepted else True
-            this_document.update(
-                is_accepted=is_accepted
+        this_student = request.POST['student']
+        this_accept_or_reject = request.POST['status']
+        if Document.objects.filter(id__exact=this_doc_id):
+            this_status = 'A' if this_accept_or_reject == 'A' else 'R'
+            Document.objects.filter(id__exact=this_doc_id).update(
+                status=this_status
             )
             request.session['done'] = 'وضعیت مدرک با موفقیت تغییر کرد :)'
-            return redirect("/admins/panel/setting/")
+            return redirect("/admins/panel/student/view/?search="+str(this_student))
     request.session['error'] = 'خطا :('
-    return redirect("/admins/panel/setting/")
+    return redirect("/admins/panel/")
 
 
 @require_GET
