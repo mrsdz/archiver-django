@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/css/delete-modal.css">
+
+    <link rel="stylesheet" href="../static/css/fonts.css">
+    <link rel="stylesheet" href="../static/css/uikit.min.css">
+    <!--js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js"></script>
+</head>
+<body>
+    <a href="#delete-modal" uk-toggle>Delete</a>
+    <div id="delete-modal" class="uk-modal-full" uk-modal>
+    <div class="uk-modal-dialog" style="height: 100%">
+        <svg class="exit-svg" viewBox="0 0 500 130" preserveAspectRatio="xMinYMin meet">
+            <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: #F44336;"></path>
+        </svg>
+        <div class="uk-position-top-center" style="margin-top: 100px;">
+            <h1 class="confirm-message">آیا مطمئنید میخواهید این فایل پاک کنید؟</h1>
+        </div>
+        <div class="uk-position-bottom-center" style="margin-bottom: 128px;">
+            <div class="uk-padding-large uk-text-center">
+                <a href=""><button class="uk-button yes-no blue">بله</button></a>
+                <button class="uk-button yes-no red uk-modal-close-default">خیر</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
