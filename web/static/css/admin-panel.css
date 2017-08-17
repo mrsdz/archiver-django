@@ -25,12 +25,15 @@
 .width{
     width: 100% !important;
 }
-@media screen and (max-width: 699px){
+@media screen and (max-width: 320px){
     .width,
     .uk-form-width-large{
-        width: 100% !important;
+        width: 315px !important;
     }
 }
-@media screen and (min-width: 700px) and (max-width: 3000px){
-
+@media screen and (min-width: 321px) and (max-width: 699px){
+    .width,
+    .uk-form-width-large{
+        width: 350px !important;
+    }
 }

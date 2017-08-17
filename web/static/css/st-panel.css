@@ -1,5 +1,5 @@
 .background{
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
@@ -40,19 +40,6 @@ h6{
     height: 60px !important;
     padding: 0 15px !important;
 }
-.st-name{
-    font-family: Vazir !important;
-    font-size: 16px !important;
-    color: #fff !important;
-}
-.st-icon{
-    color: #fff !important;
-}
-.uk-card-title{
-    font-family: Vazir !important;
-    direction: rtl !important;
-    margin: 16px !important;
-}
 .field{
     font-family: Vazir !important;
     color: rgba(0,0,0,0.7) !important;
@@ -67,7 +54,7 @@ hr{
     background: #fff !important;
 }
 .padding{
-    padding: 100px 50px !important;
+    padding: 100px 0 !important;
 }
 .padding-top{
     padding: 10% 10px;
@@ -78,7 +65,7 @@ hr{
     height: auto !important;
     border-top-left-radius: 5px !important;
     border-top-right-radius: 5px !important;
-    cursor: zoom-in;
+    cursor: zoom-in !important;
 }
 .text {
     width: 100% !important;
@@ -88,17 +75,23 @@ hr{
     direction: rtl !important;
     background: #fff !important;
     font-size: 18px !important;
-    border-bottom-left-radius: 5px !important;
-    border-bottom-right-radius: 5px !important;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
-    cursor: zoom-in;
 }
-figure{
-    margin-top: 0 !important;
+.state{
+    text-align: center !important;
+    font-family: Vazir !important;
+    direction: rtl !important;
+    font-size: 18px !important;
+    color: #fff;
 }
-figure {
-    margin: 15px 15px !important;
+.state label{
+    width: 100%;
+    display: inline-block;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .logo, h4{
     font-family: Vazir !important;
@@ -106,7 +99,34 @@ figure {
     cursor: default !important;
     font-weight: lighter !important;
 }
-.row{content:"" !important;display:table!important;clear:both!important;}
+.container {
+    width: 100%;
+    float: left;
+}
+.card-columns {
+    -webkit-column-count: 4;
+    column-count: 4;
+    -webkit-column-gap: 10px;
+    column-gap: 10px;
+}
+.card-columns .card {
+    margin-bottom: 25px;
+    display: inline-block;
+    width: 100%;
+}
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
 .uk-modal-close-default{
     position: relative !important;
     top: 0 !important;
@@ -147,6 +167,15 @@ figure {
     top: 0;
     left: 0;
 }
+.tb-yellow{  background: #FFC107;  }
+.tb-green{  background: #4CAF50;  }
+.tb-red{  background: #F44336;  }
+.uk-lightbox-toolbar {
+    background: rgba(0,0,0,.5) !important;
+    color: rgba(255,255,255,1) !important;
+    font-family: Vazir !important;
+    direction: rtl !important;
+}
 @media screen and (max-width: 699px){
     .background{
         transform: skewY(0) !important;
@@ -174,8 +203,13 @@ figure {
         width: 100% !important;
         margin-top: 8px !important;
     }
-    figure {
-        margin: 15px 0 !important;
+    .card-columns {
+        -webkit-column-count: 1 !important;
+        column-count: 1 !important;
+    }
+    .photo-width{
+        width: 80% !important;
+        left: 10% !important;
     }
 }
 @media screen and (min-width: 700px) and (max-width: 1200px){
@@ -189,8 +223,9 @@ figure {
     .hide{
         display: none !important;
     }
-    figure {
-        margin: 15px 10px !important;
+    .photo-width{
+        width: 95% !important;
+        left: 2.5% !important;
     }
 }
 @media screen and (min-width: 1201px) and (max-width: 3000px){
