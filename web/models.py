@@ -6,7 +6,11 @@ from django.utils.crypto import get_random_string
 from django.utils.deconstruct import deconstructible
 
 
-# Create your models here.
+def path_rename(instance, filename):
+    name = get_random_string(length=24) + "." + filename.split('.')[-1]
+    path = "docs/" + str(instance.student_id) + "/"
+    full = path + name
+    return full
 
 
 class Section(models.Model):
@@ -39,22 +43,14 @@ class Student(models.Model):
         return "{}".format(self.college_number)
 
 
-def path_rename(instance, filename):
-    name = get_random_string(length=24) + "." + filename.split('.')[-1]
-    path = "docs/" + str(instance.student_id) + "/"
-    full = path + name
-    return full
-
-
 class Document(models.Model):
-
     id = models.AutoField(primary_key=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     type = models.CharField(max_length=200)
     primary = models.BooleanField(default=False)
     date = models.DateTimeField(auto_now=True)
-    # TODO: Must pass a function upload_to :)
     doc = models.ImageField(upload_to=path_rename)
+    is_accepted = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "{}-{}-{}".format(self.id, self.student.college_number, self.type)

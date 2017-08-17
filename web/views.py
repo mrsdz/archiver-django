@@ -383,3 +383,21 @@ def add_main_doc(request):
         return redirect("/admins/panel/setting/")
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/setting/")
+
+
+@require_POST
+@login_required(login_url="/")
+def accept_reject_docs(request):
+    if 'doc' in request.POST:
+        this_doc_id = request.POST['doc']
+        this_document = Document.objects.get(id=this_doc_id)
+        if this_document:
+            is_accepted = False if this_document.is_accepted else True
+            this_document.update(
+                is_accepted=is_accepted
+            )
+            request.session['done'] = 'وضعیت مدرک با موفقیت تغییر کرد :)'
+            return redirect("/admins/panel/setting/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/setting/")
+
