@@ -485,3 +485,17 @@ def edit_main_document(request):
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/setting/")
 
+
+@require_GET
+@login_required(login_url="/")
+def delete_main_document(request):
+    if DeletePrimaryDocument(request.GET).is_valid():
+        this_id = request.GET['id']
+        if PrimaryDocument.objects.filter(id__exact=this_id).exists():
+            PrimaryDocument.objects.filter(id__exact=this_id).delete()
+            request.session['done'] = 'نام مدرک با موفقیت حذف گردید :)'
+            return redirect("/admins/panel/setting/")
+        request.session['error'] = 'مدرکی با این آیدی وجود ندارد :('
+        return redirect("/admins/panel/setting/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/setting/")

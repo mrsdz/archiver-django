@@ -68,3 +68,7 @@ class EditPrimaryDocument(forms.Form):
     name = forms.CharField(max_length=200)
     id = forms.IntegerField()
 
+
+class DeletePrimaryDocument(forms.Form):
+    id = forms.IntegerField()
+

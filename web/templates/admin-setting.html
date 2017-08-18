@@ -90,7 +90,7 @@
                                     </td>
                                     <td>
                                         <a class="edit edit-style" uk-icon="icon: file-edit"></a>
-                                        <a class="edit-style" uk-icon="icon: trash"></a>
+                                        <a href="{% url 'Delete Main Doc' %}?id={{ i.id }}" class="edit-style" uk-icon="icon: trash"></a>
                                     </td>
                                 </tr>
                             {% endfor %}
