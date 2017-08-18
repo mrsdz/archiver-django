@@ -1,5 +1,6 @@
+form{  display: inline-block !important;}
 .padding{
-    padding: 80px 20px !important;
+    padding: 100px 20px !important;
 }
 .uk-card{
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
@@ -22,6 +23,8 @@
 .view-btn{
     font-family: Vazir !important;
     direction: rtl !important;
+    background: transparent;
+    display: inline-block !important;
     font-size: 16px !important;
     text-align: center !important;
     color: #fff !important;
@@ -59,6 +62,25 @@
 }
 .gery:active{
     background: rgba(69, 90, 100, 0.4) !important
+}
+/*export btn*/
+.add-btn{
+    padding: 11px 19px !important;
+    background: #4CAF50;
+    color: #fff !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+    -webkit-transition: all 0.3s ease !important;
+    -moz-transition: all 0.3s ease !important;
+    transition: all 0.3s ease !important;
+}
+.add-btn:hover {
+    background: #388E3C !important;
+}
+.add-btn span{ vertical-align: middle !important; margin-top: -3px;}
+.uk-tooltip{
+    font-size: 14px !important;
+    font-family: Vazir !important;
+    direction: rtl !important;
 }
 @media screen and (max-width: 699px){
     .view-btn{

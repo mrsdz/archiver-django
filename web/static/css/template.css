@@ -71,6 +71,7 @@
 .red-btn:focus{
     color: #fff !important;
     background: #f44336 !important;
+    box-shadow: 0 14px 25px rgba(244, 67, 54, 0.30);
 }
 .ubuntu-btn{
     color: #C4546A !important;
@@ -80,6 +81,21 @@
 .ubuntu-btn:focus{
     color: #fff !important;
     background: #C4546A !important;
+    box-shadow: 0 14px 25px rgba(196, 84, 106, 0.30);
+}
+.add-green{
+    color: #4CAF50 !important;
+    border: 2px solid #4CAF50 !important;
+}
+.add-green:hover {
+    color: #fff !important;
+    background: #4CAF50 !important;
+    box-shadow: 0 14px 25px rgba(76, 175, 80, 0.30);
+}
+.add-green:active,
+.ubuntu-btn:active,
+.red-btn:active{
+    box-shadow: none;
 }
 .uk-form-icon{color: #000}
 .uk-select {
@@ -128,6 +144,31 @@
     background: #388E3C;
 }
 .edit-style:hover{color: #C4546A !important;}
+/*eduction*/
+.uk-modal-title{
+    font-family: Vazir !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    direction: rtl !important;
+}
+.add-btn-blue{
+    color: #2196F3 !important;
+}
+.add-btn-blue:hover{
+    background: rgba(33, 150, 243, 0.2) !important;
+}
+.add-btn-blue:active{
+    background: rgba(33, 150, 243, 0.4) !important;
+}
+.add--btn-red{
+    color: #F44336 !important;
+}
+.add--btn-red:hover{
+    background: rgba(244, 67, 54, 0.2) !important;
+}
+.add--btn-red:active{
+    background: rgba(244, 67, 54, 0.4) !important;
+}
 @media screen and (max-width: 699px){
     .uk-table th {
         padding: 5px 5px !important;
