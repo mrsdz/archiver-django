@@ -57,6 +57,7 @@
                             <input type="hidden" value="R" name="status">
                             <input type="hidden" value="{{ i.id }}" name="doc">
                             <input type="hidden" value="{{ i.student.college_number }}" name="student">
+                            <input type="hidden" value="{% url 'New Docs' %}" name="location">
                             <button class="uk-button view-btn red-btn">تکذیب<span uk-icon="icon: close"></span></button>
                             {% csrf_token %}
                         </form>
