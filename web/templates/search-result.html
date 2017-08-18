@@ -71,6 +71,7 @@
                                             <input type="hidden" value="R" name="status">
                                             <input type="hidden" value="{{ i.id }}" name="doc">
                                             <input type="hidden" value="{{ i.student.college_number }}" name="student">
+                                            <input type="hidden" value="{% url 'View Student' %}" name="location">
                                             <button class="uk-button paper-btn red">تکذیب مدرک</button>
                                             {% csrf_token %}
                                         </form>
@@ -82,6 +83,7 @@
                                             <input type="hidden" value="A" name="status">
                                             <input type="hidden" value="{{ i.id }}" name="doc">
                                             <input type="hidden" value="{{ i.student.college_number }}" name="student">
+                                            <input type="hidden" value="{% url 'View Student' %}" name="location">
                                             <button class="uk-button paper-btn green">تایید مدرک</button>
                                             {% csrf_token %}
                                         </form>

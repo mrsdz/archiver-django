@@ -303,6 +303,7 @@ def admins_upload_student(request):
 def admins_view_new_docs(request):
     context = dict()
     context['message'] = handle_message(request)
+    context['docs'] = Document.objects.filter(status='W')
     return render(request, "view.html", context)
 
 
@@ -391,8 +392,9 @@ def add_main_doc(request):
 @require_POST
 @login_required(login_url="/")
 def accept_reject_docs(request):
-    if 'doc' in request.POST and 'status' in request.POST and 'student' in request.POST:
+    if 'doc' in request.POST and 'status' in request.POST and 'student' in request.POST and 'location' in request.POST:
         this_doc_id = request.POST['doc']
+        this_location = request.POST['location']
         this_student = request.POST['student']
         this_accept_or_reject = request.POST['status']
         if Document.objects.filter(id__exact=this_doc_id):
@@ -401,7 +403,10 @@ def accept_reject_docs(request):
                 status=this_status
             )
             request.session['done'] = 'وضعیت مدرک با موفقیت تغییر کرد :)'
-            return redirect("/admins/panel/student/view/?search="+str(this_student))
+            if this_location == '/admins/panel/student/view/':
+                return redirect("/admins/panel/student/view/?search="+str(this_student))
+            elif this_location == '/admins/panel/docs/new/':
+                return redirect("/admins/panel/docs/new")
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/")
 
