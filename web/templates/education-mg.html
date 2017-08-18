@@ -107,25 +107,36 @@
         <div class="uk-modal-dialog uk-card-body">
             <h2 class="uk-modal-title uk-text-center">رشته جدید</h2>
             <hr/>
-            <form class="uk-form-stacked" method="post" action="{% url 'Add Staff' %}">
-                    <!--name-->
+            <form class="uk-form-stacked" method="post" action="{% url 'Add Subject' %}">
+                <!--name-->
+                <div class="uk-margin">
+                    <div class="uk-inline" style="width: 80%; position: relative; left: 10%">
+                        <input required name="name" class="uk-input" placeholder="نام رشته">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+                    </div>
+                </div>
+                <!--maghta-->
                     <div class="uk-margin">
-                        <div class="uk-inline" style="width: 80%; position: relative; left: 10%">
-                            <input required name="first_name" class="uk-input" placeholder="نام رشته">
-                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+                        <div style="width: 80%; position: relative; left: 10%">
+                            <select class="uk-select" name="section">
+                                {% for sec in section %}
+                                    <option value="{{ sec.pk }}">{{ sec.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: info"></span>
+                            <span class="uk-form-icon" uk-icon="icon: chevron-down"></span>
                         </div>
                     </div>
-
-                    {% csrf_token %}
-                    <div class="uk-text-left" style="position: relative; left: 10%">
-                        <button class="uk-button modal-btn add-btn-blue">اضافه
-                            <span uk-icon="icon: plus"></span>
-                        </button>
-                        <button class="uk-button modal-btn add--btn-red uk-modal-close" type="button">انصراف
-                            <span uk-icon="icon: close"></span>
-                        </button>
-                    </div>
-                </form>
+                {% csrf_token %}
+                <div class="uk-text-left" style="position: relative; left: 10%">
+                    <button class="uk-button modal-btn add-btn-blue">اضافه
+                        <span uk-icon="icon: plus"></span>
+                    </button>
+                    <button class="uk-button modal-btn add--btn-red uk-modal-close" type="button">انصراف
+                        <span uk-icon="icon: close"></span>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     <!--add maghtae-->
@@ -133,15 +144,14 @@
     <div class="uk-modal-dialog uk-card-body">
         <h2 class="uk-modal-title uk-text-center">مقطع جدید</h2>
         <hr/>
-        <form class="uk-form-stacked" method="post" action="{% url 'Add Staff' %}">
+        <form class="uk-form-stacked" method="post" action="{% url 'Add Section' %}">
             <!--name-->
             <div class="uk-margin">
                 <div class="uk-inline" style="width: 80%; position: relative; left: 10%">
-                    <input required name="first_name" class="uk-input" placeholder="نام مقطع">
+                    <input required name="name" class="uk-input" placeholder="نام مقطع">
                     <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: tag"></span>
                 </div>
             </div>
-
             {% csrf_token %}
             <div class="uk-text-left" style="position: relative; left: 10%">
                 <button class="uk-button modal-btn add-btn-blue">اضافه

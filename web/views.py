@@ -569,6 +569,40 @@ def delete_subject(request):
     return redirect("/admins/panel/education/")
 
 
+@require_POST
+@login_required(login_url="/")
+def add_section(request):
+    if 'name' in request.POST:
+        this_name = request.POST['name']
+        if Section.objects.filter(name__exact=this_name).exists():
+            request.session['error'] = 'مقطعی‌ای با این آیدی وجود دارد :('
+            return redirect("/admins/panel/education/")
+        Section(name=this_name).save()
+        request.session['done'] = 'مقطع با موفقیت اضافه گردید :)'
+        return redirect("/admins/panel/education/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/education/")
+
+
+@require_POST
+@login_required(login_url="/")
+def add_subject(request):
+    if 'name' in request.POST and 'section' in request.POST:
+        this_name = request.POST['name']
+        this_section = request.POST['section']
+        if Subject.objects.filter(name__exact=this_name).exists():
+            request.session['error'] = 'رشته‌ای با این آیدی وجود ندارد :('
+            return redirect("/admins/panel/education/")
+        Subject(
+            name=this_name,
+            section=get_object_or_404(Section, id=this_section)
+        ).save()
+        request.session['done'] = 'رشته با موفقیت اضافه گردید :)'
+        return redirect("/admins/panel/education/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/education/")
+
+
 @require_GET
 @login_required(login_url="/")
 def view_report(request):
