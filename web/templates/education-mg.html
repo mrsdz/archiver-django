@@ -37,28 +37,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="rec-name">نرم افزار</td>
-                        <td class="edit-input">
-                            <input value="نرم افزار" class="edit-input edit-input-style" dir="rtl">
-                            <a class="save" href="#">تغییر</a>
-                        </td>
-                        <td>
-                            <a class="edit edit-style" uk-icon="icon: file-edit"></a>
-                            <a class="edit-style" uk-icon="icon: trash"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="rec-name">حسابداری</td>
-                        <td class="edit-input">
-                            <input value="حسابداری" class="edit-input edit-input-style" dir="rtl">
-                            <a class="save" href="#">تغییر</a>
-                        </td>
-                        <td>
-                            <a class="edit edit-style" uk-icon="icon: file-edit"></a>
-                            <a class="edit-style" uk-icon="icon: trash"></a>
-                        </td>
-                    </tr>
+                        {% for i in subject %}
+                            <tr>
+                                <td class="rec-name">{{ i.name }}</td>
+                                <td class="edit-input">
+                                    <form method="post" action="{% url 'Edit Subject' %}">
+                                        <input type="hidden" name="id" value="{{ i.id }}" class="edit-input edit-input-style" dir="rtl">
+                                        <input name="name" value="{{ i.name }}" class="edit-input edit-input-style" dir="rtl">
+                                        {% csrf_token %}
+                                    </form>
+                                </td>
+                                <td>
+                                    <a class="edit edit-style" uk-icon="icon: file-edit"></a>
+                                    <a class="edit-style" uk-icon="icon: trash"></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
                 <hr/>
@@ -82,28 +76,22 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="rec-name">کاردانی</td>
-                            <td class="edit-input">
-                                <input value="کاردانی" class="edit-input edit-input-style" dir="rtl">
-                                <a class="save" href="#">تغییر</a>
-                            </td>
-                            <td>
-                                <a class="edit edit-style" uk-icon="icon: file-edit"></a>
-                                <a class="edit-style" uk-icon="icon: trash"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="rec-name">کارشناسی</td>
-                            <td class="edit-input">
-                                <input value="کارشناسی" class="edit-input edit-input-style" dir="rtl">
-                                <a class="save" href="#">تغییر</a>
-                            </td>
-                            <td>
-                                <a class="edit edit-style" uk-icon="icon: file-edit"></a>
-                                <a class="edit-style" uk-icon="icon: trash"></a>
-                            </td>
-                        </tr>
+                            {% for i in section %}
+                                <tr>
+                                    <td class="rec-name">{{ i.name }}</td>
+                                    <td class="edit-input">
+                                        <form method="post" action="{% url 'Edit Section' %}">
+                                            <input type="hidden" name="id" value="{{ i.id }}" class="edit-input edit-input-style" dir="rtl">
+                                            <input name="name" value="{{ i.name }}" class="edit-input edit-input-style" dir="rtl">
+                                            {% csrf_token %}
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a class="edit edit-style" uk-icon="icon: file-edit"></a>
+                                        <a class="edit-style" uk-icon="icon: trash"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                     <hr/>

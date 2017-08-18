@@ -420,6 +420,8 @@ def accept_reject_docs(request):
 def education_page(request):
     context = dict()
     context['message'] = handle_message(request)
+    context['subject'] = Subject.objects.all()
+    context['section'] = Section.objects.all()
     return render(request, "education-mg.html", context)
 
 
@@ -499,3 +501,41 @@ def delete_main_document(request):
         return redirect("/admins/panel/setting/")
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/setting/")
+
+
+@require_POST
+@login_required(login_url="/")
+def edit_subject(request):
+    if EditSubject(request.POST).is_valid():
+        this_id = request.POST['id']
+        this_name = request.POST['name']
+        if not Subject.objects.filter(id__exact=this_id).exists():
+            request.session['error'] = 'رشته‌ای این آیدی وجود ندارد :('
+            return redirect("/admins/panel/education/")
+        Subject.objects.filter(id__exact=this_id).update(
+            name=this_name
+        )
+        request.session['done'] = 'رشته با موفقیت تغییر گردید :)'
+        return redirect("/admins/panel/education/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/education/")
+
+
+@require_POST
+@login_required(login_url="/")
+def edit_section(request):
+    if EditSection(request.POST).is_valid():
+        this_id = request.POST['id']
+        this_name = request.POST['name']
+        if not Section.objects.filter(id__exact=this_id).exists():
+            request.session['error'] = 'مقطع‌ای این آیدی وجود ندارد :('
+            return redirect("/admins/panel/education/")
+        Section.objects.filter(id__exact=this_id).update(
+            name=this_name
+        )
+        request.session['done'] = 'مقطع با موفقیت تغییر گردید :)'
+        return redirect("/admins/panel/education/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/education/")
+
+
