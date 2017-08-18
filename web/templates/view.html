@@ -69,7 +69,7 @@
                             {% csrf_token %}
                         </form>
                         <div uk-lightbox="animation: scale" style="display: inline-block">
-                            <a class="uk-button view-btn gery" href="../static/files/header.jpg" data-caption="Caption">مشاهده
+                            <a class="uk-button view-btn gery" href="/media?image={{ i.doc.url }}&student={{ i.student.college_number }}" data-caption="{{ i.type }}">مشاهده
                                 <span uk-icon="icon: image"></span>
                             </a>
                         </div>
