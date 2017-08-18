@@ -1,5 +1,5 @@
 .padding{
-    padding: 0 70px !important;
+    padding: 100px 70px !important;
 }
 .uk-modal-body {
     padding: 5px 30px !important;
@@ -71,17 +71,6 @@
     background: rgba(69, 90, 100, 0.4) !important
 }
 /*search*/
-.search{
-    background: #fff !important;
-}
-.uk-search-input{
-    font-family: Vazir !important;
-    color: #000 !important;
-    direction: rtl !important;
-    font-size: 20px !important;
-    text-align: center !important;
-    border: none !important;
-}
 .add-btn{
     padding: 11px 19px !important;
     background: #4CAF50;

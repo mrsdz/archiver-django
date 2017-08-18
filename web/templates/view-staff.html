@@ -6,19 +6,10 @@
 {% endblock %}
 
 {% block admin_content %}
-    <!--search-->
-    <div class="uk-width-1-1@m card-padding" style="padding-top: 70px; padding-right: 70px; padding-left: 70px">
-        <div class="uk-card uk-card-default uk-border-rounded">
-            <form class="uk-search uk-align-center uk-border-rounded">
-                <span class="uk-search-icon-flip uk-margin-right" uk-search-icon></span>
-                <input class="uk-search-input uk-form-large" type="search" placeholder="جستجو کارمندان...">
-            </form>
-        </div>
-    </div>
     <!--cards-->
     <div class="uk-grid uk-grid-small padding " uk-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: > div ; delay: 0; repeat: false">
-        <div class="uk-width-1-4@m">
-            {% for i in staffers %}
+        {% for i in staffers %}
+            <div class="uk-width-1-4@m">
                 <div class="uk-card uk-card-default uk-border-rounded">
                     <div  class="uk-card-body uk-text-right" uk-grid>
                         <!--name-->
@@ -54,7 +45,7 @@
                     </div>
                     <div class="uk-card-footer">
                         <form onsubmit="return confirm('آیا مطمئن هستید؟!')" action="{% url 'Delete Staff' %}" method="post">
-                            <button style="width: 100%" class="uk-button view-btn red-btn">حذف
+                            <button style="width: 100%;background:transparent;" class="uk-button view-btn red-btn">حذف
                                 <span uk-icon="icon: trash"></span>
                             </button>
                             {% csrf_token %}
@@ -62,8 +53,8 @@
                         </form>
                     </div>
                 </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
     <!--add staff button-->
     <div class="uk-position-bottom-right uk-position-fixed uk-padding">

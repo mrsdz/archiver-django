@@ -1,0 +1,169 @@
+{% extends "admin-header.html" %}
+{% load staticfiles %}
+
+{% block admin_header %}
+    <link rel="stylesheet" href="{% static 'css/template.css' %}">
+    <script>
+        $(document).ready(function() {
+            $('a.edit').click(function () {
+                var dad = $(this).parent().parent();
+                dad.find('.rec-name').hide();
+                dad.find('.edit-input').fadeIn().focus();
+            });
+
+            $('.edit-input').focusout(function() {
+                var dad = $(this).parent();
+                var dad2 = $(this).parent().parent();
+                $(this).hide();
+                dad2.find('.rec-name').fadeIn();
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block admin_content %}
+    <div class="uk-grid-small padding" uk-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: > div ; delay: 0; repeat: false">
+        <!--reshte-->
+        <div class="uk-width-1-2@m">
+        <div class="uk-width-1-1 uk-margin-top">
+            <div class="uk-card margin-top uk-card-body uk-border-rounded">
+                <h3 class="uk-card-title">حذف و اضافه رشته</h3>
+                <hr>
+                <table class="uk-table uk-table-divider rec-table uk-overlay">
+                    <thead>
+                    <tr>
+                        <th>نام رشته</th>
+                        <th>تغییر رشته</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="rec-name">نرم افزار</td>
+                        <td class="edit-input">
+                            <input value="نرم افزار" class="edit-input edit-input-style" dir="rtl">
+                            <a class="save" href="#">تغییر</a>
+                        </td>
+                        <td>
+                            <a class="edit edit-style" uk-icon="icon: file-edit"></a>
+                            <a class="edit-style" uk-icon="icon: trash"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="rec-name">حسابداری</td>
+                        <td class="edit-input">
+                            <input value="حسابداری" class="edit-input edit-input-style" dir="rtl">
+                            <a class="save" href="#">تغییر</a>
+                        </td>
+                        <td>
+                            <a class="edit edit-style" uk-icon="icon: file-edit"></a>
+                            <a class="edit-style" uk-icon="icon: trash"></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hr/>
+                <div class="uk-text-center">
+                    <button class="uk-button add-green" uk-toggle="target: #add-reshte" style="padding: 0 50px;">رشته جدید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!--maghtae-->
+        <div class="uk-width-1-2@m">
+            <div class="uk-width-1-1 uk-margin-top">
+                <div class="uk-card margin-top uk-card-body uk-border-rounded">
+                    <h3 class="uk-card-title">حذف و اضافه مقطع</h3>
+                    <hr>
+                    <table class="uk-table uk-table-divider rec-table uk-overlay">
+                        <thead>
+                        <tr>
+                            <th>نام مقطع</th>
+                            <th>تغییر مقطع</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="rec-name">کاردانی</td>
+                            <td class="edit-input">
+                                <input value="کاردانی" class="edit-input edit-input-style" dir="rtl">
+                                <a class="save" href="#">تغییر</a>
+                            </td>
+                            <td>
+                                <a class="edit edit-style" uk-icon="icon: file-edit"></a>
+                                <a class="edit-style" uk-icon="icon: trash"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="rec-name">کارشناسی</td>
+                            <td class="edit-input">
+                                <input value="کارشناسی" class="edit-input edit-input-style" dir="rtl">
+                                <a class="save" href="#">تغییر</a>
+                            </td>
+                            <td>
+                                <a class="edit edit-style" uk-icon="icon: file-edit"></a>
+                                <a class="edit-style" uk-icon="icon: trash"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <hr/>
+                    <div class="uk-text-center">
+                        <button class="uk-button add-green" uk-toggle="target: #add-maghtae" style="padding: 0 50px;">مقطع جدید</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--add reshte-->
+    <div id="add-reshte" uk-modal>
+        <div class="uk-modal-dialog uk-card-body">
+            <h2 class="uk-modal-title uk-text-center">رشته جدید</h2>
+            <hr/>
+            <form class="uk-form-stacked" method="post" action="{% url 'Add Staff' %}">
+                    <!--name-->
+                    <div class="uk-margin">
+                        <div class="uk-inline" style="width: 80%; position: relative; left: 10%">
+                            <input required name="first_name" class="uk-input" placeholder="نام رشته">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+                        </div>
+                    </div>
+
+                    {% csrf_token %}
+                    <div class="uk-text-left" style="position: relative; left: 10%">
+                        <button class="uk-button modal-btn add-btn-blue">اضافه
+                            <span uk-icon="icon: plus"></span>
+                        </button>
+                        <button class="uk-button modal-btn add--btn-red uk-modal-close" type="button">انصراف
+                            <span uk-icon="icon: close"></span>
+                        </button>
+                    </div>
+                </form>
+        </div>
+    </div>
+    <!--add maghtae-->
+    <div id="add-maghtae" uk-modal>
+    <div class="uk-modal-dialog uk-card-body">
+        <h2 class="uk-modal-title uk-text-center">مقطع جدید</h2>
+        <hr/>
+        <form class="uk-form-stacked" method="post" action="{% url 'Add Staff' %}">
+            <!--name-->
+            <div class="uk-margin">
+                <div class="uk-inline" style="width: 80%; position: relative; left: 10%">
+                    <input required name="first_name" class="uk-input" placeholder="نام مقطع">
+                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: tag"></span>
+                </div>
+            </div>
+
+            {% csrf_token %}
+            <div class="uk-text-left" style="position: relative; left: 10%">
+                <button class="uk-button modal-btn add-btn-blue">اضافه
+                    <span uk-icon="icon: plus"></span>
+                </button>
+                <button class="uk-button modal-btn add--btn-red uk-modal-close" type="button">انصراف
+                    <span uk-icon="icon: close"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

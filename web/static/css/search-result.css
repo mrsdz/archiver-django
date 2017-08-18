@@ -99,6 +99,12 @@ hr{
 .blue:hover{
     background: #1976D2 !important;
 }
+.blue-grey{
+    background: #607D8B !important;
+}
+.blue-grey:hover{
+    background: #455A64 !important;
+}
 .uk-modal-title{
     font-family: Vazir !important;
     font-size: 20px !important;

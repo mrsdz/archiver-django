@@ -86,7 +86,7 @@
 
                     <!--submit-->
                     <div class="uk-margin">
-                        <button class="uk-button uk-width-1-1 uk-box-shadow-hover-xlarge ubuntu-btn">اضافه
+                        <button class="uk-button uk-width-1-1 ubuntu-btn">اضافه
                             <span uk-icon="icon: plus"></span>
                         </button>
                     </div>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <button class="uk-button uk-width-1-1 uk-box-shadow-hover-xlarge ubuntu-btn">آپلود
+                    <button class="uk-button uk-width-1-1 ubuntu-btn">آپلود
                         <span uk-icon="icon: upload"></span>
                     </button>
                 </div>
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                     <div class="uk-margin">
-                        <button class="uk-button uk-width-1-1 uk-box-shadow-hover-xlarge red-btn">حذف
+                        <button class="uk-button uk-width-1-1 red-btn">حذف
                             <span uk-icon="icon: trash"></span>
                         </button>
                     </div>
@@ -144,11 +144,23 @@
             <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
             <h3 class="uk-card-title">مدارک ارسال شده توسط دانشجویان</h3>
             <hr/>
-            <div class="uk-margin">
-                <a href="{% url 'New Docs' %}" class="uk-button uk-width-1-1 uk-padding-small uk-box-shadow-hover-xlarge ubuntu-btn">مشاهده
-                    <span uk-icon="icon: bolt"></span>
-                </a>
-            </div>
+            <form class="uk-form-stacked" style="margin-top: 32px;" method="post" action="{% url 'Add Student' %}">
+                <!--maghta-->
+                <div class="uk-margin">
+                    <div style="position: relative">
+                        <select class="uk-select" name="section">
+                            <option value="چه چیزی">چه چیزی</option>
+                        </select>
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: info"></span>
+                        <span class="uk-form-icon" uk-icon="icon: chevron-down"></span>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <a href="{% url 'New Docs' %}" class="uk-button uk-width-1-1 ubuntu-btn">مشاهده
+                        <span uk-icon="icon: bolt"></span>
+                    </a>
+                </div>
+            </form>
         </div>
         </div>
     </div>
