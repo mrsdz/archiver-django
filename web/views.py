@@ -153,6 +153,7 @@ def admins_student_management_section(request):
     context['message'] = handle_message(request)
     context['section'] = Section.objects.all()
     context['subject'] = Subject.objects.all()
+    context['primary_docs'] = PrimaryDocument.objects.all()
     return render(request, "st-mg.html", context)
 
 
@@ -603,9 +604,14 @@ def add_subject(request):
     return redirect("/admins/panel/education/")
 
 
-@require_GET
+@require_POST
 @login_required(login_url="/")
 def view_report(request):
-    context = dict()
-    context['message'] = handle_message(request)
-    return render(request, "view_report.html", context)
+    if 'what' in request.POST:
+        this_what = request.POST['what']
+        context = dict()
+        context['message'] = handle_message(request)
+        context['report'] = Student.objects.exclude(
+            college_number__in=Document.objects.filter(type__exact=this_what).values_list('student', flat=True)
+        )
+        return render(request, "view_report.html", context)

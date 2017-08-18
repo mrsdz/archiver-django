@@ -155,23 +155,26 @@
         </div>
         <div class="uk-width-1-1 uk-margin-top">
             <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
-                <h3 class="uk-card-title">مدارک ارسال شده توسط دانشجویان</h3>
+                <h3 class="uk-card-title">مشاهده گزارشات</h3>
                 <hr/>
-                <form class="uk-form-stacked"  method="post" action="{% url 'Add Student' %}">
+                <form class="uk-form-stacked"  method="post" action="{% url 'View Report' %}">
                     <!--maghta-->
                     <div class="uk-margin">
                         <div style="position: relative">
-                            <select class="uk-select" name="section">
-                                <option value="چه چیزی">چه چیزی</option>
+                            <select class="uk-select" name="what">
+                                {% for i in primary_docs %}
+                                    <option value="{{ i.name }}">کسانی که {{ i.name }} ندارند</option>
+                                {% endfor %}
                             </select>
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: info"></span>
                             <span class="uk-form-icon" uk-icon="icon: chevron-down"></span>
                         </div>
                     </div>
+                    {% csrf_token %}
                     <div class="uk-margin">
-                        <a href="{% url 'View Report' %}" class="uk-button uk-width-1-1 ubuntu-btn">مشاهده
+                        <button class="uk-button uk-width-1-1 ubuntu-btn">مشاهده
                             <span uk-icon="icon: bolt"></span>
-                        </a>
+                        </button>
                     </div>
                 </form>
             </div>

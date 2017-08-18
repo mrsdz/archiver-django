@@ -24,13 +24,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>اشکان دهباشی</td>
-                                <td>123456789</td>
-                                <td>نرم افزار</td>
-                                <td>روزانه</td>
-                                <td>کاردانی</td>
-                            </tr>
+                            {% for i in report %}
+                                <tr>
+                                    <td>{{ i.first_name }}</td>
+                                    <td>{{ i.last_name }}</td>
+                                    <td>{{ i.subject.name }}</td>
+                                    <td>{{ i.period }}</td>
+                                    <td>{{ i.section.name }}</td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
