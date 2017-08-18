@@ -78,28 +78,22 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="rec-name">دیپلم</td>
-                            <td class="edit-input">
-                                <input value="دیپلم" class="edit-input edit-input-style" dir="rtl">
-                                <a class="save" href="#">تغییر</a>
-                            </td>
-                            <td>
-                                <a class="edit edit-style" uk-icon="icon: file-edit"></a>
-                                <a class="edit-style" uk-icon="icon: trash"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="rec-name">اشتغال به تحصیل</td>
-                            <td class="edit-input">
-                                <input value="اشتغال به تحصیل" class="edit-input edit-input-style" dir="rtl">
-                                <a class="save" href="#">تغییر</a>
-                            </td>
-                            <td>
-                                <a class="edit edit-style" uk-icon="icon: file-edit"></a>
-                                <a class="edit-style" uk-icon="icon: trash"></a>
-                            </td>
-                        </tr>
+                            {% for i in primary_docs %}
+                                <tr>
+                                    <td class="rec-name">{{ i.name }}</td>
+                                    <td class="edit-input">
+                                        <form method="post" action="{% url 'Edit Main Doc' %}">
+                                            <input type="hidden" name="id" value="{{ i.id }}">
+                                            <input name="name" value="{{ i.name }}" class="edit-input edit-input-style">
+                                            {% csrf_token %}
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a class="edit edit-style" uk-icon="icon: file-edit"></a>
+                                        <a class="edit-style" uk-icon="icon: trash"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

@@ -338,6 +338,7 @@ def admins_view_students(request):
 def admins_setting(request):
     context = dict()
     context['message'] = handle_message(request)
+    context['primary_docs'] = PrimaryDocument.objects.all()
     return render(request, "admin-setting.html", context)
 
 
@@ -462,3 +463,22 @@ def delete_staffer(request):
         return redirect("/admins/panel/staff/")
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/staff/")
+
+
+@require_POST
+@login_required(login_url="/")
+def edit_main_document(request):
+    if EditPrimaryDocument(request.POST).is_valid():
+        this_id = request.POST['id']
+        this_name = request.POST['name']
+        if not PrimaryDocument.objects.filter(id__exact=this_id).exists():
+            request.session['error'] = 'مدرکی با این آیدی وجود ندارد :('
+            return redirect("/admins/panel/setting/")
+        PrimaryDocument.objects.filter(id__exact=this_id).update(
+            name=this_name
+        )
+        request.session['done'] = 'نام مدرک با موفقیت تغییر کرد :)'
+        return redirect("/admins/panel/setting/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/setting/")
+

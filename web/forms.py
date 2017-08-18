@@ -62,3 +62,9 @@ class PasswordChange(forms.Form):
 
 class PrimaryDocumentName(forms.Form):
     name = forms.CharField(max_length=200)
+
+
+class EditPrimaryDocument(forms.Form):
+    name = forms.CharField(max_length=200)
+    id = forms.IntegerField()
+
