@@ -1,0 +1,46 @@
+{% extends "admin-header.html" %}
+{% load staticfiles %}
+
+{% block admin_header %}
+<link rel="stylesheet" href="{% static 'css/view-report.css' %}">
+{% endblock %}
+
+{% block admin_content %}
+    <div class="uk-grid-small padding" uk-grid uk-scrollspy="cls: uk-animation-slide-bottom; target: > div ; delay: 0; repeat: false">
+        <!--reshte-->
+        <div class="uk-width-1-1@m">
+            <div class="uk-width-1-1 uk-margin-top">
+                <div class="uk-card margin-top uk-card-body uk-border-rounded" style="overflow-x:auto;">
+                    <h3 class="uk-card-title">دانشجویانی که مدرک ارسال کردن</h3>
+                    <hr>
+                    <table class="uk-table uk-table-hover uk-table-divider rec-table uk-overlay">
+                        <thead>
+                        <tr>
+                            <th>نام و نام خانوادگی</th>
+                            <th>شماره دانشجویی</th>
+                            <th>رشته</th>
+                            <th>دوره</th>
+                            <th>مقطع</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>اشکان دهباشی</td>
+                                <td>123456789</td>
+                                <td>نرم افزار</td>
+                                <td>روزانه</td>
+                                <td>کاردانی</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--export-->
+    <div class="uk-position-bottom-right uk-position-fixed uk-padding">
+        <a class="uk-button uk-border-circle add-btn" title="خروجی" uk-tooltip>
+            <span uk-icon="icon: upload; ratio: 1.3"></span>
+        </a>
+    </div>
+{% endblock %}
