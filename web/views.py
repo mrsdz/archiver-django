@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_GET, require_POST
 from django.contrib.auth import authenticate, logout, login
-from django.http.response import HttpResponse, HttpResponseNotFound
+from django.http.response import HttpResponse, HttpResponseNotFound, HttpResponseServerError
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -610,8 +610,35 @@ def view_report(request):
     if 'what' in request.POST:
         this_what = request.POST['what']
         context = dict()
-        context['message'] = handle_message(request)
+        context['what'] = this_what
         context['report'] = Student.objects.exclude(
             college_number__in=Document.objects.filter(type__exact=this_what).values_list('student', flat=True)
         )
         return render(request, "view_report.html", context)
+
+
+@require_GET
+@login_required(login_url="/")
+def get_report(request):
+    if 'what' in request.GET:
+        this_what = request.GET['what']
+        report_detail = Student.objects.exclude(
+            college_number__in=Document.objects.filter(type__exact=this_what).values_list('student', flat=True)
+        )
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="report.csv"'
+        writer = csv.writer(response, delimiter=str(u';'), dialect='excel')
+        writer.writerow([
+            u"شماره دانشجویی".encode('utf8'), u"کد ملی".encode('utf8'), u"نام".encode('utf8'),
+            u"نام خانوادگی".encode('utf8'), u"رشته".encode('utf8'), u"مقطع".encode('utf8'), u"دوره".encode('utf8'),
+        ])
+        for i in report_detail:
+            if Student.objects.filter(college_number=int(i.college_number)).exists():
+                writer.writerow([
+                    i.college_number, i.social_number.encode('utf8'), i.first_name.encode('utf8'),
+                    i.last_name.encode('utf8'), i.subject.name.encode('utf8'), i.section.name.encode('utf8'),
+                    i.period.encode('utf8')
+                ])
+        return response
+    else:
+        return HttpResponseServerError("Error")
