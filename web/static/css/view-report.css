@@ -1,0 +1,63 @@
+.padding{
+    padding: 80px 20px !important;
+}
+.uk-card{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+    position: relative !important;
+    background: #fff !important;
+
+}
+.uk-card-title{
+    font-size: 18px !important;
+    font-family: Vazir !important;
+    text-align: center !important;
+    color: #000 !important;
+    margin: 0 !important;
+}
+/*table*/
+.rec-table{
+    font-family: Vazir !important;
+    text-align: center !important;
+    direction: rtl !important;
+    -webkit-transition: all 0.3s ease !important;
+    -moz-transition: all 0.3s ease !important;
+    transition: all 0.3s ease !important;
+}
+.uk-table th {
+    text-align: center !important;
+}
+/*export btn*/
+.add-btn{
+    padding: 11px 19px !important;
+    background: #4CAF50;
+    color: #fff !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+    -webkit-transition: all 0.3s ease !important;
+    -moz-transition: all 0.3s ease !important;
+    transition: all 0.3s ease !important;
+}
+.add-btn:hover {
+    background: #388E3C !important;
+}
+.add-btn span{ vertical-align: middle !important; margin-top: -3px;}
+.uk-tooltip{
+    font-size: 14px !important;
+    font-family: Vazir !important;
+    direction: rtl !important;
+}
+@media screen and (max-width: 699px){
+    .uk-table th {
+        padding: 5px 5px !important;
+    }
+    .uk-table th{
+        font-size: 14px !important;
+    }
+    .uk-table td {
+        font-size: 12px !important;
+    }
+    .add-btn{
+        padding: 5px 12px !important;
+    }
+}
+@media screen and (min-width: 700px) and (max-width: 1200px){
+}
