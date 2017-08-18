@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^admins/panel/student/edit/$', views.admins_edit_student, name="Edit Student"),
     url(r'^admins/panel/student/upload/$', views.admins_upload_student, name="Upload Student"),
     url(r'^admins/panel/student/view/$', views.admins_view_students, name="View Student"),
+    url(r'^admins/panel/student/report/$', views.view_report, name="View Report"),
     url(r'^admins/panel/docs/new/$', views.admins_view_new_docs, name="New Docs"),
     url(r'^admins/panel/docs/status/$', views.accept_reject_docs, name="Docs Change Status"),
     url(r'^admins/panel/staff/$', views.admins_staff_management, name="Staff Management"),

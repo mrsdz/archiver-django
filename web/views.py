@@ -567,3 +567,11 @@ def delete_subject(request):
         return redirect("/admins/panel/education/")
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/education/")
+
+
+@require_GET
+@login_required(login_url="/")
+def view_report(request):
+    context = dict()
+    context['message'] = handle_message(request)
+    return render(request, "view_report.html", context)
