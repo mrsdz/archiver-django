@@ -321,14 +321,17 @@ def admins_staff_management(request):
 def admins_view_students(request):
     if 'search' in request.GET:
         context = dict()
-        this_search_key = int(request.GET['search'])
-        context['message'] = handle_message(request)
-        context['docs'] = Document.objects.filter(student__college_number__exact=this_search_key)
-        context['student_info'] = Student.objects.get(college_number__exact=this_search_key)
-        context['primary_docs'] = PrimaryDocument.objects.all()
-        context['subject'] = Subject.objects.all()
-        context['section'] = Section.objects.all()
-        return render(request, "search-result.html", context)
+        this_search_key = request.GET['search']
+        if Student.objects.filter(college_number=this_search_key).exists():
+            context['message'] = handle_message(request)
+            context['docs'] = Document.objects.filter(student__college_number__exact=this_search_key)
+            context['student_info'] = Student.objects.get(college_number__exact=this_search_key)
+            context['primary_docs'] = PrimaryDocument.objects.all()
+            context['subject'] = Subject.objects.all()
+            context['section'] = Section.objects.all()
+            return render(request, "search-result.html", context)
+        request.session['error'] = 'دانشجویی با این نام کاربری وجود ندارد :('
+        return redirect("/admins/panel/")
     request.session['error'] = 'خطا :('
     return redirect("/admins/panel/")
 
