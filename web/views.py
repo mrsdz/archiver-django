@@ -264,7 +264,7 @@ def admins_upload_student(request):
                 if r[this_college_number] == "college_number":
                     continue
 
-                print r[this_section]
+                # TODO: Add a section adder
                 if r[this_section].decode('utf8') == "کاردانی پیوسته":
                     this_section_value = get_object_or_404(Section, name="کاردانی")
                 elif r[this_section].decode('utf8') == "کارشناسی ناپیوسته":
@@ -539,3 +539,31 @@ def edit_section(request):
     return redirect("/admins/panel/education/")
 
 
+@require_GET
+@login_required(login_url="/")
+def delete_section(request):
+    if DeleteSection(request.GET).is_valid():
+        this_id = request.GET['id']
+        if Section.objects.filter(id__exact=this_id).exists():
+            Section.objects.filter(id__exact=this_id).delete()
+            request.session['done'] = 'مقطع با موفقیت حذف گردید :)'
+            return redirect("/admins/panel/education/")
+        request.session['error'] = 'مقطع‌ای با این آیدی وجود ندارد :('
+        return redirect("/admins/panel/education/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/education/")
+
+
+@require_GET
+@login_required(login_url="/")
+def delete_subject(request):
+    if DeleteSubject(request.GET).is_valid():
+        this_id = request.GET['id']
+        if Subject.objects.filter(id__exact=this_id).exists():
+            Subject.objects.filter(id__exact=this_id).delete()
+            request.session['done'] = 'رشته با موفقیت حذف گردید :)'
+            return redirect("/admins/panel/education/")
+        request.session['error'] = 'رشته‌ای با این آیدی وجود ندارد :('
+        return redirect("/admins/panel/education/")
+    request.session['error'] = 'خطا :('
+    return redirect("/admins/panel/education/")
