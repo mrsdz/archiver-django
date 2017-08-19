@@ -25,18 +25,20 @@
                             <label style="margin-left: 8px;">تنظیمات</label>
                         </a>
                     </li>
-                    <li class="hide">
-                        <a href="{% url 'Education Management' %}" class="header-items">
-                            <span uk-icon="icon: pencil"></span>
-                            <label style="margin-left: 8px;">آموزش</label>
-                        </a>
-                    </li>
-                    <li class="hide">
-                        <a href="{% url 'Staff Management' %}" class="header-items">
-                            <span uk-icon="icon: users"></span>
-                            <label style="margin-left: 8px;">کارکنان</label>
-                        </a>
-                    </li>
+                    {% if request.session.job == 'A' %}
+                        <li class="hide">
+                            <a href="{% url 'Education Management' %}" class="header-items">
+                                <span uk-icon="icon: pencil"></span>
+                                <label style="margin-left: 8px;">آموزش</label>
+                            </a>
+                        </li>
+                        <li class="hide">
+                            <a href="{% url 'Staff Management' %}" class="header-items">
+                                <span uk-icon="icon: users"></span>
+                                <label style="margin-left: 8px;">کارکنان</label>
+                            </a>
+                        </li>
+                    {% endif %}
                     <li class="hide">
                         <a href="{% url 'Student Management' %}" class="header-items">
                             <span uk-icon="icon: user"></span>

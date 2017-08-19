@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 
 from .forms import *
 from .models import Subject, Section, Student, PrimaryDocument, Document, UsersJob
-from .utils import handle_message
+from .utils import handle_message, perm
 
 import csv
 import os
@@ -131,6 +131,7 @@ def admin_login(request):
         if this_user is not None:
             if this_user.is_active:
                 login(request, this_user)
+                perm(request)
                 return redirect('/admins/panel/')
             else:
                 HttpResponse("Your Account is disable.")
@@ -143,6 +144,8 @@ def admin_login(request):
 def admins_panel(request):
     context = dict()
     context['message'] = handle_message(request)
+    this_user = get_object_or_404(User, username=request.user.get_username())
+    context['permission'] = UsersJob.objects.get(user=this_user)
     return render(request, "admin-panel.html", context)
 
 
