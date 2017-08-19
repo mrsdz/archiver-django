@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 
 from .forms import *
 from .models import Subject, Section, Student, PrimaryDocument, Document, UsersJob
-from .utils import handle_message, perm
+from .utils import handle_message, perm, has_perm_admin, has_perm_admin_or_archive
 
 import csv
 import os
@@ -163,7 +163,7 @@ def admins_student_management_section(request):
 @login_required(login_url="/")
 @require_POST
 def admins_add_student(request):
-    if AddStudent(request.POST).is_valid():
+    if AddStudent(request.POST).is_valid() and has_perm_admin(request):
         this_college_number = request.POST['college_number']
         this_social_number = request.POST['social_number']
         this_period = request.POST['period']
@@ -192,7 +192,7 @@ def admins_add_student(request):
 @login_required(login_url="/")
 @require_POST
 def admins_delete_student(request):
-    if DeleteStudent(request.POST).is_valid():
+    if DeleteStudent(request.POST).is_valid() and has_perm_admin(request):
         this_college_number = int(request.POST['college_number'])
         if Student.objects.filter(college_number__exact=this_college_number).exists():
             Student.objects.filter(college_number__exact=this_college_number).delete()
@@ -208,7 +208,7 @@ def admins_delete_student(request):
 @login_required(login_url="/")
 @require_POST
 def admins_edit_student(request):
-    if EditStudent(request.POST).is_valid():
+    if EditStudent(request.POST).is_valid() and has_perm_admin(request):
         old_college_number = int(request.POST['old_college_number'])
         this_college_number = int(request.POST['college_number'])
         this_social_number = int(request.POST['social_number'])
@@ -239,7 +239,7 @@ def admins_edit_student(request):
 @login_required(login_url="/")
 @require_POST
 def admins_upload_student(request):
-    if 'students_info' in request.FILES:
+    if 'students_info' in request.FILES and has_perm_admin(request):
         this_student_info = request.FILES['students_info']
         if this_student_info.content_type == 'text/csv':
             reader = csv.reader(this_student_info, delimiter=str(u","))
@@ -305,19 +305,25 @@ def admins_upload_student(request):
 @require_GET
 @login_required(login_url="/")
 def admins_view_new_docs(request):
-    context = dict()
-    context['message'] = handle_message(request)
-    context['docs'] = Document.objects.filter(status='W')
-    return render(request, "view.html", context)
+    if has_perm_admin_or_archive(request):
+        context = dict()
+        context['message'] = handle_message(request)
+        context['docs'] = Document.objects.filter(status='W')
+        return render(request, "view.html", context)
+    else:
+        return redirect("/logout/")
 
 
 @require_GET
 @login_required(login_url="/")
 def admins_staff_management(request):
-    context = dict()
-    context['message'] = handle_message(request)
-    context['staffers'] = UsersJob.objects.all()
-    return render(request, "view-staff.html", context)
+    if has_perm_admin(request):
+        context = dict()
+        context['message'] = handle_message(request)
+        context['staffers'] = UsersJob.objects.all()
+        return render(request, "view-staff.html", context)
+    else:
+        return redirect("/logout/")
 
 
 @require_GET
@@ -383,7 +389,7 @@ def admins_password_change(request):
 @require_POST
 @login_required(login_url="/")
 def add_main_doc(request):
-    if PrimaryDocumentName(request.POST).is_valid():
+    if PrimaryDocumentName(request.POST).is_valid() and has_perm_admin_or_archive(request):
         this_main_doc = request.POST['name']
         if PrimaryDocument.objects.filter(name__exact=this_main_doc).exists():
             request.session['error'] = 'این مورد موجود می‌باشد :('
@@ -400,7 +406,8 @@ def add_main_doc(request):
 @require_POST
 @login_required(login_url="/")
 def accept_reject_docs(request):
-    if 'doc' in request.POST and 'status' in request.POST and 'student' in request.POST and 'location' in request.POST:
+    if 'doc' in request.POST and 'status' in request.POST and 'student' in request.POST and 'location' in request.POST \
+            and has_perm_admin_or_archive(request):
         this_doc_id = request.POST['doc']
         this_location = request.POST['location']
         this_student = request.POST['student']
@@ -422,17 +429,20 @@ def accept_reject_docs(request):
 @require_GET
 @login_required(login_url="/")
 def education_page(request):
-    context = dict()
-    context['message'] = handle_message(request)
-    context['subject'] = Subject.objects.all()
-    context['section'] = Section.objects.all()
-    return render(request, "education-mg.html", context)
+    if has_perm_admin(request):
+        context = dict()
+        context['message'] = handle_message(request)
+        context['subject'] = Subject.objects.all()
+        context['section'] = Section.objects.all()
+        return render(request, "education-mg.html", context)
+    else:
+        return redirect("/logout/")
 
 
 @require_POST
 @login_required(login_url="/")
 def add_staffer(request):
-    if AddStaffer(request.POST).is_valid():
+    if AddStaffer(request.POST).is_valid() and has_perm_admin(request):
         this_username = request.POST['username']
         this_first_name = request.POST['first_name']
         this_last_name = request.POST['last_name']
@@ -462,7 +472,7 @@ def add_staffer(request):
 @require_POST
 @login_required(login_url="/")
 def delete_staffer(request):
-    if DeleteStaffer(request.POST).is_valid():
+    if DeleteStaffer(request.POST).is_valid() and has_perm_admin(request):
         this_username = str(request.POST['username'])
         if not User.objects.filter(username=this_username).exists():
             request.session['error'] = 'کاربری با این مشخصات وجود ندارد :('
@@ -477,7 +487,7 @@ def delete_staffer(request):
 @require_POST
 @login_required(login_url="/")
 def edit_main_document(request):
-    if EditPrimaryDocument(request.POST).is_valid():
+    if EditPrimaryDocument(request.POST).is_valid() and has_perm_admin_or_archive(request):
         this_id = request.POST['id']
         this_name = request.POST['name']
         if not PrimaryDocument.objects.filter(id__exact=this_id).exists():
@@ -495,7 +505,7 @@ def edit_main_document(request):
 @require_GET
 @login_required(login_url="/")
 def delete_main_document(request):
-    if DeletePrimaryDocument(request.GET).is_valid():
+    if DeletePrimaryDocument(request.GET).is_valid() and has_perm_admin_or_archive(request):
         this_id = request.GET['id']
         if PrimaryDocument.objects.filter(id__exact=this_id).exists():
             PrimaryDocument.objects.filter(id__exact=this_id).delete()
@@ -510,7 +520,7 @@ def delete_main_document(request):
 @require_POST
 @login_required(login_url="/")
 def edit_subject(request):
-    if EditSubject(request.POST).is_valid():
+    if EditSubject(request.POST).is_valid() and has_perm_admin(request):
         this_id = request.POST['id']
         this_name = request.POST['name']
         if not Subject.objects.filter(id__exact=this_id).exists():
@@ -528,7 +538,7 @@ def edit_subject(request):
 @require_POST
 @login_required(login_url="/")
 def edit_section(request):
-    if EditSection(request.POST).is_valid():
+    if EditSection(request.POST).is_valid() and has_perm_admin(request):
         this_id = request.POST['id']
         this_name = request.POST['name']
         if not Section.objects.filter(id__exact=this_id).exists():
@@ -546,7 +556,7 @@ def edit_section(request):
 @require_GET
 @login_required(login_url="/")
 def delete_section(request):
-    if DeleteSection(request.GET).is_valid():
+    if DeleteSection(request.GET).is_valid() and has_perm_admin(request):
         this_id = request.GET['id']
         if Section.objects.filter(id__exact=this_id).exists():
             Section.objects.filter(id__exact=this_id).delete()
@@ -561,7 +571,7 @@ def delete_section(request):
 @require_GET
 @login_required(login_url="/")
 def delete_subject(request):
-    if DeleteSubject(request.GET).is_valid():
+    if DeleteSubject(request.GET).is_valid() and has_perm_admin(request):
         this_id = request.GET['id']
         if Subject.objects.filter(id__exact=this_id).exists():
             Subject.objects.filter(id__exact=this_id).delete()
@@ -576,7 +586,7 @@ def delete_subject(request):
 @require_POST
 @login_required(login_url="/")
 def add_section(request):
-    if 'name' in request.POST:
+    if 'name' in request.POST and has_perm_admin(request):
         this_name = request.POST['name']
         if Section.objects.filter(name__exact=this_name).exists():
             request.session['error'] = 'مقطعی‌ای با این آیدی وجود دارد :('
@@ -591,7 +601,7 @@ def add_section(request):
 @require_POST
 @login_required(login_url="/")
 def add_subject(request):
-    if 'name' in request.POST and 'section' in request.POST:
+    if 'name' in request.POST and 'section' in request.POST and has_perm_admin(request):
         this_name = request.POST['name']
         this_section = request.POST['section']
         if Subject.objects.filter(name__exact=this_name).exists():
