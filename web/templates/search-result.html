@@ -23,6 +23,7 @@
                             <label style="margin-left: 8px;">برگشت</label>
                         </a>
                     </li>
+                    {% if request.session.job == 'A' %}
                     <li>
                         <a href="#modal-upload" uk-toggle class="header-items">
                             <span class="hide" uk-icon="icon: upload"></span>
@@ -35,6 +36,7 @@
                             <label style="margin-left: 8px;">تغییر مشخصات</label>
                         </a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="uk-navbar-right">
@@ -65,6 +67,7 @@
                         <img src="/media?image={{ i.doc.url }}&student={{ student_info.college_number }}" class="image" alt="">
                         <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary">
                             <div class="uk-position-center">
+                                {% if request.session.job == 'A' or request.session.job == 'B' %}
                                 {% if i.status != 'R' %}
                                     <div class="uk-transition-slide-top-small">
                                         <form action="{% url 'Docs Change Status' %}" method="post">
@@ -88,6 +91,7 @@
                                             {% csrf_token %}
                                         </form>
                                     </div>
+                                {% endif %}
                                 {% endif %}
                                 <div class="uk-transition-slide-bottom-small">
                                     <a href="/media?image={{ i.doc.url }}&student={{ student_info.college_number }}" data-caption="{{ i.type }}" class="uk-button paper-btn blue">مشاهده مدرک</a>

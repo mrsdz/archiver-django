@@ -87,18 +87,20 @@
                             <span uk-icon="icon: user"></span>
                         </a>
                     </h6>
-                    <h6>
-                        <a href="{% url 'Staff Management' %}" class="header-items">
-                            <label style="margin-left: 8px;">کارکنان</label>
-                            <span uk-icon="icon: users"></span>
-                        </a>
-                    </h6>
-                    <h6>
-                        <a href="" class="header-items">
-                            <label style="margin-left: 8px;">آموزش</label>
-                            <span uk-icon="icon: pencil"></span>
-                        </a>
-                    </h6>
+                    {% if request.session.job == 'A' %}
+                        <h6>
+                            <a href="{% url 'Staff Management' %}" class="header-items">
+                                <label style="margin-left: 8px;">کارکنان</label>
+                                <span uk-icon="icon: users"></span>
+                            </a>
+                        </h6>
+                        <h6>
+                            <a href="" class="header-items">
+                                <label style="margin-left: 8px;">آموزش</label>
+                                <span uk-icon="icon: pencil"></span>
+                            </a>
+                        </h6>
+                    {% endif %}
                     <h6>
                         <a href="{% url 'Admin Setting' %}" class="header-items">
                             <label style="margin-left: 8px;">تنظیمات</label>

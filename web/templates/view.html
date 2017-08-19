@@ -53,6 +53,7 @@
                         </h6>
                     </div>
                     <div class="uk-card-footer">
+                        {% if request.session.job == 'A' or request.session.job == 'B' %}
                         <form action="{% url 'Docs Change Status' %}" method="post">
                             <input type="hidden" value="R" name="status">
                             <input type="hidden" value="{{ i.id }}" name="doc">
@@ -69,6 +70,7 @@
                             <button class="uk-button view-btn green">تایید<span uk-icon="icon: check"></span></button>
                             {% csrf_token %}
                         </form>
+                        {% endif %}
                         <div uk-lightbox="animation: scale" style="display: inline-block">
                             <a class="uk-button view-btn gery" href="/media?image={{ i.doc.url }}&student={{ i.student.college_number }}" data-caption="{{ i.type }}">مشاهده
                                 <span uk-icon="icon: image"></span>
