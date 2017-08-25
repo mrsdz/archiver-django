@@ -655,3 +655,21 @@ def get_report(request):
         return response
     else:
         return HttpResponseServerError("Error")
+
+
+@require_GET
+@login_required(login_url="/")
+def get_student_number(request):
+    if 'social_number' in request.GET:
+        this_social_number = request.GET['social_number']
+        if Student.objects.filter(social_number=this_social_number).exists():
+            this_user_object = Student.objects.get(social_number=this_social_number)
+            return render(request, "", this_user_object)
+        else:
+            request.session['error'] = 'کد ملی اشتباه است :('
+            return redirect("/")
+    else:
+        request.session['error'] = 'خطا :('
+    return redirect("/")
+    
+

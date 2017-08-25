@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^admins/panel/education/section/delete/$', views.delete_section, name="Delete Section"),
     url(r'^admins/panel/education/section/add/$', views.add_section, name="Add Section"),
     url(r'^student/login/$', views.student_login, name="Student Login"),
+    url(r'^student/get/college_number/$', views.get_student_number, name="Student Get College Number"),
     url(r'^upload/$', views.upload_document, name="Upload"),
     url(r'^media/', views.media, name="Media"),
     url(r'^logout/$', views.logout_all, name="Logout"),
