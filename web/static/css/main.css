@@ -31,6 +31,8 @@ html, body{
     background:rgba(255,255,255,0.1) !important;
     border: none !important;
     color: #fff !important;
+    height: 50px !important;
+    border-radius: 2em !important;
 }
 .uk-input::placeholder{
     color: #fff !important;
@@ -42,12 +44,13 @@ html, body{
 .uk-input:focus + span{
     color: #000 !important;
 }
-.uk-button{
+.enter-btn{
     font-family: 'Vazir';
     background:  #fff;
     color: #000 !important;
     font-size: 18px !important;
-    height: 40px !important;
+    height: 50px !important;
+    border-radius: 2em !important;
     -webkit-transition: all 0.2s ease !important;
     -moz-transition: all 0.2s ease !important;
     transition: all 0.2s ease !important;
@@ -56,6 +59,17 @@ html, body{
 .uk-form-icon{
     color: #fff !important;
 }
+.st-number{
+    font-family: 'Vazir';
+    color: rgba(255,255,255,0.8) !important;
+    font-size: 18px !important;
+    -webkit-transition: all 0.2s ease !important;
+    -moz-transition: all 0.2s ease !important;
+    transition: all 0.2s ease !important;
+}
+.st-number:hover{
+    color: rgba(255,255,255,1) !important;
+}
 .footer{
     background: #fff;
     text-align: center;
@@ -63,6 +77,47 @@ html, body{
     position: absolute;
     width: 100%;
     bottom: -10%;
+}
+/*modal*/
+.uk-modal-title{
+    font-family: 'Vazir';
+    font-size: 18px;
+    font-weight: bold;
+}
+.st-number-input{
+    font-family: 'Vazir' !important;
+    font-size: 16px !important;
+    text-indent: 30px;
+    direction: rtl !important;
+    background:rgba(0,0,0,0.5) !important;
+    border: none !important;
+    color: #fff !important;
+    height: 50px !important;
+    border-radius: 2em !important;
+}
+.st-number-input:focus{
+    background:rgba(0,0,0,0.7) !important;
+    color: #fff !important;
+}
+.st-number-input:focus + span{
+    color: #fff !important;
+}
+.modal-padding{
+    padding: 15px 50px;
+}
+.modal-enter-btn{
+    font-family: 'Vazir';
+    background: #6C7AFE;
+    color: #fff !important;
+    font-size: 18px !important;
+    height: 50px !important;
+    border-radius: 2em !important;
+    -webkit-transition: all 0.2s ease !important;
+    -moz-transition: all 0.2s ease !important;
+    transition: all 0.2s ease !important;
+}
+.modal-enter-btn:hover{
+    box-shadow: 0 14px 25px rgba(108, 122, 254,0.16);
 }
 /*media query*/
 @media screen and (max-width: 1200px){
