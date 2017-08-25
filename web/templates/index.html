@@ -14,8 +14,8 @@
             background: linear-gradient(90deg, rgba(33, 212, 253,0.9) 0%, rgba(183, 33, 255,0.9) 100%),url({% static 'files/index.jpg' %}) !important;
             background-color: #6C7AFE;
         }
-        .uk-button:hover,
-        .uk-button:focus{
+        .enter-btn:hover,
+        .enter-btn:focus{
             background: #6C7AFE;
             color: #fff !important;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
@@ -38,18 +38,39 @@
         <hr>
         <form method="POST" action="{% url 'Student Login' %}">
             <div class="uk-inline uk-margin uk-width-1-1">
-                <input class="uk-input uk-border-rounded" name="username" type="number" required placeholder="لطفا شماره دانشجویی خود را وارد کنید.">
+                <input class="uk-input" name="username" type="number" required placeholder="لطفا شماره دانشجویی خود را وارد کنید.">
                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
             </div>
             <div class="uk-inline uk-width-1-1">
-                <input class="uk-input uk-border-rounded" name="password" type="number" required placeholder="لطفا کد ملی خود را وارد کنید.">
+                <input class="uk-input" name="password" type="number" required placeholder="لطفا کد ملی خود را وارد کنید.">
                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
             </div>
             <div class="uk-margin">
-                <button name="sbt" class="uk-button uk-border-rounded uk-width-1-1" type="submit">ورود</button>
+                <button name="sbt" class="uk-button uk-width-1-1 enter-btn" type="submit">ورود</button>
+            </div>
+            <div class="uk-margin uk-text-center">
+                <a uk-toggle="target: #modal-example" class="uk-button st-number">دریافت شماره دانشجویی</a>
             </div>
             {% csrf_token %}
         </form>
     </div>
     <footer class="footer">تمامی حقوق این سایت متعلق به شرکت ورتا و دانشکده فنی شهید شمسی پور می باشد.</footer>
+    <!--st number modal-->
+    <div id="modal-example" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-border-rounded">
+            <h2 class="uk-modal-title uk-text-center">شماره دانشجویی</h2>
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="modal-padding">
+                <form method="POST" action="">
+                    <div class="uk-inline uk-width-1-1">
+                        <input class="uk-input st-number-input" name="password" type="number" required placeholder="لطفا کد ملی خود را وارد کنید.">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: credit-card"></span>
+                    </div>
+                    <div class="uk-margin">
+                        <button name="sbt" class="uk-button uk-width-1-1 modal-enter-btn" type="submit">ادامه</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
