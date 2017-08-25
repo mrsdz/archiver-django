@@ -658,13 +658,13 @@ def get_report(request):
 
 
 @require_GET
-@login_required(login_url="/")
 def get_student_number(request):
     if 'social_number' in request.GET:
         this_social_number = request.GET['social_number']
         if Student.objects.filter(social_number=this_social_number).exists():
-            this_user_object = Student.objects.get(social_number=this_social_number)
-            return render(request, "", this_user_object)
+            context = dict()
+            context['this_user_object'] = Student.objects.get(social_number=this_social_number)
+            return render(request, "st-number.html", context)
         else:
             request.session['error'] = 'کد ملی اشتباه است :('
             return redirect("/")
