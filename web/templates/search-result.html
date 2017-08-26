@@ -98,7 +98,7 @@
                                 </div>
                                 <!--print-->
                                 <div class="uk-transition-slide-bottom-small">
-                                    <button class="uk-button paper-btn blue-grey">چاپ</button>
+                                    <button onclick="print_image('/media?student={{ i.student.college_number }}&image={{ i.doc.url }}')" class="uk-button paper-btn blue-grey">چاپ</button>
                                 </div>
                             </div>
                         </div>
@@ -302,4 +302,11 @@
             </div>
         </div>
     </div>
+    <script>
+        function print_image (url){
+            popup = window.open(url);
+            popup.focus(); //required for IE
+            popup.print();
+        }
+    </script>
 {% endblock %}
