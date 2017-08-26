@@ -64,7 +64,7 @@
                 {% for i in docs %}
                 <div class="card">
                     <div class="uk-transition-toggle uk-light">
-                        <img src="/media?image={{ i.doc.url }}&student={{ student_info.college_number }}" class="image" alt="">
+                        <img src="/media?student={{ i.student.college_number }}&image={{ i.doc.url }}" class="image" alt="">
                         <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary">
                             <div class="uk-position-center">
                                 {% if request.session.job == 'A' or request.session.job == 'B' %}
@@ -94,7 +94,7 @@
                                 {% endif %}
                                 {% endif %}
                                 <div class="uk-transition-slide-bottom-small">
-                                    <a href="/media?image={{ i.doc.url }}&student={{ student_info.college_number }}" data-caption="{{ i.type }}" class="uk-button paper-btn blue">مشاهده مدرک</a>
+                                    <a href="/media?student={{ i.student.college_number }}&image={{ i.doc.url }}" data-caption="{{ i.type }}" class="uk-button paper-btn blue">مشاهده مدرک</a>
                                 </div>
                                 <!--print-->
                                 <div class="uk-transition-slide-bottom-small">
