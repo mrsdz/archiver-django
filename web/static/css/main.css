@@ -41,7 +41,7 @@ html, body{
     background:rgba(255,255,255,1) !important;
     color: #000 !important;
 }
-.uk-input:focus + span{
+.uk-input:focus + .uk-form-icon svg{
     color: #000 !important;
 }
 .enter-btn{
@@ -56,7 +56,7 @@ html, body{
     transition: all 0.2s ease !important;
 }
 .uk-card-title,
-.uk-form-icon{
+.uk-form-icon svg{
     color: #fff !important;
 }
 .st-number{
