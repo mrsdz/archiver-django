@@ -1,0 +1,73 @@
+body, html{
+    background: #ffffff;
+    width: 100%;
+}
+.background{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #2196F3, #E91E63);
+    transform: skewY(-30deg);
+    -webkit-transform: skewY(-30deg);
+    transform-origin: top left;
+}
+.uk-navbar-container{
+    background: #fff !important;
+}
+.header-items{
+    background: transparent !important;
+    color: #000 !important;
+}
+.header-items,
+.header-items span,
+.header-items label{
+    cursor: pointer !important;
+}
+.header-items:hover{
+    color: #2196F3 !important;
+}
+.header-items label{
+    font-family: Vazir !important;
+    font-weight: 100 !important;
+}
+.uk-navbar-item, .uk-navbar-nav>li>a, .uk-navbar-toggle {
+    height: 60px !important;
+    padding: 0 15px !important;
+}
+.logo{
+    font-family: 'Vazir' !important;
+    color: #000 !important;
+    cursor: default !important;
+    font-weight: bold;
+}
+.uk-card-default{
+    border-radius: 5px;
+}
+.uk-card-default h3{
+    background: #2196F3;
+    padding: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #fff !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.uk-card-default h3,
+.uk-card-default ul li{
+    font-family: Vazir;
+    direction: rtl;
+    text-align: right;
+}
+.card-padding{
+    padding: 15px 5px;
+}
+.uk-list li{
+    padding: 5px 20px;
+}
+.uk-list li label{
+    color: #2196F3;
+    font-weight: bold;
+}

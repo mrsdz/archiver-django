@@ -1,19 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-	<p>
-		<h1>{{ this_user_object.social_number }}</h1>
-		<h1>{{ this_user_object.college_number }}</h1>
-		<h1>{{ this_user_object.first_name }}</h1>
-		<h1>{{ this_user_object.last_name }}</h1>
-		<h1>{{ this_user_object.section.name }}</h1>
-		<h1>{{ this_user_object.subject.name }}</h1>
-		<h1>{{ this_user_object.period }}</h1>
-	</p>
+{% extends "header-template.html" %}
 
-</body>
-</html>
+{% load staticfiles %}
+
+{% block header %}
+	<link rel="stylesheet" href="{% static 'css/st-number.css' %}">
+{% endblock %}
+
+{% block content %}
+	<!--navbar-->
+	<div class="uk-position-fixed uk-position-z-index uk-width-1-1">
+		<nav class="uk-navbar-container uk-box-shadow-medium" uk-navbar>
+			<div class="uk-navbar-left">
+				<ul class="uk-navbar-nav">
+					<li class="hide">
+						<a href="{% url 'Index' %}" class="header-items" style="margin-left: 32px;">
+							<span uk-icon="icon: arrow-left"></span>
+							<label style="margin-left: 8px;">برگشت</label>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="uk-navbar-right">
+				<ul class="uk-navbar-nav">
+					<li>
+						<a class="logo" style="margin-right: 32px;">بایگانی آنلاین دانشکده شهید شمسی‌ پور</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<!--background-->
+	<div class="background"></div>
+	<!--info-->
+	<div class="uk-position-center">
+		<div class="uk-card uk-card-default" style="width: 450px;">
+			<h3 class="uk-card-title uk-text-center">مشخصات دانشجو</h3>
+			<div class="card-padding">
+				<ul class="uk-list">
+					<li>کد ملی: <label>{{ this_user_object.social_number }}</label></li>
+					<li>شماره دانشجویی: <label>{{ this_user_object.college_number }}</label></li>
+					<li>نام: <label>{{ this_user_object.first_name }}</label></li>
+					<li>نام خانوادگی: <label>{{ this_user_object.last_name }}</label></li>
+					<li>مقطع: <label>{{ this_user_object.section.name }}</label></li>
+					<li>رشته: <label>{{ this_user_object.subject.name }}</label></li>
+					<li>دوره: <label>{{ this_user_object.period }}</label></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
