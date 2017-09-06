@@ -74,9 +74,10 @@ hr{
     border-radius: 5px !important;
 }
 .paper-btn{
-    width: 100% !important;
-    margin-top: 10px !important;
-    border-radius: 2em !important;
+    padding: 15px 20px;
+    line-height: 10px;
+    margin: 5px;
+    border-radius: 50% !important;
     font-family: Vazir !important;
     color: #fff !important;
     direction: rtl !important;
@@ -227,6 +228,10 @@ hr{
     padding-top: 10px !important;
     padding-bottom: 10px !important;
     border-radius: 5px;
+}
+.uk-tooltip {
+    font-size: 14px;
+    font-family: Vazir !impo;
 }
 @media screen and (max-width: 699px){
     .background{

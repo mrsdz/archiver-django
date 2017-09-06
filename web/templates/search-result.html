@@ -68,37 +68,46 @@
                         <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary">
                             <div class="uk-position-center">
                                 {% if request.session.job == 'A' or request.session.job == 'B' %}
-                                {% if i.status != 'R' %}
-                                    <div class="uk-transition-slide-top-small">
-                                        <form action="{% url 'Docs Change Status' %}" method="post">
-                                            <input type="hidden" value="R" name="status">
-                                            <input type="hidden" value="{{ i.id }}" name="doc">
-                                            <input type="hidden" value="{{ i.student.college_number }}" name="student">
-                                            <input type="hidden" value="{% url 'View Student' %}" name="location">
-                                            <button class="uk-button paper-btn red">تکذیب مدرک</button>
-                                            {% csrf_token %}
-                                        </form>
+                                    {% if i.status != 'R' %}
+                                    <div style="width: 50%; display: inline-block">
+                                        <div class="uk-transition-slide-top-small">
+                                            <form action="{% url 'Docs Change Status' %}" method="post">
+                                                <input type="hidden" value="R" name="status">
+                                                <input type="hidden" value="{{ i.id }}" name="doc">
+                                                <input type="hidden" value="{{ i.student.college_number }}" name="student">
+                                                <input type="hidden" value="{% url 'View Student' %}" name="location">
+                                                <button title="تکذیب" uk-tooltip="pos: top;  delay: 150" class="uk-button paper-btn red"><span uk-icon="icon: close"></span></button>
+                                                {% csrf_token %}
+                                            </form>
+                                        </div>
                                     </div>
+                                    {% endif %}
+                                    {% if i.status != 'A' %}
+                                    <div style="width: 50%; display: inline-block">
+                                        <div class="uk-transition-slide-top-small">
+                                            <form action="{% url 'Docs Change Status' %}" method="post">
+                                                <input type="hidden" value="A" name="status">
+                                                <input type="hidden" value="{{ i.id }}" name="doc">
+                                                <input type="hidden" value="{{ i.student.college_number }}" name="student">
+                                                <input type="hidden" value="{% url 'View Student' %}" name="location">
+                                                <button title="تایید" uk-tooltip="pos: top;  delay: 150" class="uk-button paper-btn green"><span uk-icon="icon: check"></span></button>
+                                                {% csrf_token %}
+                                            </form>
+                                        </div>
+                                    </div>
+                                    {% endif %}
                                 {% endif %}
-                                {% if i.status != 'A' %}
+                                <br/>
+                                <div style="width: 50%; display: inline-block">
                                     <div class="uk-transition-slide-bottom-small">
-                                        <form action="{% url 'Docs Change Status' %}" method="post">
-                                            <input type="hidden" value="A" name="status">
-                                            <input type="hidden" value="{{ i.id }}" name="doc">
-                                            <input type="hidden" value="{{ i.student.college_number }}" name="student">
-                                            <input type="hidden" value="{% url 'View Student' %}" name="location">
-                                            <button class="uk-button paper-btn green">تایید مدرک</button>
-                                            {% csrf_token %}
-                                        </form>
+                                        <a title="مشاهده" uk-tooltip="pos: bottom;  delay: 150" href="/media?student={{ i.student.college_number }}&image={{ i.doc.url }}" data-caption="{{ i.type }}" class="uk-button paper-btn blue"><span uk-icon="icon: image"></span></a>
                                     </div>
-                                {% endif %}
-                                {% endif %}
-                                <div class="uk-transition-slide-bottom-small">
-                                    <a href="/media?student={{ i.student.college_number }}&image={{ i.doc.url }}" data-caption="{{ i.type }}" class="uk-button paper-btn blue">مشاهده مدرک</a>
                                 </div>
                                 <!--print-->
-                                <div class="uk-transition-slide-bottom-small">
-                                    <button onclick="print_image('/media?student={{ i.student.college_number }}&image={{ i.doc.url }}')" class="uk-button paper-btn blue-grey">چاپ</button>
+                                <div style="width: 50%; display: inline-block">
+                                    <div class="uk-transition-slide-bottom-small">
+                                        <button title="پرینت" uk-tooltip="pos: bottom; delay: 150" onclick="print_image('/media?student={{ i.student.college_number }}&image={{ i.doc.url }}')" class="uk-button paper-btn blue-grey"><span uk-icon="icon: social"></span></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
