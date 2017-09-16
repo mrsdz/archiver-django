@@ -85,7 +85,7 @@
                                     <td class="edit-input">
                                         <form method="post" action="{% url 'Edit Main Doc' %}">
                                             <input type="hidden" name="id" value="{{ i.id }}">
-                                            <input name="name" value="{{ i.name }}" class="edit-input edit-input-style">
+                                            <input required name="name" value="{{ i.name }}" class="edit-input edit-input-style">
                                             {% csrf_token %}
                                         </form>
                                     </td>
@@ -110,7 +110,7 @@
                     <!--paper-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input name="name" class="uk-input uk-form-width-large" placeholder="نام مدرک">
+                            <input name="name" class="uk-input uk-form-width-large" required placeholder="نام مدرک">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: tag"></span>
                         </div>
                     </div>

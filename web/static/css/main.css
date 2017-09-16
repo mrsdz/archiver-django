@@ -120,6 +120,14 @@ html, body{
     box-shadow: 0 14px 25px rgba(108, 122, 254,0.16);
 }
 /*media query*/
+@media screen and (max-width: 699px) {
+    .footer{
+        display: none !important    
+    }
+    .modal-padding{
+        padding: 15px 0 !important;
+    }
+}
 @media screen and (max-width: 1200px){
     .header h2{
         font-size: 23px !important;

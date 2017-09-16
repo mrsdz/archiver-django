@@ -18,7 +18,7 @@
                     <!--name-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input name="first_name" class="uk-input uk-form-width-large" placeholder="نام">
+                            <input required name="first_name" class="uk-input uk-form-width-large" placeholder="نام">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                     <!--Family-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input name="last_name" class="uk-input uk-form-width-large" placeholder="نام خانوادگی">
+                            <input required name="last_name" class="uk-input uk-form-width-large" placeholder="نام خانوادگی">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: users"></span>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                     <!--student number-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input name="college_number" class="uk-input uk-form-width-large" placeholder="شماره دانشجویی" type="number">
+                            <input required name="college_number" class="uk-input uk-form-width-large" placeholder="شماره دانشجویی" type="number">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: credit-card"></span>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                     <!--national code-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input name="social_number" class="uk-input uk-form-width-large" placeholder="کد ملی" type="number">
+                            <input required name="social_number" class="uk-input uk-form-width-large" placeholder="کد ملی" type="number">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: world"></span>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
             <form class="uk-form-stacked" style="margin-top: 32px;" method="post" enctype="multipart/form-data" action="{% url 'Upload Student' %}">
                 <div class="uk-margin" uk-margin>
                     <div uk-form-custom="target: true" style="cursor: pointer">
-                        <input type="file" name="students_info" accept="text/csv" title="Student File">
+                        <input required type="file" name="students_info" accept="text/csv" title="Student File">
                         <input class="uk-input uk-form-width-large" required placeholder="انتخاب فایل" disabled>
                         <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: folder"></span>
                     </div>
@@ -126,7 +126,7 @@
                     <!--st number-->
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input name="college_number" class="uk-input uk-form-width-large" placeholder="شماره دانشجویی" type="number">
+                            <input required name="college_number" class="uk-input uk-form-width-large" placeholder="شماره دانشجویی" type="number">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: credit-card"></span>
                         </div>
                     </div>

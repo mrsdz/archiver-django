@@ -43,7 +43,7 @@
                                 <td class="edit-input">
                                     <form method="post" action="{% url 'Edit Subject' %}">
                                         <input type="hidden" name="id" value="{{ i.id }}" class="edit-input edit-input-style" dir="rtl">
-                                        <input name="name" value="{{ i.name }}" class="edit-input edit-input-style" dir="rtl">
+                                        <input name="name" value="{{ i.name }}" class="edit-input edit-input-style" required dir="rtl">
                                         {% csrf_token %}
                                     </form>
                                 </td>

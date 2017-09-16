@@ -18,14 +18,14 @@
                     <div class="uk-margin">
                         <div v-if="visibility == 'true'" class="uk-inline" uk-form-custom="target: true">
                             <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: plus"></a>
-                            <input class="uk-input upload-input" name="type" placeholder="لطفا نام مدرک خود را وارد کنید.">
+                            <input required class="uk-input upload-input" name="type" placeholder="لطفا نام مدرک خود را وارد کنید.">
                         </div>
                     </div>
                 </div>
                 <div class="uk-margin" uk-margin>
                     <div class="uk-inline" uk-form-custom="target: true">
                         <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: pull"></a>
-                        <input type="file" name="image" accept="image/*" maxlength="250">
+                        <input required type="file" name="image" accept="image/*" maxlength="250">
                         <input class="uk-input upload-input" placeholder="فایل مورد نظر را انتخاب کنید!" disabled>
                     </div>
                     {% csrf_token %}
